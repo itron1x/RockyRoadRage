@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour{
+namespace Player{
+    public class PlayerManager : MonoBehaviour{
 
-    [SerializeField] private List<LayerMask> playerLayers;
+        [SerializeField] private List<LayerMask> playerLayers;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

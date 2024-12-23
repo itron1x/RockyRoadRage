@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 561365231}
   - component: {fileID: 561365230}
   - component: {fileID: 561365229}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 759068742}
   - component: {fileID: 759068741}
   - component: {fileID: 759068740}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SampleTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +790,7 @@ TerrainCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 2203e90caf8a5c94995bc4eb6da89b93, type: 2}
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676158936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5b86f631a5dbb8468d313c5d2d3c781, type: 3}
   m_Name: 
@@ -1759,7 +1759,7 @@ GameObject:
   - component: {fileID: 1822584791}
   - component: {fileID: 1822584790}
   - component: {fileID: 1822584789}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StartPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 759068741}
   - component: {fileID: 759068740}
   m_Layer: 0
-  m_Name: DummyTrack
+  m_Name: SampleTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

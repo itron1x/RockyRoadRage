@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour{
     
     [SerializeField]
     private GroundDetection groundDetection;
-    private Camera _playerCamera;
+
+    [SerializeField] private Transform camera;
+    // private Camera _playerCamera;
     
     //Movement Coordinates
     private float _movementX;
@@ -22,7 +24,6 @@ public class PlayerController : MonoBehaviour{
     
     public TextMeshProUGUI positionText;
     public TextMeshProUGUI speedText;
-    public TextMeshProUGUI mouseText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
@@ -39,11 +40,12 @@ public class PlayerController : MonoBehaviour{
     }
 
     void FixedUpdate(){
-        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY);
-       if(!jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * speed);
-       SetPositionText();
-       SetSpeedText();
-       SetMouseText();
+        Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
+        movement = Quaternion.AngleAxis(camera.rotation.eulerAngles.y, Vector3.up) * movement;
+        
+        if(!jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * speed);
+        SetPositionText();
+        SetSpeedText();
     }
 
     void OnJump(){
@@ -54,15 +56,20 @@ public class PlayerController : MonoBehaviour{
         }
     }
 
+    void OnApplicationFocus(bool focus){
+        if (focus){
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else{
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
     void SetPositionText(){
         positionText.text = "X: " + transform.position.x + "\nZ: " + transform.position.z;
     }
     
     void SetSpeedText(){
         speedText.text = "Speed: " + _rb.linearVelocity.magnitude;
-    }
-
-    void SetMouseText(){
-        mouseText.text = "Mouse: \n" + "x: " + Mouse.current.position.x.ReadValue() + "y: " + Mouse.current.position.y.ReadValue(); 
     }
 }

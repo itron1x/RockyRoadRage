@@ -12,7 +12,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            checkpointTracker.PlayerThroughCheckpoint(this);
+            checkpointTracker.BallThroughCheckpoint(this, other.transform);
         }
     }
 

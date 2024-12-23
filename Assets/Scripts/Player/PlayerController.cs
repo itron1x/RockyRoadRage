@@ -66,10 +66,10 @@ public class PlayerController : MonoBehaviour{
     }
 
     void SetPositionText(){
-        positionText.text = "X: " + transform.position.x + "\nZ: " + transform.position.z;
+        //positionText.text = "X: " + transform.position.x + "\nZ: " + transform.position.z;
     }
     
     void SetSpeedText(){
-        speedText.text = "Speed: " + _rb.linearVelocity.magnitude;
+        //speedText.text = "Speed: " + _rb.linearVelocity.magnitude;
     }
 }

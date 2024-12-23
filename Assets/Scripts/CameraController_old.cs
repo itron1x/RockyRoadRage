@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour{
+public class CameraController_old : MonoBehaviour{
     public GameObject player;
     private Vector3 _offset;
     
@@ -27,8 +26,6 @@ public class CameraController : MonoBehaviour{
     void Update(){
         _mouseX = Mouse.current.position.x.ReadValue() - Screen.width / 2;
         _mouseY = Mouse.current.position.y.ReadValue() - Screen.height / 2;
-        // _mouseX = Mouse.current.position.x.ReadValue();
-        // _mouseY = Mouse.current.position.y.ReadValue();
     }
 
     void LateUpdate(){
@@ -41,11 +38,4 @@ public class CameraController : MonoBehaviour{
         transform.position = player.transform.position - _rotation * new Vector3(0,0,7) + Vector3.up * 1;
         transform.rotation = _rotation;
     }
-
-    // private void OnApplicationFocus(bool hasFocus){
-    //     if (hasFocus){
-    //         Cursor.lockState = CursorLockMode.Locked;
-    //         Cursor.visible = false;
-    //     }
-    // }
 }

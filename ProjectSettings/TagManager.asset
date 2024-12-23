@@ -3,16 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
+<<<<<<< Updated upstream
   tags:
   - Checkpoint
+=======
+<<<<<<< HEAD
+  tags: []
+=======
+  tags:
+  - Checkpoint
+>>>>>>> origin/main
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Trigger
   - 
   - 
   - 

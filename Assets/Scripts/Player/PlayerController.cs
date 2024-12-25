@@ -14,22 +14,27 @@ namespace Player{
         [SerializeField]
         private GroundDetection groundDetection;
 
-        [SerializeField] private Transform camera;
-        // private Camera _playerCamera;
+        [SerializeField] private Transform mainCamera;
     
         //Movement Coordinates
         private float _movementX;
         private float _movementY;
     
-        //Moues Coordinates
-    
-        public TextMeshProUGUI positionText;
-        public TextMeshProUGUI speedText;
-    
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start(){
             _rb = GetComponent<Rigidbody>(); 
-            SetPositionText();
+        }
+
+        void Awake(){
+            Transform parent = transform.parent;
+            // mainCamera = parent.GetComponentInChildren<Camera>().transform;
+        }
+        
+        void FixedUpdate(){
+            Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
+            movement = Quaternion.AngleAxis(mainCamera.rotation.eulerAngles.y, Vector3.up) * movement;
+        
+            if(!jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * speed, ForceMode.Acceleration);
         }
 
         // Update is called once per frame
@@ -38,15 +43,6 @@ namespace Player{
 
             _movementX = movement.x;
             _movementY = movement.y;
-        }
-
-        void FixedUpdate(){
-            Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
-            movement = Quaternion.AngleAxis(camera.rotation.eulerAngles.y, Vector3.up) * movement;
-        
-            if(!jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * speed, ForceMode.Acceleration);
-            SetPositionText();
-            SetSpeedText();
         }
 
         void OnJump(){
@@ -64,14 +60,6 @@ namespace Player{
             else{
                 Cursor.lockState = CursorLockMode.None;
             }
-        }
-
-        void SetPositionText(){
-            //positionText.text = "X: " + transform.position.x + "\nZ: " + transform.position.z;
-        }
-    
-        void SetSpeedText(){
-            //speedText.text = "Speed: " + _rb.linearVelocity.magnitude;
         }
     }
 }

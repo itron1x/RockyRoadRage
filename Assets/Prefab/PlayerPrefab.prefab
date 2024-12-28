@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526636588948362499}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15212342, y: 0.000000054126282, z: -0.000000008330835, w: 0.98836154}
-  m_LocalPosition: {x: 0, y: 0.62705827, z: -9.537169}
+  m_LocalRotation: {x: 0.000000007780244, y: 0.0568156, z: -4.4275444e-10, w: 0.9983847}
+  m_LocalPosition: {x: -1.1344767, y: -2.38, z: -9.93544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -274,6 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8977592848367416145}
+  - component: {fileID: 2286547543159089433}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -299,6 +300,19 @@ Transform:
   - {fileID: 7443049120521553804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2286547543159089433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336992868585047707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4f277a6871501468096dd8a6deb0a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outputChannels: 0200000004000000080000001000000020000000400000008000000000010000
 --- !u!1 &6416110330222653705
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +328,6 @@ GameObject:
   - component: {fileID: 1593378922041819985}
   - component: {fileID: 7089107493687969278}
   - component: {fileID: 6896436982023761673}
-  - component: {fileID: 8192883031751101571}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -487,19 +500,6 @@ MonoBehaviour:
   jump: 0
   groundDetection: {fileID: 1287798758492958952}
   mainCamera: {fileID: 7724878251835178395}
---- !u!114 &8192883031751101571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416110330222653705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c4f277a6871501468096dd8a6deb0a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outputChannels: 0200000004000000080000001000000020000000400000008000000000010000
 --- !u!1 &8233916060073307263
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,8 +529,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233916060073307263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15212342, y: 0.00000005338356, z: -0.000000003505277, w: 0.98836154}
-  m_LocalPosition: {x: 0, y: 0.62705827, z: -9.537169}
+  m_LocalRotation: {x: 0.0000000077753075, y: 0.0568156, z: -5.295111e-10, w: 0.9983847}
+  m_LocalPosition: {x: -1.1344767, y: -2.38, z: -9.93544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -623,9 +623,9 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.5
+    Value: 0
     Center: 17.5
-    Range: {x: -10, y: 45}
+    Range: {x: 0, y: 45}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: 1
-        LegacyInput: Mouse X
+        LegacyInput: 
         LegacyGain: 200
         CancelDeltaTime: 0
       InputValue: 0
@@ -723,10 +723,10 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         Gain: -1
-        LegacyInput: Mouse Y
+        LegacyInput: 
         LegacyGain: -200
         CancelDeltaTime: 0
-      InputValue: 0
+      InputValue: -0
       Driver:
         AccelTime: 0.2
         DecelTime: 0.2
@@ -744,4 +744,4 @@ MonoBehaviour:
         AccelTime: 0
         DecelTime: 0
   PlayerIndex: 0
-  AutoEnableInputs: 0
+  AutoEnableInputs: 1

@@ -10,21 +10,7 @@ namespace Player{
         [SerializeField]
         private List<OutputChannels> outputChannels;
         
-        private PlayerInputManager _inputManager;
-
-        private void Awake(){
-            _inputManager = FindFirstObjectByType<PlayerInputManager>();
-        }
-
-        private void OnEnable(){ 
-            _inputManager.onPlayerJoined += AddPlayer;
-        }
-
-        private void OnDisable(){
-            _inputManager.onPlayerJoined -= AddPlayer;
-        }
-        
-        private void AddPlayer(PlayerInput player){
+        public void AddPlayer(PlayerInput player){
             Transform playerParent = player.transform.parent;
 
             //Get single channel for camera
@@ -36,7 +22,8 @@ namespace Player{
 
             //Divide inputs to seperate players
             playerParent.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = player.playerIndex;
-
+            
+            
         }
     }
 }

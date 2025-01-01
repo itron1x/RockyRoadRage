@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector3 = UnityEngine.Vector3;
 
-public class SpawnPlayer : MonoBehaviour
+public class RaceControlManager : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private Camera idleCamera;

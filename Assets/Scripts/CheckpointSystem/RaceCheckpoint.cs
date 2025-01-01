@@ -4,25 +4,31 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
 
-    private CheckpointTracker checkpointTracker;
+    private LapCheckpointTracker _lapCheckpointTracker;
     
     [SerializeField] private int CheckpointId; // ID of checkpoint - checkpoints must be reached in order
-
+    [SerializeField] private bool LapFinish; //Toggles Lap Finish
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            checkpointTracker.BallThroughCheckpoint(this, other.transform);
+            _lapCheckpointTracker.BallThroughCheckpoint(this, other.transform);
         }
     }
 
-    public void SetCheckpointTracker(CheckpointTracker checkpointTracker)
+    public void SetLapCheckpointTracker(LapCheckpointTracker lapCheckpointTracker)
     {
-        this.checkpointTracker = checkpointTracker;
+        _lapCheckpointTracker = lapCheckpointTracker;
     }
 
     public int GetCheckpointId()
     {
-        return this.CheckpointId;
+        return CheckpointId;
+    }
+
+    public bool IsLapFinish()
+    {
+        return LapFinish;
     }
 }

@@ -424,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceTimer: {fileID: 1350478476640918710}
   splitsDisplay: {fileID: 7411158671863348953}
+  playerName: 
 --- !u!1 &5336992868585047707
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +488,7 @@ GameObject:
   - component: {fileID: 3533650414143278899}
   m_Layer: 6
   m_Name: GroundDetection
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

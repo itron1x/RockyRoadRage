@@ -12,7 +12,7 @@ namespace Player{
             _isGrounded = true;
         }
         void OnTriggerEnter(Collider other){
-            print(other.GetType());
+            //print(other.GetType());
             if (other.gameObject.layer == 3 && !_isGrounded){
                 _isGrounded = true;
                 parent.jump = false;

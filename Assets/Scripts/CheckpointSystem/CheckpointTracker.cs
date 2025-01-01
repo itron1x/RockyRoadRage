@@ -32,21 +32,22 @@ public class CheckpointTracker : MonoBehaviour
         Debug.Log("Detected player ball: " + ball.name);
         
         int playerIndex = playerBallsTransforms.IndexOf(ball);
-        Debug.Log(playerIndex);
-        
         int passedCheckpoint = checkpoint.GetCheckpointId();
         int _nextCheckpoint = _nextCheckpointList[playerIndex];
         
         if (passedCheckpoint == _nextCheckpoint - 1) return; // Player went through same checkpoint twice
-
+        
+        RaceTelemetry playerRaceTelemetry = ball.parent.GetComponentInChildren<RaceTelemetry>();
         if (passedCheckpoint == _nextCheckpoint)
         {
             _nextCheckpointList[playerIndex] = (_nextCheckpoint + 1) % _checkpointCount;
             Debug.Log("Player " + playerIndex+ " passed Checkpoint " + checkpoint.GetCheckpointId());
+            playerRaceTelemetry.displaySplit();
         }
         else
         {
             Debug.Log("Player " + playerIndex+ " passed wrong Checkpoint " + checkpoint.GetCheckpointId());
+            playerRaceTelemetry.displayWrongCheckpointWarning();
         }
         
     }

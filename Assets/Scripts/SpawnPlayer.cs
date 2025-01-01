@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
@@ -10,10 +11,14 @@ public class SpawnPlayer : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoints;
     [SerializeField] private Camera idleCamera;
+    [SerializeField] private float joinTimeoutSeconds = 5;
     
-    private List<GameObject> _players = new List<GameObject>();
     private List<Vector3> _spawnPointLocations = new List<Vector3>();
+    private List<PlayerInput> _playerInputs = new List<PlayerInput>();
     private RaceControlUI _raceControlUI;
+    private long _raceStartTimeMilliseconds;
+    
+    private IEnumerator _countdown;
     
     private void Awake()
     {
@@ -25,14 +30,6 @@ public class SpawnPlayer : MonoBehaviour
                 Vector3 spawnLocation = spawnPoint.transform.position;
                 Debug.Log("Found spawn point " + spawnPoint.name + " at " + spawnLocation);
                 
-                // Create a sphere at the spawn location
-                //GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                //sphere.transform.position = spawnLocation;
-
-                // Optional: Customize the sphere's appearance
-                //sphere.transform.localScale = Vector3.one * 0.5f; // Make the sphere smaller
-                //sphere.GetComponent<Renderer>().material.color = Color.red; // Set color to red
-                
                 _spawnPointLocations.Add(spawnLocation);
                 
             }
@@ -42,19 +39,56 @@ public class SpawnPlayer : MonoBehaviour
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         idleCamera.gameObject.SetActive(false);
+        ResetWaitTime();
+        playerInput.DeactivateInput();
+        
         GameObject newPlayer = playerInput.gameObject;
+        _playerInputs.Add(playerInput);
         
-        _players.Add(newPlayer);
-        int playerIndex = _players.IndexOf(newPlayer);
-
-        CheckpointTracker RaceControl = GetComponent<CheckpointTracker>();
-        RaceControl.AddPlayer(newPlayer.transform);
-        
+        int playerIndex = _playerInputs.IndexOf(playerInput);
+        CheckpointTracker raceControl = GetComponent<CheckpointTracker>();
+        raceControl.AddPlayer(newPlayer.transform);
         Vector3 spawnPoint = _spawnPointLocations[playerIndex];
-        
-        _raceControlUI.DisplayUpdateText("Player " + playerIndex + " joined!");
-        
+        _raceControlUI.DisplayUpdateText("Player " + (playerIndex + 1) + " joined! Race will begin shortly...");
         newPlayer.GetComponent<Rigidbody>().MovePosition(spawnPoint); //whenever an object has a Rigidbody, it needs to be moved this way to integrate with the physics engine.
+        
+    }
+
+    private void ActivateRace()
+    {
+        _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        foreach (var playerInput in _playerInputs)
+        {
+            RaceTelemetry playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+            playerRaceTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
+            playerInput.ActivateInput();
+        }
+    }
+    
+    private void ResetWaitTime()
+    {
+        if (_countdown != null) StopCoroutine(_countdown);
+        _countdown = WaitBeforeCountdown(joinTimeoutSeconds);
+        StartCoroutine(_countdown);
+    }
+
+    // every 2 seconds perform the print()
+    private IEnumerator StartRaceWithCountdown()
+    {
+        _raceControlUI.ClearUpdateText();
+        for (var i = 3; i >= 1; i--)
+        {
+            _raceControlUI.DisplayCountdownText("" + i);
+            yield return new WaitForSeconds(1f);
+        }
+        _raceControlUI.DisplayCountdownText("Roll!", 2);
+        ActivateRace();
+    }
+
+    private IEnumerator WaitBeforeCountdown(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        yield return StartRaceWithCountdown();
     }
 
 }

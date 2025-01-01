@@ -155,7 +155,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 843140663}
+  - {fileID: 1010226139}
   - {fileID: 1317886892}
   m_Father: {fileID: 1676158938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1056,14 +1056,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1010226139}
-  m_Father: {fileID: 241848831}
+  m_Children: []
+  m_Father: {fileID: 1010226139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -333.33}
-  m_SizeDelta: {x: 0, y: -666.66}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_SizeDelta: {x: 1252.6466, y: 10.340027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843140664
 MonoBehaviour:
@@ -1163,12 +1162,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 843140663}
+  m_Children:
+  - {fileID: 843140663}
+  m_Father: {fileID: 241848831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -333.32996}
   m_SizeDelta: {x: 216.02, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010226140
@@ -1961,6 +1961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints: {fileID: 520667413}
   idleCamera: {fileID: 1649093543}
+  joinTimeoutSeconds: 5
 --- !u!114 &1676158940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,8 +1988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069e8a3ece39f0b40858aba96c895370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceControlInfoText: {fileID: 1010226138}
-  countdownText: {fileID: 1317886891}
+  raceControlInfoTextObject: {fileID: 1010226138}
+  countdownTextObject: {fileID: 1317886891}
 --- !u!114 &1676158942
 MonoBehaviour:
   m_ObjectHideFlags: 0

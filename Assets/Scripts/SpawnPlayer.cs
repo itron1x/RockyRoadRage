@@ -13,9 +13,11 @@ public class SpawnPlayer : MonoBehaviour
     
     private List<GameObject> _players = new List<GameObject>();
     private List<Vector3> _spawnPointLocations = new List<Vector3>();
+    private RaceControlUI _raceControlUI;
     
     private void Awake()
     {
+        _raceControlUI = GetComponent<RaceControlUI>();
         foreach (Transform spawnPoint in spawnPoints)
         {
             if (spawnPoint.CompareTag("Spawn"))
@@ -37,20 +39,20 @@ public class SpawnPlayer : MonoBehaviour
         }
     }
     
-    //Despite what JetBrains tells you, this method is actually being used. Don't trust the bots.
-    void OnPlayerJoined(PlayerInput playerInput)
+    public void OnPlayerJoined(PlayerInput playerInput)
     {
         idleCamera.gameObject.SetActive(false);
-        Debug.Log("Player Joined at " + playerInput.gameObject.transform.position);
         GameObject newPlayer = playerInput.gameObject;
-        //Debug.Log("Player " + newPlayer.name);
         
         _players.Add(newPlayer);
         int playerIndex = _players.IndexOf(newPlayer);
+
+        CheckpointTracker RaceControl = GetComponent<CheckpointTracker>();
+        RaceControl.AddPlayer(newPlayer.transform);
         
         Vector3 spawnPoint = _spawnPointLocations[playerIndex];
         
-        Debug.Log("Player " + newPlayer.tag + " spawned at " + spawnPoint);
+        _raceControlUI.DisplayUpdateText("Player " + playerIndex + " joined!");
         
         newPlayer.GetComponent<Rigidbody>().MovePosition(spawnPoint); //whenever an object has a Rigidbody, it needs to be moved this way to integrate with the physics engine.
     }

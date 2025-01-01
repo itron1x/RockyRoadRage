@@ -15,7 +15,6 @@ public class CheckpointTracker : MonoBehaviour
     private void Awake()
     {
         _nextCheckpointList = new List<int>();
-        _nextCheckpointList.Add(0);
         foreach (Transform checkpointSingleTransform in checkpointsParent)
         {
             if (checkpointSingleTransform.CompareTag("Checkpoint"))
@@ -29,26 +28,34 @@ public class CheckpointTracker : MonoBehaviour
 
     public void BallThroughCheckpoint(Checkpoint checkpoint, Transform ball)
     {
+        if (!ball.CompareTag("Player")) return;
+        Debug.Log("Detected player ball: " + ball.name);
+        
+        int playerIndex = playerBallsTransforms.IndexOf(ball);
+        Debug.Log(playerIndex);
+        
         int passedCheckpoint = checkpoint.GetCheckpointId();
-        int _nextCheckpoint = _nextCheckpointList[0];
+        int _nextCheckpoint = _nextCheckpointList[playerIndex];
         
         if (passedCheckpoint == _nextCheckpoint - 1) return; // Player went through same checkpoint twice
 
         if (passedCheckpoint == _nextCheckpoint)
         {
-            _nextCheckpointList[0] = (_nextCheckpoint + 1) % _checkpointCount;
-            Debug.Log("Player passed Checkpoint " + checkpoint.GetCheckpointId());
+            _nextCheckpointList[playerIndex] = (_nextCheckpoint + 1) % _checkpointCount;
+            Debug.Log("Player " + playerIndex+ " passed Checkpoint " + checkpoint.GetCheckpointId());
         }
         else
         {
-            Debug.Log("Player passed wrong Checkpoint " + checkpoint.GetCheckpointId());
+            Debug.Log("Player " + playerIndex+ " passed wrong Checkpoint " + checkpoint.GetCheckpointId());
         }
         
     }
 
-    public void addPlayer(Transform playerBall)
+    public void AddPlayer(Transform playerBall)
     {
-        playerBallsTransforms.Add(playerBall);
-        
+        playerBallsTransforms.Add(playerBall); // Add the players ball to the list so we know which rock is what player
+        _nextCheckpointList.Add(0); // Add a lap counter for each player added
+        Debug.Log("Added new player " + playerBall.name);
+        Debug.Log(playerBall.name +" " + playerBallsTransforms.Count);
     }
 }

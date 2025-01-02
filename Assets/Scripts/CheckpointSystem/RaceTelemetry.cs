@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 public class RaceTelemetry : MonoBehaviour
 {
     //TODO: change GameObject maybe to TextMeshProUGUI (less code)? Did it with coinCount
-    [SerializeField] private GameObject raceTimer;
-    [SerializeField] private GameObject splitsDisplay;
+    [SerializeField] private TextMeshProUGUI raceTimer;
+    [SerializeField] private TextMeshProUGUI splitsDisplay;
     //TODO: TextMeshProUGUI
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] public String playerName;
@@ -20,15 +20,10 @@ public class RaceTelemetry : MonoBehaviour
     private int _playerIndex;
     private bool timerActive = false;
     
-    private TextMeshProUGUI _timerText;
-    private TextMeshProUGUI _splitText;
-
     public void Awake()
     {
-        raceTimer.SetActive(false);
-        splitsDisplay.SetActive(false);
-        _timerText = raceTimer.GetComponent<TextMeshProUGUI>();
-        _splitText = splitsDisplay.GetComponent<TextMeshProUGUI>();
+        raceTimer.gameObject.SetActive(false);
+        splitsDisplay.gameObject.SetActive(false);
         _lapSplits = new List<long>();
     }
 
@@ -39,8 +34,8 @@ public class RaceTelemetry : MonoBehaviour
         long timeSinceStart = timestampNow - _raceStartTimestamp;
         // Convert to DateTime
         DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
-        _timerText.text = dateTime.ToString("mm:ss.fff");
-        raceTimer.SetActive(true);
+        raceTimer.text = dateTime.ToString("mm:ss.fff");
+        raceTimer.gameObject.SetActive(true);
     }
 
     public void SetRaceControlManager(RaceControlManager raceControlManager)
@@ -59,9 +54,10 @@ public class RaceTelemetry : MonoBehaviour
         _raceEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         var duration = _raceEndTimestamp - _raceStartTimestamp;
         DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(duration).DateTime;
-        _splitText.text = "Finish! Race Time: " + finishTime.ToString("mm:ss.fff");
+        splitsDisplay.text = "Finish! Race Time: " + finishTime.ToString("mm:ss.fff");
         timerActive = false;
-        raceTimer.SetActive(false);
+        raceTimer.gameObject.SetActive(false);
+        
         raceControlManager.PlayerFinishedRace(this);
     }
 
@@ -72,21 +68,21 @@ public class RaceTelemetry : MonoBehaviour
         _lapSplits.Add(timeSinceStart);
         // Convert to DateTime
         DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
-        _splitText.text = dateTime.ToString("mm:ss.fff");
-        splitsDisplay.SetActive(true);
+        splitsDisplay.text = dateTime.ToString("mm:ss.fff");
+        splitsDisplay.gameObject.SetActive(true);
         Invoke(nameof(ClearSplits),2);
     }
 
     public void displayWrongCheckpointWarning()
     {
-        _splitText.text = "Wrong Way!";
-        splitsDisplay.SetActive(true);
+        splitsDisplay.text = "Wrong Way!";
+        splitsDisplay.gameObject.SetActive(true);
         Invoke(nameof(ClearSplits),2);
     }
     private void ClearSplits()
     {
-        _splitText.text = "";
-        splitsDisplay.SetActive(false);
+        splitsDisplay.text = "";
+        splitsDisplay.gameObject.SetActive(false);
     }
 
     public List<long> GetLapSplits(){

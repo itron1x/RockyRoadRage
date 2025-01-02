@@ -35,7 +35,6 @@ public class RaceTelemetry : MonoBehaviour
         // Convert to DateTime
         DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
         raceTimer.text = dateTime.ToString("mm:ss.fff");
-        raceTimer.gameObject.SetActive(true);
     }
 
     public void SetRaceControlManager(RaceControlManager raceControlManager)
@@ -47,6 +46,7 @@ public class RaceTelemetry : MonoBehaviour
     {
         _raceStartTimestamp = raceStartTimestamp;
         timerActive = true;
+        raceTimer.gameObject.SetActive(true);
     }
 
     public void finish()

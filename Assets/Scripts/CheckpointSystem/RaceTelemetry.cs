@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,6 +20,7 @@ public class RaceTelemetry : MonoBehaviour
     private List<long> _lapSplits;
     private int _playerIndex;
     private bool timerActive = false;
+    private Transform _respawnPoint;
     
     public void Awake()
     {
@@ -100,5 +102,16 @@ public class RaceTelemetry : MonoBehaviour
     }
     public TextMeshProUGUI GetCoinText(){
         return coinText;
+    }
+
+    public void SetRespawnPoint(Transform respawnPoint)
+    {
+        _respawnPoint = respawnPoint;
+    }   
+    public void Respawn(Rigidbody playerBody)
+    {
+        playerBody.linearVelocity = Vector3.zero;
+        playerBody.angularVelocity = Vector3.zero;
+        playerBody.MovePosition(_respawnPoint.position);
     }
 }

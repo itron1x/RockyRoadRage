@@ -13,7 +13,7 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private float postRaceTimeoutSeconds = 5;
     [SerializeField] private Canvas leaderboardCanvas;
     
-    private List<Vector3> _spawnPointLocations = new List<Vector3>();
+    private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
     private int finishedPlayers = 0;
     private RaceControlUI _raceControlUI;
@@ -31,7 +31,7 @@ public class RaceControlManager : MonoBehaviour
         {
             if (spawnPoint.CompareTag("Spawn"))
             {   
-                Vector3 spawnLocation = spawnPoint.transform.position;
+                Transform spawnLocation = spawnPoint.transform;
                 Debug.Log("Found spawn point " + spawnPoint.name + " at " + spawnLocation);
                 
                 _spawnPointLocations.Add(spawnLocation);
@@ -54,13 +54,15 @@ public class RaceControlManager : MonoBehaviour
         
         LapCheckpointTracker lapCheckpointTracker = GetComponent<LapCheckpointTracker>();
         lapCheckpointTracker.AddPlayer(newPlayer.transform);
+        
         RaceTelemetry playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+        Transform spawnPoint = _spawnPointLocations[playerIndex];
         playerRaceTelemetry.SetRaceControlManager(this);
         playerRaceTelemetry.SetPlayerIndex(playerIndex);
+        playerRaceTelemetry.SetRespawnPoint(spawnPoint); //sets initial spawn point
         
-        Vector3 spawnPoint = _spawnPointLocations[playerIndex];
         _raceControlUI.DisplayUpdateText("Player " + (playerIndex + 1) + " joined! Race will begin shortly...");
-        newPlayer.GetComponent<Rigidbody>().MovePosition(spawnPoint); //whenever an object has a Rigidbody, it needs to be moved this way to integrate with the physics engine.
+        newPlayer.GetComponent<Rigidbody>().MovePosition(spawnPoint.position); //whenever an object has a Rigidbody, it needs to be moved this way to integrate with the physics engine.
     }
 
     private void ActivateRace()

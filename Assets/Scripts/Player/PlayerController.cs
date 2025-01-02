@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 namespace Player{
     public class PlayerController : MonoBehaviour{
         private Rigidbody _rb;
+        private RaceTelemetry _raceTelemetry;
     
         //Character Settings
         public float speed;
@@ -23,6 +24,8 @@ namespace Player{
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start(){
             _rb = GetComponent<Rigidbody>(); 
+            _raceTelemetry = transform.parent.GetComponentInChildren<RaceTelemetry>();
+            Debug.Log(_raceTelemetry);
         }
 
         void Awake(){
@@ -51,6 +54,12 @@ namespace Player{
                 _rb.AddForce(jumpVector,ForceMode.Impulse);
                 jump = true;
             }
+        }
+
+        void OnInteract()
+        {
+            Debug.Log("Respawning");
+            _raceTelemetry.Respawn(_rb);
         }
 
         void OnApplicationFocus(bool focus){

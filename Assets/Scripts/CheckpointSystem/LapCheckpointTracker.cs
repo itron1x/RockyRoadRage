@@ -45,6 +45,8 @@ public class LapCheckpointTracker : MonoBehaviour
         {
             _nextCheckpointList[playerIndex] = (nextCheckpoint + 1) % _checkpointCount;
             Debug.Log("Player " + playerIndex+ " passed Checkpoint " + checkpoint.GetCheckpointId());
+            playerRaceTelemetry.SetRespawnPoint(checkpoint.GetRespawnPoint());
+            
             if (checkpoint.IsLapFinish())
             {
                 _lapCountList[playerIndex]++;
@@ -71,4 +73,5 @@ public class LapCheckpointTracker : MonoBehaviour
         _lapCountList.Add(-1); // Add a lap counter for each player added, and set -1 so passing the finish line at the start doesn't count as a lap yet
         Debug.Log("Added new player " + playerBall.name);
     }
+    
 }

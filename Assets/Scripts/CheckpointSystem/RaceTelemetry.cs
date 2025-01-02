@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Player;
 using TMPro;
@@ -7,13 +8,17 @@ using UnityEngine.Serialization;
 
 public class RaceTelemetry : MonoBehaviour
 {
-    //TODO: change GameObject maybe to TextMeshProUGUI (less code)? Did it with coinCount
     [SerializeField] private TextMeshProUGUI raceTimer;
+
     [SerializeField] private TextMeshProUGUI splitsDisplay;
-    //TODO: TextMeshProUGUI
+    
+    [SerializeField] private TextMeshProUGUI outOfBoundsDisplay;
+    [SerializeField] private int outOfBoundsRespawnTimerSeconds = 3;
+    
+    
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] public String playerName;
-    
+
     private RaceControlManager raceControlManager;
     private long _raceStartTimestamp = -1;
     private long _raceEndTimestamp = -1;
@@ -22,10 +27,13 @@ public class RaceTelemetry : MonoBehaviour
     private bool timerActive = false;
     private Transform _respawnPoint;
     
+    private Coroutine _respawnTimerCoroutine;
+
     public void Awake()
     {
         raceTimer.gameObject.SetActive(false);
         splitsDisplay.gameObject.SetActive(false);
+        outOfBoundsDisplay.gameObject.SetActive(false);
         _lapSplits = new List<long>();
     }
 
@@ -43,7 +51,7 @@ public class RaceTelemetry : MonoBehaviour
     {
         this.raceControlManager = raceControlManager;
     }
-    
+
     public void SetRaceStartTimestamp(long raceStartTimestamp)
     {
         _raceStartTimestamp = raceStartTimestamp;
@@ -59,7 +67,7 @@ public class RaceTelemetry : MonoBehaviour
         splitsDisplay.text = "Finish! Race Time: " + finishTime.ToString("mm:ss.fff");
         timerActive = false;
         raceTimer.gameObject.SetActive(false);
-        
+
         raceControlManager.PlayerFinishedRace(this);
     }
 
@@ -72,25 +80,27 @@ public class RaceTelemetry : MonoBehaviour
         DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
         splitsDisplay.text = dateTime.ToString("mm:ss.fff");
         splitsDisplay.gameObject.SetActive(true);
-        Invoke(nameof(ClearSplits),2);
+        Invoke(nameof(ClearSplits), 2);
     }
 
     public void displayWrongCheckpointWarning()
     {
         splitsDisplay.text = "Wrong Way!";
         splitsDisplay.gameObject.SetActive(true);
-        Invoke(nameof(ClearSplits),2);
+        Invoke(nameof(ClearSplits), 2);
     }
+
     private void ClearSplits()
     {
         splitsDisplay.text = "";
         splitsDisplay.gameObject.SetActive(false);
     }
 
-    public List<long> GetLapSplits(){
+    public List<long> GetLapSplits()
+    {
         return _lapSplits;
     }
-    
+
     public int GetPlayerIndex()
     {
         return _playerIndex;
@@ -100,7 +110,9 @@ public class RaceTelemetry : MonoBehaviour
     {
         _playerIndex = playerIndex;
     }
-    public TextMeshProUGUI GetCoinText(){
+
+    public TextMeshProUGUI GetCoinText()
+    {
         return coinText;
     }
 
@@ -113,5 +125,29 @@ public class RaceTelemetry : MonoBehaviour
         playerBody.linearVelocity = Vector3.zero;
         playerBody.angularVelocity = Vector3.zero;
         playerBody.MovePosition(_respawnPoint.position);
+    }
+
+    private IEnumerator RespawnTimer( Rigidbody playerBody)
+    {
+        outOfBoundsDisplay.gameObject.SetActive(true);
+        for (var i = outOfBoundsRespawnTimerSeconds; i > 0; i--)
+        {
+            outOfBoundsDisplay.text = "Respawning in: " + i + "s";
+            yield return new WaitForSeconds(1f);
+        }
+        Respawn(playerBody);
+        outOfBoundsDisplay.gameObject.SetActive(false);
+        
+    }
+
+    public void OnPlayerOutOfBounds(Rigidbody playerBody)
+    {
+        _respawnTimerCoroutine = StartCoroutine(RespawnTimer(playerBody));
+    }
+
+    public void OnPlayerBackInBounds()
+    {
+        if(_respawnTimerCoroutine != null) StopCoroutine(_respawnTimerCoroutine);
+        _respawnTimerCoroutine = null;
     }
 }

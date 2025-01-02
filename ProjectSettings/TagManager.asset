@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Checkpoint
   - Spawn
+  - Collectables
   layers:
   - Default
   - TransparentFX

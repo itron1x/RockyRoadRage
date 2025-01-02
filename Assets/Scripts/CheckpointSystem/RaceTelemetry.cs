@@ -2,11 +2,15 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RaceTelemetry : MonoBehaviour
 {
+    //TODO: change GameObject maybe to TextMeshProUGUI (less code)? Did it with coinCount
     [SerializeField] private GameObject raceTimer;
     [SerializeField] private GameObject splitsDisplay;
+    //TODO: TextMeshProUGUI
+    [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] public String playerName;
     
     private RaceControlManager raceControlManager;
@@ -98,5 +102,7 @@ public class RaceTelemetry : MonoBehaviour
     {
         _playerIndex = playerIndex;
     }
-    
+    public TextMeshProUGUI GetCoinText(){
+        return coinText;
+    }
 }

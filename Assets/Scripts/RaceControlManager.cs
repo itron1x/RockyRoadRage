@@ -13,6 +13,7 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private float joinTimeoutSeconds = 5;
     [SerializeField] private float postRaceTimeoutSeconds = 5;
     [SerializeField] private Canvas leaderboardCanvas;
+    [SerializeField] private float raceSpeedMultiplier = 1.5f;
     
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
@@ -68,6 +69,7 @@ public class RaceControlManager : MonoBehaviour
 
     private void ActivateRace()
     {
+        Time.timeScale = raceSpeedMultiplier;
         _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         foreach (var playerInput in _playerInputs)
         {
@@ -126,4 +128,9 @@ public class RaceControlManager : MonoBehaviour
         leaderboardCanvas.gameObject.SetActive(true);
     }
 
+    public void setRaceSpeedMultiplier(float multiplier)
+    {
+        raceSpeedMultiplier = multiplier;
+    }
+    
 }

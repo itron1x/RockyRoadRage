@@ -1,3 +1,4 @@
+using CheckpointSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,6 +27,12 @@ namespace Collectables{
 
         void SetCountText(){
             _coinText.text = _coins.ToString(); 
+        }
+
+        public void RemoveCoins(int amount){
+            if (_coins - amount >= 0) _coins -= amount;
+            else _coins = 0;
+            SetCountText();
         }
     }
 }

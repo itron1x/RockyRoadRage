@@ -1,4 +1,5 @@
 using System;
+using CheckpointSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,10 +14,10 @@ namespace Player{
         [FormerlySerializedAs("speed")]
         [Header("Movement attributes")]
         
-        [SerializeField] private float acceleration;
-        [SerializeField] private float speed;
-        [SerializeField] private float jumpForce;
-        [SerializeField] private float mass;
+        [SerializeField] private int acceleration;
+        [SerializeField] private int speed;
+        [SerializeField] private int jumpForce;
+        [SerializeField] private int mass;
         [NonSerialized] public bool Jump;
     
         [Header("References")]

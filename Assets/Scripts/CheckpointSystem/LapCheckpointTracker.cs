@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CheckpointSystem;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;

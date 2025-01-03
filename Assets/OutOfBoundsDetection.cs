@@ -1,4 +1,5 @@
 using System;
+using CheckpointSystem;
 using UnityEngine;
 
 public class OutOfBoundsDetection : MonoBehaviour

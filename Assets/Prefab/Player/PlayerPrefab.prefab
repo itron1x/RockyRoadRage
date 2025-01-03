@@ -501,6 +501,7 @@ MonoBehaviour:
   splitsDisplay: {fileID: 4392305389255697229}
   outOfBoundsDisplay: {fileID: 6717793522280428127}
   outOfBoundsRespawnTimerSeconds: 3
+  coinController: {fileID: 5208917714407895399}
   coinText: {fileID: 8991063834368884545}
   playerName: 
 --- !u!1 &4862085252564472760
@@ -1705,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a3c2b1b7bac484d9dd4a382dd1cbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 21
+  acceleration: 20
   speed: 20
   jumpForce: 10
   mass: 1

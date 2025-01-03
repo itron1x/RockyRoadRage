@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.011636297
       objectReference: {fileID: 0}
+    - target: {fileID: 7622741480868198462, guid: 716c1c513d6fd844b8dfe778fa596a9d, type: 3}
+      propertyPath: coinController
+      value: 
+      objectReference: {fileID: 5075691960698926681}
     - target: {fileID: 7724878251835178395, guid: 716c1c513d6fd844b8dfe778fa596a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.895689

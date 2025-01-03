@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Player{
     public class PlayerController : MonoBehaviour{
@@ -8,13 +10,19 @@ namespace Player{
         private RaceTelemetry _raceTelemetry;
     
         //Character Settings
-        public float speed;
-        public float jumpForce;
-        public bool jump;
+        [FormerlySerializedAs("speed")]
+        [Header("Movement attributes")]
+        
+        [SerializeField] private float acceleration;
+        [SerializeField] private float speed;
+        [SerializeField] private float jumpForce;
+        [SerializeField] private float mass;
+        [NonSerialized] public bool Jump;
     
+        [Header("References")]
+        
         [SerializeField]
         private GroundDetection groundDetection;
-
         [SerializeField] private Transform mainCamera;
     
         //Movement Coordinates
@@ -23,21 +31,17 @@ namespace Player{
     
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start(){
-            _rb = GetComponent<Rigidbody>(); 
+            _rb = GetComponent<Rigidbody>();
+            _rb.mass = mass;
             _raceTelemetry = transform.parent.GetComponentInChildren<RaceTelemetry>();
             Debug.Log(_raceTelemetry);
-        }
-
-        void Awake(){
-            Transform parent = transform.parent;
-            // mainCamera = parent.GetComponentInChildren<Camera>().transform;
         }
         
         void FixedUpdate(){
             Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
             movement = Quaternion.AngleAxis(mainCamera.rotation.eulerAngles.y, Vector3.up) * movement;
         
-            if(!jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * speed, ForceMode.Acceleration);
+            if(!Jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * acceleration, ForceMode.Acceleration);
         }
 
         // Update is called once per frame
@@ -52,7 +56,7 @@ namespace Player{
             Vector3 jumpVector = new Vector3(0.0f, jumpForce, 0.0f);
             if (groundDetection.IsGrounded){
                 _rb.AddForce(jumpVector,ForceMode.Impulse);
-                jump = true;
+                Jump = true;
             }
         }
 

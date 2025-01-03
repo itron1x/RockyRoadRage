@@ -435,9 +435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a3c2b1b7bac484d9dd4a382dd1cbc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 20
   speed: 20
   jumpForce: 10
-  jump: 0
+  mass: 1
   groundDetection: {fileID: 8363383691921760250}
   mainCamera: {fileID: 7569962880370147302}
 --- !u!114 &6789499005476212522

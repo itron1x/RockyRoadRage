@@ -15,7 +15,7 @@ namespace Player{
             //print(other.GetType());
             if (other.gameObject.layer == 3 && !_isGrounded){
                 _isGrounded = true;
-                parent.jump = false;
+                parent.Jump = false;
             }
         }
         void OnTriggerExit(Collider other){

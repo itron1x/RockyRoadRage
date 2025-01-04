@@ -454,7 +454,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2005563384901860940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0fab53dc2431444a797a9e197b74d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 97c48b120a5821947afc5b6e64502550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   raceTelemetry: {fileID: 7777932109055064643}

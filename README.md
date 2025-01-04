@@ -9,4 +9,15 @@ Ask Paul for more info.
 2) For collision make sure to add the "Ground" layer as tag since it uses this tag to identify collisions.
 Also check the provide "Provides Contacts" option for terrain.
 
-3) To change prefabs: PlayerInputManager.instance.playerPrefab (Currently called on the EventManager in the CharacterController) Link: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/PlayerInputManager.html
+3) To change prefabs: PlayerInputManager.instance.playerPrefab (Currently called on the EventManager in the CharacterController) Link: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/PlayerInputManager.htm
+
+## Packages
+* Cinemachine
+* Post Processing (https://www.youtube.com/watch?v=rmlJUaWfmzQ)
+
+## TODO
+- [ ] UI Design
+- [ ] Leaderboard
+- [ ] Save unlocked characters and coins to local disk (https://www.youtube.com/watch?v=1mf730eb5Wo)
+- [ ] Player and Character Selection Menu
+- [ ] Add coins to global coins after match

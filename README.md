@@ -16,8 +16,8 @@ Also check the provide "Provides Contacts" option for terrain.
 * Post Processing (https://www.youtube.com/watch?v=rmlJUaWfmzQ)
 
 ## TODO
-- [ ] UI Design
 - [ ] Leaderboard
 - [ ] Save unlocked characters and coins to local disk (https://www.youtube.com/watch?v=1mf730eb5Wo)
 - [ ] Player and Character Selection Menu
 - [ ] Add coins to global coins after match
+- [ ] Implement Difficulty (Game Speed)

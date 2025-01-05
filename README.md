@@ -9,7 +9,7 @@ Ask Paul for more info.
 2) For collision make sure to add the "Ground" layer as tag since it uses this tag to identify collisions.
 Also check the provide "Provides Contacts" option for terrain.
 
-3) To change prefabs: PlayerInputManager.instance.playerPrefab (Currently called on the EventManager in the CharacterController) Link: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/PlayerInputManager.htm
+3) To change prefabs: PlayerInputManager.instance.playerPrefab (Currently called on the EventManager in the CharacterController) Link: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/PlayerInputManager.htm; https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/PlayerInputManager.html 
 
 ## Packages
 * Cinemachine

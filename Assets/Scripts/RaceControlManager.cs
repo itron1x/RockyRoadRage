@@ -17,7 +17,7 @@ public class RaceControlManager : MonoBehaviour
     
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
-    private int finishedPlayers = 0;
+    private List<int> _leaderboard = new List<int>();
     private RaceControlUI _raceControlUI;
     private long _raceStartTimeMilliseconds;
     
@@ -84,10 +84,10 @@ public class RaceControlManager : MonoBehaviour
         var playerIndex = playerRaceTelemetry.GetPlayerIndex();
         Debug.Log("Player " + playerIndex + " finished!");
         _playerInputs[playerIndex].DeactivateInput();
-        finishedPlayers++;
-
+        _leaderboard.Add(playerIndex);
+        
         //when all Players have finished the Race, display Leaderboard
-        if (finishedPlayers >= _playerInputs.Count)
+        if (_leaderboard.Count >= _playerInputs.Count)
         {
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
             Invoke(nameof(showLeaderboard), postRaceTimeoutSeconds);
@@ -124,8 +124,16 @@ public class RaceControlManager : MonoBehaviour
 
     private void showLeaderboard()
     {
-        //TODO: Leaderboard
+        LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
+        for (int i = 1; i <= _leaderboard.Count; i++)
+        {
+            var playerRaceTelemetry = _playerInputs[i - 1].gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+            DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(playerRaceTelemetry.GetFinishTime()).DateTime;
+            leaderboardScript.SetPlayer(i, playerRaceTelemetry.playerName, finishTime.ToString("mm:ss.fff"), playerRaceTelemetry.GetCoinText().text);
+        }
+        
         leaderboardCanvas.gameObject.SetActive(true);
+        _raceControlUI.gameObject.SetActive(false);
     }
 
     public void setRaceSpeedMultiplier(float multiplier)

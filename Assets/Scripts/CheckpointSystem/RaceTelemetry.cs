@@ -98,6 +98,11 @@ namespace CheckpointSystem{
             splitsDisplay.gameObject.SetActive(false);
         }
 
+        public long GetFinishTime()
+        {
+            return _raceEndTimestamp - _raceStartTimestamp;
+        }
+        
         public List<long> GetLapSplits()
         {
             return _lapSplits;

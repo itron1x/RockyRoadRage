@@ -236,8 +236,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526636588948362499}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.011007754, y: 0.9088021, z: -0.02402526, w: -0.41638976}
-  m_LocalPosition: {x: 7.5630283, y: -1.7916455, z: 6.5208483}
+  m_LocalRotation: {x: 0.20482351, y: -0.0000046520618, z: 0.0000009734906, w: 0.9787989}
+  m_LocalPosition: {x: 0, y: 1.648865, z: -9.178677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1300,6 +1300,7 @@ GameObject:
   - component: {fileID: 9026871604265601788}
   - component: {fileID: 1043325886313883356}
   - component: {fileID: 8376100629085871989}
+  - component: {fileID: 2336567511376153531}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -1315,8 +1316,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233916060073307263}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.011007754, y: 0.9088021, z: -0.02402526, w: -0.41638976}
-  m_LocalPosition: {x: 7.5630283, y: -1.7916455, z: 6.5208483}
+  m_LocalRotation: {x: 0.20482351, y: -0.0000046520618, z: 0.0000009734906, w: 0.9787989}
+  m_LocalPosition: {x: 0, y: 1.648865, z: -9.178677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1379,7 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
-    BindingMode: 5
+    BindingMode: 4
     PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
@@ -1397,7 +1398,7 @@ MonoBehaviour:
       Radius: 2.5
       Height: 0.1
     SplineCurvature: 0.5
-  RecenteringTarget: 2
+  RecenteringTarget: 3
   HorizontalAxis:
     Value: 0
     Center: 0
@@ -1409,9 +1410,9 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 3.0286582
+    Value: 23.383682
     Center: 17.5
-    Range: {x: 0, y: 45}
+    Range: {x: 0, y: 60}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -1441,7 +1442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: 0, y: -0.0022222102}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -1531,6 +1532,36 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &2336567511376153531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233916060073307263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRadius: 0.4
+  Decollision:
+    Enabled: 0
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 1
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Damping: 0.5
+    SmoothingTime: 0
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 8
+    MaximumRaycast: 10
+    Damping: 0.5
 --- !u!1001 &4136372738553065679
 PrefabInstance:
   m_ObjectHideFlags: 0

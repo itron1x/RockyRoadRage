@@ -9,7 +9,7 @@ namespace TrackScripts{
             if (other.CompareTag("Player"))
             {
                 RaceTelemetry playerRaceTelemetry = other.transform.parent.GetComponentInChildren<RaceTelemetry>();
-                playerRaceTelemetry.OnPlayerOutOfBounds(other.transform.GetComponent<Rigidbody>());
+                if(playerRaceTelemetry.GetFinishTime() == -1) playerRaceTelemetry.OnPlayerOutOfBounds(other.transform.GetComponent<Rigidbody>());
             }
         }
     

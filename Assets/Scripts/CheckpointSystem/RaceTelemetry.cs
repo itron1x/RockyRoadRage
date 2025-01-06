@@ -100,6 +100,7 @@ namespace CheckpointSystem{
 
         public long GetFinishTime()
         {
+            if (_raceEndTimestamp == -1) return -1;
             return _raceEndTimestamp - _raceStartTimestamp;
         }
         

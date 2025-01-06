@@ -35,7 +35,6 @@ namespace Player{
             _rb = GetComponent<Rigidbody>();
             _rb.mass = mass;
             _raceTelemetry = transform.parent.GetComponentInChildren<RaceTelemetry>();
-            Debug.Log(_raceTelemetry);
         }
         
         void FixedUpdate(){

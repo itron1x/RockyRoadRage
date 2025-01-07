@@ -41,7 +41,17 @@ public class RaceControlManager : MonoBehaviour
             }
         }
     }
-    
+
+    private void Start()
+    {
+        if(RaceInfoSystem.GetInstance() == null) return;
+        
+        _playerInputManager.playerPrefab = RaceInfoSystem.GetInstance().GetPlayerPrefabs()[0];
+        var inputDevice = RaceInfoSystem.GetInstance().GetPlayerInputs()[0];
+        
+        _playerInputManager.JoinPlayer(-1, -1, null, inputDevice);
+    }
+
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         idleCamera.gameObject.SetActive(false);

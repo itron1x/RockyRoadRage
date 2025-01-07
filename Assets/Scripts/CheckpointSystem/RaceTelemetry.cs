@@ -158,6 +158,7 @@ namespace CheckpointSystem{
         {
             if(_respawnTimerCoroutine != null) StopCoroutine(_respawnTimerCoroutine);
             _respawnTimerCoroutine = null;
+            outOfBoundsDisplay.gameObject.SetActive(false);
         }
     }
 }

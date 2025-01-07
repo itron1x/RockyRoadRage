@@ -37,6 +37,7 @@ namespace Player{
             _raceTelemetry = transform.parent.GetComponentInChildren<RaceTelemetry>();
         }
         
+        // Add force based on direction and wanted movement
         void FixedUpdate(){
             Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
             movement = Quaternion.AngleAxis(mainCamera.rotation.eulerAngles.y, Vector3.up) * movement;
@@ -44,7 +45,7 @@ namespace Player{
             if(!Jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * acceleration, ForceMode.Acceleration);
         }
 
-        // Update is called once per frame
+        // Change movement for next frame.
         void OnMove(InputValue movementInput){
             Vector2 movement = movementInput.Get<Vector2>();
 
@@ -52,6 +53,7 @@ namespace Player{
             _movementY = movement.y;
         }
 
+        // Jump with the character
         void OnJump(){
             Vector3 jumpVector = new Vector3(0.0f, jumpForce, 0.0f);
             if (groundDetection.IsGrounded){
@@ -60,12 +62,13 @@ namespace Player{
             }
         }
 
+        // Manual respawn
         void OnInteract()
         {
-            Debug.Log("Respawning");
             _raceTelemetry.Respawn(_rb);
         }
 
+        // Lock cursor mode on game focus
         void OnApplicationFocus(bool focus){
             if (focus){
                 Cursor.lockState = CursorLockMode.Locked;

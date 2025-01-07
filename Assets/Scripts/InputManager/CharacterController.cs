@@ -7,6 +7,7 @@ namespace InputManager{
         [SerializeField] 
         private List<GameObject> prefabs;
         
+        // Method called if a player joins. TODO: potentially not necessary.
         public void OnPlayerJoined(PlayerInput playerInput){
             print(playerInput.devices[0].device.name);
 

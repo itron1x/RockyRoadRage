@@ -11,12 +11,13 @@ namespace Collectables{
         [SerializeField]
         private RaceTelemetry raceTelemetry;
     
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        // Initialize coins
         void Start(){
             _coinText = raceTelemetry.GetCoinText();
             SetCountText();
         }
 
+        // When collecting a coin this method is called.
         void OnTriggerEnter(Collider other){
             if (other.gameObject.CompareTag("Collectables")){
                 _coins += 1;
@@ -25,10 +26,12 @@ namespace Collectables{
             }
         }
 
+        // Update coin text 
         void SetCountText(){
             _coinText.text = _coins.ToString(); 
         }
 
+        // Remove coins
         public void RemoveCoins(int amount){
             if (_coins - amount >= 0) _coins -= amount;
             else _coins = 0;

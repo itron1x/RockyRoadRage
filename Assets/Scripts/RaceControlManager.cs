@@ -59,6 +59,8 @@ public class RaceControlManager : MonoBehaviour
         ResetWaitTime();
         playerInput.DeactivateInput();
         
+        // ? Question = is it necessary to also deactivate the Physics of the gameObject ?
+        
         GameObject newPlayer = playerInput.gameObject;
         _playerInputs.Add(playerInput);
         

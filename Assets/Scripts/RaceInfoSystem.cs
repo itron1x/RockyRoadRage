@@ -44,17 +44,17 @@ public class RaceInfoSystem : MonoBehaviour
     }
     
     // Temp manual save and load shortcut
-     public void Update(){
-         if (Keyboard.current.enterKey.wasPressedThisFrame){
-             print("Saving!");
-             SaveSystem.Save();
-         }
-    
-         if (Keyboard.current.spaceKey.wasPressedThisFrame){
-             print("Loading!");
-             SaveSystem.Load();
-         }
-     }
+     // public void Update(){
+     //     if (Keyboard.current.enterKey.wasPressedThisFrame){
+     //         print("Saving!");
+     //         SaveSystem.Save();
+     //     }
+     //
+     //     if (Keyboard.current.spaceKey.wasPressedThisFrame){
+     //         print("Loading!");
+     //         SaveSystem.Load();
+     //     }
+     // }
 
     public void SetRacingScene(SceneAsset racingScene)
     {

@@ -45,11 +45,12 @@ public class RaceControlManager : MonoBehaviour
 
     private void Start()
     {
+        RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
         if(RaceInfoSystem.GetInstance() == null) return;
         
-        _playerInputManager.playerPrefab = RaceInfoSystem.GetInstance().GetPlayerPrefabs()[0];
-        var inputDevice = RaceInfoSystem.GetInstance().GetPlayerInputs()[0];
-        
+        _playerInputManager.playerPrefab = infoSystem.GetPlayerPrefabs()[0];
+        var inputDevice = infoSystem.GetPlayerInputs()[0];
+        raceSpeedMultiplier = infoSystem.GetRaceSpeed();
         _playerInputManager.JoinPlayer(-1, -1, null, inputDevice);
     }
 

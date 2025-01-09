@@ -3165,6 +3165,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: m_PlayerPrefab
+      value: 
+      objectReference: {fileID: 9042308571311303235, guid: 7f29609fc96153e438ab152707de3508, type: 3}
     - target: {fileID: 7279876900076919611, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: idleCamera
       value: 

@@ -12,16 +12,19 @@ public class RaceInfoSystem : MonoBehaviour
     private SceneAsset _racingScene;
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<GameObject> _playerPrefabs = new List<GameObject>();
+
+    private int _globalCoins;
     
     private void Awake()
     {
-        if (_instance != null)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        SaveSystem.Load();
     }
 
     public static RaceInfoSystem GetInstance()
@@ -29,6 +32,17 @@ public class RaceInfoSystem : MonoBehaviour
         return _instance;
     }
     
+    //Temp manual save and load shortcut
+    // public void Update(){
+    //     if (Keyboard.current.enterKey.wasPressedThisFrame){
+    //         SaveSystem.Save();
+    //     }
+    //
+    //     if (Keyboard.current.spaceKey.wasPressedThisFrame){
+    //         SaveSystem.Load();
+    //     }
+    // }
+
     public void SetRacingScene(SceneAsset racingScene)
     {
         _racingScene = racingScene;
@@ -54,5 +68,26 @@ public class RaceInfoSystem : MonoBehaviour
     {
         SceneManager.LoadScene(_racingScene.name);
     }
+
+    public int GetGlobalCoins(){
+        return _globalCoins;
+    }
+
+    public void SetGlobalCoins(int globalCoins){
+        _globalCoins = globalCoins;
+    }
+
+    public void SaveGlobalCoins(ref PlayerSaveData data){
+        data.coins = _globalCoins;
+    }
+
+    public void LoadGlobalCoins(ref PlayerSaveData data){
+        _globalCoins = data.coins;
+    }
     
+}
+
+[System.Serializable]
+public struct PlayerSaveData{
+    public int coins;
 }

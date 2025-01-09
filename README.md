@@ -11,6 +11,12 @@ Also check the provide "Provides Contacts" option for terrain.
 
 3) To change prefabs: PlayerInputManager.instance.playerPrefab (Currently called on the EventManager in the CharacterController) Link: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.5/manual/PlayerInputManager.htm; https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/PlayerInputManager.html 
 
+4) SaveSystem:
+* call save and load with SaveSystem.Save() and SaveSystem.Load()
+* Coins and character will be callable through RaceInfoSystem with Getter and Setter Methods
+* Data is saved in %APPDATA%\LocalLow\DefaultCompany\RockyRoadRage\save.json
+* IMPORTANT: During development you might need to add the RaceInfoSystem Script to your scene!
+
 ## Packages
 * Cinemachine
 * Post Processing (https://www.youtube.com/watch?v=rmlJUaWfmzQ)

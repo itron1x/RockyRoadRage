@@ -11,16 +11,20 @@ namespace UI{
         [SerializeField] private TextMeshProUGUI characterName;
         [SerializeField] private TextMeshProUGUI characterPrice;
         [SerializeField] private TextMeshProUGUI characterDescription;
+        [SerializeField] private TextMeshProUGUI globalCoins;
         
         [Header("Buttons")]
         [SerializeField] private Button buyButton;
         
         private int _activeCharacter;
+        private int _coins;
         
 
         // Set initial character
         private void Awake(){
             UpdateCharacter(_activeCharacter);
+            _coins = RaceInfoSystem.GetInstance().GetGlobalCoins();
+            globalCoins.text = _coins.ToString();
         }
 
         // update active character to next in list

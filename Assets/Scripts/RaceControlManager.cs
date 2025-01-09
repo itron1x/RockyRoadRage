@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CheckpointSystem;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Vector3 = UnityEngine.Vector3;
 
 public class RaceControlManager : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private float postRaceTimeoutSeconds = 5;
     [SerializeField] private Canvas leaderboardCanvas;
     [SerializeField] private float raceSpeedMultiplier = 1.5f;
+    [SerializeField] private Transform mapOverview;
     
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
@@ -95,7 +96,10 @@ public class RaceControlManager : MonoBehaviour
     {
         var playerIndex = playerRaceTelemetry.GetPlayerIndex();
         Debug.Log("Player " + playerIndex + " finished!");
-        _playerInputs[playerIndex].DeactivateInput();
+        
+        // Call method after a certain amount of time
+        StartCoroutine(PlayerFinishCamera(playerIndex, 2));
+        
         _leaderboard.Add(playerIndex);
         
         //when all Players have finished the Race, display Leaderboard
@@ -104,7 +108,22 @@ public class RaceControlManager : MonoBehaviour
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
             Invoke(nameof(showLeaderboard), postRaceTimeoutSeconds);
         }
+    }
+
+    IEnumerator PlayerFinishCamera(int playerIndex, float delay){
+        yield return new WaitForSeconds(delay);
         
+        GameObject playerGameObject = _playerInputs[playerIndex].gameObject;
+        Transform parent = playerGameObject.transform.parent;
+        PrefabReferences prefabReferences = playerGameObject.GetComponentInParent<PrefabReferences>();
+
+        // Set camera to finish checkpoint
+        parent.GetComponentInChildren<CinemachineCamera>().Follow = mapOverview;
+        
+        // Make player invisible
+        prefabReferences.GetCharacter().layer = LayerMask.NameToLayer("Invisible");
+        prefabReferences.GetOverlays().layer = LayerMask.NameToLayer("Invisible");
+        prefabReferences.GetEye().layer = LayerMask.NameToLayer("Invisible");
     }
 
     private void ResetWaitTime()

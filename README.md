@@ -23,7 +23,7 @@ Also check the provide "Provides Contacts" option for terrain.
 
 ## TODO
 - [ ] Leaderboard
-- [ ] Save unlocked characters and coins to local disk (https://www.youtube.com/watch?v=1mf730eb5Wo)
+- [x] Save unlocked characters and coins to local disk (https://www.youtube.com/watch?v=1mf730eb5Wo)
 - [ ] Player and Character Selection Menu
 - [ ] Add coins to global coins after match
 - [ ] Implement Difficulty (Game Speed)

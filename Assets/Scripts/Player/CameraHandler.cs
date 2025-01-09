@@ -9,7 +9,7 @@ namespace Player{
     public class CameraHandler : MonoBehaviour{
         [SerializeField]
         private List<OutputChannels> outputChannels;
-        
+
         public void AddPlayer(PlayerInput player){
             Transform playerParent = player.transform.parent;
 
@@ -22,8 +22,6 @@ namespace Player{
 
             //Divide inputs to seperate players
             playerParent.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = player.playerIndex;
-            
-            
         }
     }
 }

@@ -693,6 +693,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81578bd6171ae8e4f82833fbf868f6f7, type: 3}
+--- !u!4 &1852257640 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5314473096006650844, guid: a5e22e18d3914fd17a2640f0a50548df, type: 3}
+  m_PrefabInstance: {fileID: 1649508130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1886432524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -701,6 +706,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 420446588681503527, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: lapsToFinish
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 420446588681503527, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: checkpointsParent
       value: 
@@ -749,6 +758,10 @@ PrefabInstance:
       propertyPath: idleCamera
       value: 
       objectReference: {fileID: 89564231}
+    - target: {fileID: 7279876900076919611, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: mapOverview
+      value: 
+      objectReference: {fileID: 1852257640}
     - target: {fileID: 7279876900076919611, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: spawnPoints
       value: 

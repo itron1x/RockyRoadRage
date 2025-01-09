@@ -50,7 +50,7 @@ public class LapCheckpointTracker : MonoBehaviour
             playerRaceTelemetry.SetRespawnPoint(checkpoint.GetRespawnPoint());
             
             // **Update Checkpoint Display**
-            UpdateCheckpointDisplay(playerIndex, _nextCheckpointList[playerIndex]);
+            // UpdateCheckpointDisplay(playerIndex, _nextCheckpointList[playerIndex]);
             
             if (checkpoint.IsLapFinish())
             {
@@ -72,11 +72,11 @@ public class LapCheckpointTracker : MonoBehaviour
     }
     
     // **Checkpoint Display**
-    private void UpdateCheckpointDisplay(int playerIndex, int nextCheckpoint)
-    {
-        int currentCheckpoint = nextCheckpoint == 0 ? _checkpointCount : nextCheckpoint;
-        checkpointTexts[playerIndex].text = $"Player {playerIndex + 1}: {currentCheckpoint}/{_checkpointCount}";
-    }
+    // private void UpdateCheckpointDisplay(int playerIndex, int nextCheckpoint)
+    // {
+    //     int currentCheckpoint = nextCheckpoint == 0 ? _checkpointCount : nextCheckpoint;
+    //     checkpointTexts[playerIndex].text = $"Player {playerIndex + 1}: {currentCheckpoint}/{_checkpointCount}";
+    // }
 
     public void AddPlayer(Transform playerBall)
     {
@@ -85,5 +85,4 @@ public class LapCheckpointTracker : MonoBehaviour
         _lapCountList.Add(-1); // Add a lap counter for each player added, and set -1 so passing the finish line at the start doesn't count as a lap yet
         Debug.Log("Added new player " + playerBall.name);
     }
-    
 }

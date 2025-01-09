@@ -8,6 +8,7 @@ public class InfoTransmitTest : MonoBehaviour
 
     public GameObject playerPrefab;
     public SceneAsset racingScene;
+    public float raceSpeed = 3f;
     
     public void TestSceneInfoTransmit()
     {
@@ -16,7 +17,7 @@ public class InfoTransmitTest : MonoBehaviour
         
         raceInfoSystem.AddPlayer(inputDevice, playerPrefab);
         raceInfoSystem.SetRacingScene(racingScene);
-        
+        raceInfoSystem.SetRaceSpeed(raceSpeed);
         raceInfoSystem.StartRace();
     }
 }

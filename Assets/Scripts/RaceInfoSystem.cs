@@ -13,7 +13,8 @@ public class RaceInfoSystem : MonoBehaviour
     private SceneAsset _racingScene;
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<GameObject> _playerPrefabs = new List<GameObject>();
-
+    private float _raceSpeed;
+    
     private int _globalCoins;
     private Hashtable _characterInformation;
     
@@ -56,6 +57,16 @@ public class RaceInfoSystem : MonoBehaviour
      //     }
      // }
 
+     public void SetRaceSpeed(float speed)
+     {
+         _raceSpeed = speed;
+     }
+
+     public float GetRaceSpeed()
+     {
+         return _raceSpeed;
+     }
+     
     public void SetRacingScene(SceneAsset racingScene)
     {
         _racingScene = racingScene;

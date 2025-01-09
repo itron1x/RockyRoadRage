@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class RaceInfoSystem : MonoBehaviour
     private List<GameObject> _playerPrefabs = new List<GameObject>();
 
     private int _globalCoins;
+    private Hashtable _characterInformation;
     
     private void Awake()
     {
@@ -24,6 +26,15 @@ public class RaceInfoSystem : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        // Add characters to Hashtable
+        _characterInformation = new Hashtable();
+        _characterInformation.Add("Pebble Pete", false);
+        _characterInformation.Add("Cubic Chris", false);
+        _characterInformation.Add("Triangle Tam", false);
+        _characterInformation.Add("Smooth Sally", false);
+        
+        // Load saved data.
         SaveSystem.Load();
     }
 
@@ -32,16 +43,18 @@ public class RaceInfoSystem : MonoBehaviour
         return _instance;
     }
     
-    //Temp manual save and load shortcut
-    // public void Update(){
-    //     if (Keyboard.current.enterKey.wasPressedThisFrame){
-    //         SaveSystem.Save();
-    //     }
-    //
-    //     if (Keyboard.current.spaceKey.wasPressedThisFrame){
-    //         SaveSystem.Load();
-    //     }
-    // }
+    // Temp manual save and load shortcut
+     public void Update(){
+         if (Keyboard.current.enterKey.wasPressedThisFrame){
+             print("Saving!");
+             SaveSystem.Save();
+         }
+    
+         if (Keyboard.current.spaceKey.wasPressedThisFrame){
+             print("Loading!");
+             SaveSystem.Load();
+         }
+     }
 
     public void SetRacingScene(SceneAsset racingScene)
     {
@@ -78,16 +91,44 @@ public class RaceInfoSystem : MonoBehaviour
     }
 
     public void SaveGlobalCoins(ref PlayerSaveData data){
+        print("Saving Coins...");
         data.coins = _globalCoins;
+    }
+
+    public void SaveCharacterInformation(ref PlayerSaveData data){
+        print("Saving Character Information...");
+        data.pebblePete = (bool)_characterInformation["Pebble Pete"];
+        data.cubicChris = (bool)_characterInformation["Cubic Chris"];
+        data.triangleTam = (bool)_characterInformation["Triangle Tam"];
+        data.smoothSally = (bool)_characterInformation["Smooth Sally"];
     }
 
     public void LoadGlobalCoins(ref PlayerSaveData data){
         _globalCoins = data.coins;
     }
-    
+
+    public void LoadCharacterInformation(ref PlayerSaveData data){
+        _characterInformation["Pebble Pete"] = data.pebblePete;
+        _characterInformation["Cubic Chris"] = data.cubicChris;
+        _characterInformation["Triangle Tam"] = data.triangleTam;
+        _characterInformation["Smooth Sally"] = data.smoothSally;
+    }
+
+    public void BuyCharacter(string characterName, int price){
+        _characterInformation[characterName] = true;
+        _globalCoins -= price;
+    }
+
+    public bool IsBought(string characterName){
+        return (bool)_characterInformation[characterName];
+    }
 }
 
 [System.Serializable]
 public struct PlayerSaveData{
     public int coins;
+    public bool pebblePete;
+    public bool cubicChris;
+    public bool triangleTam;
+    public bool smoothSally;
 }

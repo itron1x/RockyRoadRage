@@ -141,7 +141,7 @@ public class RaceControlManager : MonoBehaviour
         {
             var playerRaceTelemetry = _playerInputs[i - 1].gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
             DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(playerRaceTelemetry.GetFinishTime()).DateTime;
-            leaderboardScript.SetPlayer(i, playerRaceTelemetry.playerName, finishTime.ToString("mm:ss.fff"), playerRaceTelemetry.GetCoinText().text);
+            leaderboardScript.SetPlayer(i, playerRaceTelemetry.GetPlayerName(), finishTime.ToString("mm:ss.fff"), playerRaceTelemetry.GetCoinText().text);
         }
         
         leaderboardCanvas.gameObject.SetActive(true);

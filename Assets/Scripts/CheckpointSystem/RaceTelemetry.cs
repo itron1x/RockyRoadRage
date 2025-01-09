@@ -19,7 +19,8 @@ namespace CheckpointSystem{
         [Header("Other")] 
         [SerializeField] private CoinController coinController;
         [SerializeField] private TextMeshProUGUI coinText;
-        [SerializeField] public String playerName;
+        [SerializeField] private string playerName;
+        [SerializeField] private TextMeshProUGUI playerNameText;
 
         private RaceControlManager raceControlManager;
         private long _raceStartTimestamp = -1;
@@ -37,6 +38,7 @@ namespace CheckpointSystem{
             splitsDisplay.gameObject.SetActive(false);
             outOfBoundsDisplay.gameObject.SetActive(false);
             _lapSplits = new List<long>();
+            playerNameText.text = playerName;
         }
 
         private void Update()
@@ -59,6 +61,17 @@ namespace CheckpointSystem{
             _raceStartTimestamp = raceStartTimestamp;
             timerActive = true;
             raceTimer.gameObject.SetActive(true);
+        }
+
+        public void SetPlayerName(string playerName)
+        {
+            this.playerName = playerName;
+            playerNameText.text = playerName;
+        }
+
+        public string GetPlayerName()
+        {
+            return playerName;
         }
 
         public void finish()

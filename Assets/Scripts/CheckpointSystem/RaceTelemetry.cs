@@ -21,6 +21,7 @@ namespace CheckpointSystem{
         [SerializeField] private TextMeshProUGUI coinText;
         [SerializeField] private string playerName;
         [SerializeField] private TextMeshProUGUI playerNameText;
+        [SerializeField] private TextMeshProUGUI CheckPointText;
 
         private RaceControlManager raceControlManager;
         private long _raceStartTimestamp = -1;
@@ -50,7 +51,14 @@ namespace CheckpointSystem{
             DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
             raceTimer.text = dateTime.ToString("mm:ss.fff");
         }
-
+        
+        /*
+        public void UpdateCheckpointText(int currentCheckpoint, int totalCheckpoints)
+        {
+            CheckPointText.text = $"Checkpoint: {currentCheckpoint}/{totalCheckpoints}";
+        }
+        */
+        
         public void SetRaceControlManager(RaceControlManager raceControlManager)
         {
             this.raceControlManager = raceControlManager;

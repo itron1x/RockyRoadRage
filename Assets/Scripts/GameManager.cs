@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     
     private static RaceInfoSystem _raceInfoSystem;
     private static ShopManager _shopManager;
+
     
     void Awake(){
         if (_instance != null){
@@ -26,4 +27,5 @@ public class GameManager : MonoBehaviour
     public RaceInfoSystem GetRaceInfoSystem(){
         return _raceInfoSystem;
     }
+  
 }

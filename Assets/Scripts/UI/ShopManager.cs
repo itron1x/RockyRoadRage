@@ -92,6 +92,11 @@ namespace UI{
             else buyButton.interactable = true;
         }
 
+        public List<GameObject> GetAvailableCharacters()
+        {
+            return characters;
+        }
+        
         public void Save(){
             SaveSystem.Save();
         }

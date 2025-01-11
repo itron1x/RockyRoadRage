@@ -10,7 +10,6 @@ public class LapCheckpointTracker : MonoBehaviour
     [SerializeField] private Transform checkpointsParent; //Parent Object containing all Checkpoints as children
     [SerializeField] private List<Transform> playerBallsTransforms;
     [SerializeField] private int lapsToFinish;
-    [SerializeField] private List<TMPro.TextMeshProUGUI> checkpointTexts;
     
     private List<int> _nextCheckpointList;
     private List<int> _lapCountList;
@@ -49,8 +48,7 @@ public class LapCheckpointTracker : MonoBehaviour
             Debug.Log("Player " + playerIndex+ " passed Checkpoint " + checkpoint.GetCheckpointId());
             playerRaceTelemetry.SetRespawnPoint(checkpoint.GetRespawnPoint());
             
-            // **Update Checkpoint Display**
-            // UpdateCheckpointDisplay(playerIndex, _nextCheckpointList[playerIndex]);
+            // UpdateCheckpointDisplay(playerIndex, checkpoint.GetCheckpointId());
             
             if (checkpoint.IsLapFinish())
             {
@@ -71,12 +69,22 @@ public class LapCheckpointTracker : MonoBehaviour
         
     }
     
-    // **Checkpoint Display**
-    // private void UpdateCheckpointDisplay(int playerIndex, int nextCheckpoint)
-    // {
-    //     int currentCheckpoint = nextCheckpoint == 0 ? _checkpointCount : nextCheckpoint;
-    //     checkpointTexts[playerIndex].text = $"Player {playerIndex + 1}: {currentCheckpoint}/{_checkpointCount}";
-    // }
+    /*
+    UpdateCheckpointDisplay wird indirekt durch den Aufruf von BallThroughCheckpoint im LapCheckpointTracker aufgerufen.
+    
+    private void UpdateCheckpointDisplay(int playerIndex, int passedCheckpoint)
+    {
+        // Berechnung des aktuellen Checkpoints
+        int currentCheckpoint = passedCheckpoint == 0 ? _checkpointCount : passedCheckpoint;
+
+        // Hole den checkpointText über RaceTelemetry
+        RaceTelemetry playerTelemetry = playerBallsTransforms[playerIndex].GetComponentInParent<RaceTelemetry>();
+        if (playerTelemetry != null)
+        {
+            playerTelemetry.UpdateCheckpointText(currentCheckpoint, _checkpointCount);
+        }
+    } ; 
+    */
 
     public void AddPlayer(Transform playerBall)
     {

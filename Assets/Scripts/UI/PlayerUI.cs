@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using InputManager;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
@@ -10,71 +11,70 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Button nextPlayerButton;
     [SerializeField] private Button backPlayerButton;
     [SerializeField] private Button confirmButton;
-    [SerializeField] private InputManager.CharacterController characterController;
-    
-    private int currentPlayerIndex = 0;
+    [SerializeField] private CC characterController; // Referenz zur CC-Klasse
+    private List<InputDevice> devices;
+    private int currentDeviceIndex = 0;
+
     private List<InputManager.PlayerData> players;
-    
+    private List<InputDevice> detectedDevices = new List<InputDevice>();
+
     void Start()
     {
-        
-        /*
-        if (characterController == null)
+        devices = characterController.GetDetectedDevices(); // Geräte abrufen
+        if (devices == null || devices.Count == 0)
         {
-            Debug.LogError("Kein CharacterController gefunden!");
-            return;
-        }
-        */
-        
-        // Holt die Liste der Spieler
-        players = characterController.GetPlayerDataList();
-
-        if (players == null || players.Count == 0)
-        {
-            Debug.LogError("Keine Spieler gefunden!");
-            playerNameText.text = "Keine Spieler verfügbar";
+            Debug.LogError("Keine Geräte erkannt!");
             return;
         }
 
-        InitializeUI();
+        UpdateDeviceDisplay();
     }
 
-    private void InitializeUI()
+    private void UpdateDeviceDisplay()
     {
-        UpdateUI();
-
-        nextPlayerButton.onClick.AddListener(NextPlayer);
-        backPlayerButton.onClick.AddListener(PreviousPlayer);
-        confirmButton.onClick.AddListener(ConfirmSelection);
-    }
-
-    private void UpdateUI()
-    {
-        if (players.Count == 0)
+        if (devices.Count == 0)
         {
-            playerNameText.text = "Keine Spieler verfügbar";
+            playerNameText.text = "Keine Geräte verfügbar";
             return;
         }
 
-        PlayerData currentPlayer = players[currentPlayerIndex];
-        playerNameText.text = $"Spieler {currentPlayer.PlayerIndex + 1} - Steuerung: {currentPlayer.ControlScheme}";
+        InputDevice currentDevice = devices[currentDeviceIndex];
+        playerNameText.text = $"Gerät: {currentDevice.displayName}";
     }
 
-    public void NextPlayer()
+    public void NextDevice()
     {
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
-        UpdateUI();
+        currentDeviceIndex = (currentDeviceIndex + 1) % devices.Count;
+        UpdateDeviceDisplay();
     }
 
-    public void PreviousPlayer()
+    public void PreviousDevice()
     {
-        currentPlayerIndex = (currentPlayerIndex - 1 + players.Count) % players.Count;
-        UpdateUI();
+        currentDeviceIndex = (currentDeviceIndex - 1 + devices.Count) % devices.Count;
+        UpdateDeviceDisplay();
+    }
+
+    public void ConfirmDevice()
+    {
+        InputDevice selectedDevice = devices[currentDeviceIndex];
+        characterController.CreatePlayer(selectedDevice); // Spieler mit dem ausgewählten Gerät erstellen
+        Debug.Log($"Gerät {selectedDevice.displayName} wurde als Spieler hinzugefügt.");
     }
 
     public void ConfirmSelection()
     {
-        PlayerData currentPlayer = players[currentPlayerIndex];
-        Debug.Log($"Spieler {currentPlayer.PlayerIndex + 1} mit Steuerung {currentPlayer.ControlScheme} bestätigt.");
+        List<PlayerData> players = characterController.GetPlayerDataList();
+        if (players != null && players.Count > 0)
+        {
+            PlayerData
+                currentPlayer =
+                    players[currentDeviceIndex]; // Verwende den Index, falls das Gerät mit einem Spieler verbunden ist
+            Debug.Log(
+                $"Spieler {currentPlayer.PlayerIndex + 1} mit Steuerung {currentPlayer.ControlScheme} bestätigt.");
+        }
+        else
+        {
+            Debug.LogError("Keine Spieler-Daten verfügbar!");
+        }
     }
 }

@@ -19,8 +19,8 @@ public class CharacterSelectionIU : MonoBehaviour
     private List<GameObject> availablePrefabs;
     private int currentPrefabIndex = 0;
     private System.Action<PlayerData, GameObject> onCharacterSelectedCallback;
-    
-    void InitializeCharacters(PlayerData data, List<GameObject> prefabs, System.Action<PlayerData, GameObject> onCharacterSelected)
+
+    public void InitializeCharacters(PlayerData data, List<GameObject> prefabs, System.Action<PlayerData, GameObject> onCharacterSelected)
     {
         RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
         availableCharacters = new List<GameObject>();
@@ -47,6 +47,17 @@ public class CharacterSelectionIU : MonoBehaviour
         backButton.onClick.AddListener(PreviousCharacter);
         confirmButton.onClick.AddListener(ConfirmSelection);
     }
+    
+    public void StartCharacterSelection(PlayerData playerData, List<GameObject> availablePrefabs, System.Action<PlayerData, GameObject> onCharacterSelectedCallback)
+    {
+        // Starte die Auswahl mit den übergebenen Daten
+        InitializeCharacters(playerData, availablePrefabs, onCharacterSelectedCallback);
+
+        // Aktiviert die UI, falls sie deaktiviert war
+        gameObject.SetActive(true);
+
+        Debug.Log($"Charakterauswahl für Spieler {playerData.PlayerIndex + 1} gestartet.");
+    }
 
     private void NextCharacter()
     {
@@ -69,7 +80,11 @@ public class CharacterSelectionIU : MonoBehaviour
     {
         GameObject selectedPrefab = availablePrefabs[currentPrefabIndex];
         playerData.SelectedPrefab = selectedPrefab; // Speichert das ausgewählte Prefab in PlayerData
+
+        // Callback aufrufen, um CC zu informieren
         onCharacterSelectedCallback?.Invoke(playerData, selectedPrefab);
+
+        Debug.Log($"Charakter {selectedPrefab.name} für Spieler {playerData.PlayerIndex + 1} bestätigt.");
     }
     
 }

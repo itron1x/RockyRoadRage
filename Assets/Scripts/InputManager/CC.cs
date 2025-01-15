@@ -99,7 +99,7 @@ namespace InputManager
             AssignDevicesToPlayer(newPlayer);
 
             // Charakterauswahl starten
-            CharacterSelectionIU characterSelectionUI = FindObjectOfType<CharacterSelectionIU>();
+            CharacterSelectionIU characterSelectionUI = Object.FindFirstObjectByType<CharacterSelectionIU>();
             if (characterSelectionUI != null)
             {
                 characterSelectionUI.StartCharacterSelection(playerData, playerPrefabs, HandleCharacterSelection);

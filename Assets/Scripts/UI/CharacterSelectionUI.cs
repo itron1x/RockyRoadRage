@@ -13,10 +13,12 @@ public class CharacterSelectionIU : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button confirmButton;
     [SerializeField] private ShopManager shopManager; // Referenz auf den ShopManager
+    [SerializeField] private List<GameObject> characterPrefabs; 
+    
     private List<GameObject> availableCharacters;
 
     private PlayerData playerData;
-    private List<GameObject> availablePrefabs;
+    private List<GameObject> allCharacters;
     private int currentPrefabIndex = 0;
     private System.Action<PlayerData, GameObject> onCharacterSelectedCallback;
 
@@ -37,7 +39,7 @@ public class CharacterSelectionIU : MonoBehaviour
         Debug.Log($"Gekaufte Charaktere geladen: {availableCharacters.Count}");
         
         playerData = data;
-        availablePrefabs = prefabs;
+        allCharacters = prefabs;
         onCharacterSelectedCallback = onCharacterSelected;
 
         playerNameText.text = $"Spieler {data.PlayerIndex + 1}";
@@ -61,24 +63,24 @@ public class CharacterSelectionIU : MonoBehaviour
 
     private void NextCharacter()
     {
-        currentPrefabIndex = (currentPrefabIndex + 1) % availablePrefabs.Count;
+        currentPrefabIndex = (currentPrefabIndex + 1) % allCharacters.Count;
         UpdateCharacterPreview();
     }
 
     private void PreviousCharacter()
     {
-        currentPrefabIndex = (currentPrefabIndex - 1 + availablePrefabs.Count) % availablePrefabs.Count;
+        currentPrefabIndex = (currentPrefabIndex - 1 + allCharacters.Count) % allCharacters.Count;
         UpdateCharacterPreview();
     }
 
     private void UpdateCharacterPreview()
     {
-        characterPreviewImage.sprite = availablePrefabs[currentPrefabIndex].GetComponent<SpriteRenderer>().sprite;
+        characterPreviewImage.sprite = allCharacters[currentPrefabIndex].GetComponent<SpriteRenderer>().sprite;
     }
 
     private void ConfirmSelection()
     {
-        GameObject selectedPrefab = availablePrefabs[currentPrefabIndex];
+        GameObject selectedPrefab = allCharacters[currentPrefabIndex];
         playerData.SelectedPrefab = selectedPrefab; // Speichert das ausgewählte Prefab in PlayerData
 
         // Callback aufrufen, um CC zu informieren

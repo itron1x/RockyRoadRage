@@ -236,8 +236,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526636588948362499}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35814106, y: -0.5978195, z: 0.33867863, w: 0.6321737}
-  m_LocalPosition: {x: 5.213751, y: 6.500125, z: -0.32284784}
+  m_LocalRotation: {x: -0.00016660072, y: 0.9971832, z: -0.0022159254, w: -0.07497158}
+  m_LocalPosition: {x: 1.5383043, y: -2.0543923, z: 9.854161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -282,7 +282,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 65407
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -501,7 +501,7 @@ MonoBehaviour:
   splitsDisplay: {fileID: 4392305389255697229}
   outOfBoundsDisplay: {fileID: 6717793522280428127}
   outOfBoundsRespawnTimerSeconds: 3
-  coinController: {fileID: 0}
+  coinCollider: {fileID: 2545864525355911893}
   coinText: {fileID: 8991063834368884545}
   playerName: Smooth Sally
   playerNameText: {fileID: 8025134274762564252}
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 8101086276683688223}
   - component: {fileID: 4746210675137446510}
   - component: {fileID: 5541070906269533414}
-  - component: {fileID: 2263331326989391372}
+  - component: {fileID: 2545864525355911893}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -806,20 +806,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f004c29ceb0ab4fa49a99329bf9f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 20
-  speed: 20
-  jumpForce: 10
-  mass: 1
-  groundDetection: {fileID: 7227965196109187023}
+  Jump: 0
   mainCamera: {fileID: 7724878251835178395}
---- !u!114 &2263331326989391372
+  groundDetection: {fileID: 7227965196109187023}
+--- !u!114 &2545864525355911893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3543159742640576036}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058afa080743c1145b85d01932b503aa, type: 3}
   m_Name: 
@@ -1126,9 +1123,11 @@ MonoBehaviour:
   - {fileID: 8562295043620758650}
   playerController: {fileID: 5541070906269533414}
   lookFollower: {fileID: 5846152580209037940}
+  mainCamera: {fileID: 7862922571195019078}
   cinemachineCamera: {fileID: 3248163183937971389}
   overlays: {fileID: 2790392337782137134}
   eyes: {fileID: 5962193835695847036}
+  coinController: {fileID: 2545864525355911893}
 --- !u!1 &5714779599674561051
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,8 +1937,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233916060073307263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35814106, y: -0.5978195, z: 0.33867863, w: 0.6321737}
-  m_LocalPosition: {x: 5.213751, y: 6.500125, z: -0.32284784}
+  m_LocalRotation: {x: -0.00016660072, y: 0.9971832, z: -0.0022159254, w: -0.07497158}
+  m_LocalPosition: {x: 1.5383043, y: -2.0543923, z: 9.854161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2022,7 +2021,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -86.79618
+    Value: -171.4004
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -2032,7 +2031,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 58.809677
+    Value: 0
     Center: 17.5
     Range: {x: 0, y: 60}
     Wrap: 0
@@ -2503,6 +2502,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5269b93c013276849b71938debb4721a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3816452852641587233}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5269b93c013276849b71938debb4721a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6913903798312284733}
   m_SourcePrefab: {fileID: 100100000, guid: 5269b93c013276849b71938debb4721a, type: 3}
 --- !u!4 &1494953871709341507 stripped
 Transform:
@@ -2575,7 +2577,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c48b120a5821947afc5b6e64502550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceTelemetry: {fileID: 7622741480868198462}
+  coinController: {fileID: 2545864525355911893}
+--- !u!114 &6913903798312284733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302733644896460281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad23fb51ec690945a7e2da928866635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7796923503799143920}
+  groundDetection: {fileID: 7227965196109187023}
+  speed: 20
+  acceleration: 20
+  jumpHeight: 10
+  mass: 1
 --- !u!1001 &3797435450487011826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2656,6 +2676,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7abb2db18a8ae8a46b6b593d8d342a50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2367286073930108441}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7abb2db18a8ae8a46b6b593d8d342a50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4670211084681230309}
   m_SourcePrefab: {fileID: 100100000, guid: 7abb2db18a8ae8a46b6b593d8d342a50, type: 3}
 --- !u!4 &3691133176660205081 stripped
 Transform:
@@ -2728,7 +2751,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c48b120a5821947afc5b6e64502550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceTelemetry: {fileID: 7622741480868198462}
+  coinController: {fileID: 2545864525355911893}
+--- !u!114 &4670211084681230309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067413184750666915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad23fb51ec690945a7e2da928866635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7294314727474048843}
+  groundDetection: {fileID: 6895868763617131833}
+  speed: 20
+  acceleration: 20
+  jumpHeight: 10
+  mass: 1
 --- !u!1001 &4593046917114993838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2805,6 +2846,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd975c9a7d7785b4ca7f51ec6d7e790c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5973401765947928297}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd975c9a7d7785b4ca7f51ec6d7e790c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1926658825176789569}
   m_SourcePrefab: {fileID: 100100000, guid: fd975c9a7d7785b4ca7f51ec6d7e790c, type: 3}
 --- !u!1 &3710031542150144511 stripped
 GameObject:
@@ -2872,7 +2916,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c48b120a5821947afc5b6e64502550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceTelemetry: {fileID: 7622741480868198462}
+  coinController: {fileID: 2545864525355911893}
+--- !u!114 &1926658825176789569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710031542150144511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad23fb51ec690945a7e2da928866635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8651906423464363193}
+  groundDetection: {fileID: 2537712267482173942}
+  speed: 20
+  acceleration: 20
+  jumpHeight: 10
+  mass: 1
 --- !u!4 &4050845664725891909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd975c9a7d7785b4ca7f51ec6d7e790c, type: 3}
@@ -2954,6 +3016,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 33ed21f9380d62a489f22060dd6829b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 162986695868930152}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 33ed21f9380d62a489f22060dd6829b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 526045220420398522}
   m_SourcePrefab: {fileID: 100100000, guid: 33ed21f9380d62a489f22060dd6829b1, type: 3}
 --- !u!1 &8562295043620758650 stripped
 GameObject:
@@ -3021,7 +3086,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c48b120a5821947afc5b6e64502550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceTelemetry: {fileID: 7622741480868198462}
+  coinController: {fileID: 2545864525355911893}
+--- !u!114 &526045220420398522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8562295043620758650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad23fb51ec690945a7e2da928866635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1634240822440274935}
+  groundDetection: {fileID: 7840307161175197225}
+  speed: 20
+  acceleration: 20
+  jumpHeight: 10
+  mass: 1
 --- !u!4 &9050178437140594368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 33ed21f9380d62a489f22060dd6829b1, type: 3}

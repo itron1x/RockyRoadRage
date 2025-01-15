@@ -4,30 +4,49 @@ using Unity.VisualScripting.FullSerializer;
 
 public class SaveSystem{
     private static SaveData _saveData = new SaveData();
+    private static SaveLeaderboardData _saveLeaderboardData;
+    private static RaceInfoSystem _raceInfoSystem = RaceInfoSystem.GetInstance();
     
     [System.Serializable]
     public struct SaveData{
        public PlayerSaveData saveData; 
     }
 
-    public static string FilePath(){
-        string saveFile = Application.persistentDataPath + "/save" + ".json";
+    [System.Serializable]
+    public struct SaveLeaderboardData{
+        public LeaderboardData leaderboardData;
+    }
+
+    public static string FilePath(string filename){
+        string saveFile = Application.persistentDataPath + "/" + filename + ".json";
         return saveFile;
     }
 
     public static void Save(){
-        RaceInfoSystem.GetInstance().SaveGlobalCoins(ref _saveData.saveData);
-        RaceInfoSystem.GetInstance().SaveCharacterInformation(ref _saveData.saveData);
+        _raceInfoSystem.SaveGlobalCoins(ref _saveData.saveData);
+        _raceInfoSystem.SaveCharacterInformation(ref _saveData.saveData);
+        _raceInfoSystem.SaveLeaderboardData(ref _saveLeaderboardData.leaderboardData);
         
         //Pretty Print to false make it not human-readable
-        File.WriteAllText(FilePath(), JsonUtility.ToJson(_saveData, true));
+        File.WriteAllText(FilePath("coins"), JsonUtility.ToJson(_saveData, true));
+        File.WriteAllText(FilePath("leaderboard"), JsonUtility.ToJson(_saveLeaderboardData, true));
     }
 
     public static void Load(){
-        string savedData = File.ReadAllText(FilePath());
+        string savedData = File.ReadAllText(FilePath("coins"));
         _saveData = JsonUtility.FromJson<SaveData>(savedData);
         
-        RaceInfoSystem.GetInstance().LoadGlobalCoins(ref _saveData.saveData);
-        RaceInfoSystem.GetInstance().LoadCharacterInformation(ref _saveData.saveData);
+        _raceInfoSystem.LoadGlobalCoins(ref _saveData.saveData);
+        _raceInfoSystem.LoadCharacterInformation(ref _saveData.saveData);
+        
+        string savedLeaderboardData = File.ReadAllText(FilePath("leaderboard"));
+        _saveLeaderboardData = JsonUtility.FromJson<SaveLeaderboardData>(savedLeaderboardData);
+        _raceInfoSystem.LoadLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+    }
+
+    public static void SaveLeaderboard(){
+        _raceInfoSystem.SaveLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+        
+        File.WriteAllText(FilePath("leaderboard"), JsonUtility.ToJson(_saveLeaderboardData, true));
     }
 }

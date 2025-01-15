@@ -1,7 +1,6 @@
 using CheckpointSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Collectables{
     public class CoinController : MonoBehaviour{
@@ -18,7 +17,7 @@ namespace Collectables{
         }
 
         // When collecting a coin this method is called.
-        void OnTriggerEnter(Collider other){
+        public void AddCoins(Collider other){
             if (other.gameObject.CompareTag("Collectables")){
                 _coins += 1;
                 SetCountText();
@@ -36,6 +35,10 @@ namespace Collectables{
             if (_coins - amount >= 0) _coins -= amount;
             else _coins = 0;
             SetCountText();
+        }
+
+        public int GetCoins(){
+            return _coins;
         }
     }
 }

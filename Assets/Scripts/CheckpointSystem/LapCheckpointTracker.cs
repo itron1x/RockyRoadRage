@@ -55,18 +55,18 @@ public class LapCheckpointTracker : MonoBehaviour
             if (checkpoint.IsLapFinish())
             {
                 _lapCountList[playerIndex]++;
-                if( _lapCountList[playerIndex] > 0) playerRaceTelemetry.lapSplit(); //ignore the first time over the finish line
+                if( _lapCountList[playerIndex] > 0) playerRaceTelemetry.LapSplit(); //ignore the first time over the finish line
                 Debug.Log("Player " + playerIndex + " finished lap " + _lapCountList[playerIndex]);
             }
             if( _lapCountList[playerIndex] > 0 && _lapCountList[playerIndex] >= lapsToFinish){
                 _lapCountList[playerIndex] = -1; // avoid multiple triggers of finishing
-                playerRaceTelemetry.finish();
+                playerRaceTelemetry.Finish();
             }
         }
         else
         {
             Debug.Log("Player " + playerIndex+ " passed wrong Checkpoint " + checkpoint.GetCheckpointId());
-            playerRaceTelemetry.displayWrongCheckpointWarning();
+            playerRaceTelemetry.DisplayWrongCheckpointWarning();
         }
         
     }

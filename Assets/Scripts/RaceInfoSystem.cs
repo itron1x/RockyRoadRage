@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,6 +17,9 @@ public class RaceInfoSystem : MonoBehaviour
     
     private int _globalCoins;
     private Hashtable _characterInformation;
+    
+    public LeaderBoardEntry LeaderBoardEntry{ get; set; }
+    private List<MapLeaderboard> _leaderboardPlayers;
     
     private void Awake()
     {
@@ -97,8 +100,8 @@ public class RaceInfoSystem : MonoBehaviour
         return _globalCoins;
     }
 
-    public void SetGlobalCoins(int globalCoins){
-        _globalCoins = globalCoins;
+    public void AddGlobalCoins(int globalCoins){
+        _globalCoins += globalCoins;
     }
 
     public void SaveGlobalCoins(ref PlayerSaveData data){
@@ -133,6 +136,49 @@ public class RaceInfoSystem : MonoBehaviour
     public bool IsBought(string characterName){
         return (bool)_characterInformation[characterName];
     }
+
+    //0 = Map1, 1 = Map2, 2 = Map3
+    public bool AddLeaderboardEntry(int map, int time, string playerName){
+        List<LeaderBoardEntry> leaderboardEntries = _leaderboardPlayers[map].Leaderboard;
+        if (leaderboardEntries[0].Time <= time){
+            //Create new LeaderBoardEntry and add to Leaderboard
+            LeaderBoardEntry = new LeaderBoardEntry(time, playerName);
+            leaderboardEntries.Add(LeaderBoardEntry);
+            
+            //Sort Leaderboard
+            leaderboardEntries = leaderboardEntries.OrderBy(player => player.Time).ToList();
+            leaderboardEntries.Remove(leaderboardEntries.Last());
+            return true;
+        }
+        return false;
+    }
+
+    public List<MapLeaderboard> GetLeaderboardData(){
+        return _leaderboardPlayers;
+    }
+
+    public void SaveLeaderboardData(ref LeaderboardData data){
+        data.MapLeaderboards = _leaderboardPlayers;
+    }
+
+    public void LoadLeaderboardData(ref LeaderboardData data){
+        _leaderboardPlayers = data.MapLeaderboards;
+    }
+}
+
+public class MapLeaderboard{
+    public string MapName;
+    public List<LeaderBoardEntry> Leaderboard;
+}
+
+public class LeaderBoardEntry{
+    public string Name;
+    public int Time;
+
+    public LeaderBoardEntry(int time, string playerName){
+        Name = playerName;
+        Time = time;
+    }
 }
 
 [System.Serializable]
@@ -143,3 +189,9 @@ public struct PlayerSaveData{
     public bool triangleTam;
     public bool smoothSally;
 }
+
+[System.Serializable]
+public struct LeaderboardData{
+    public List<MapLeaderboard> MapLeaderboards;
+}
+

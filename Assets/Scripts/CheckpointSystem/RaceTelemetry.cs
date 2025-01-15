@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Collectables;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CheckpointSystem{
     public class RaceTelemetry : MonoBehaviour
@@ -16,18 +17,19 @@ namespace CheckpointSystem{
         [SerializeField] private TextMeshProUGUI outOfBoundsDisplay;
         [SerializeField] private int outOfBoundsRespawnTimerSeconds = 3;
 
+        [FormerlySerializedAs("coinController")]
         [Header("Other")] 
-        [SerializeField] private CoinController coinController;
+        [SerializeField] private CoinController coinCollider;
         [SerializeField] private TextMeshProUGUI coinText;
         [SerializeField] private string playerName;
         [SerializeField] private TextMeshProUGUI playerNameText;
 
-        private RaceControlManager raceControlManager;
+        private RaceControlManager _raceControlManager;
         private long _raceStartTimestamp = -1;
         private long _raceEndTimestamp = -1;
         private List<long> _lapSplits;
         private int _playerIndex;
-        private bool timerActive = false;
+        private bool _timerActive;
         private Transform _respawnPoint;
     
         private Coroutine _respawnTimerCoroutine;
@@ -43,7 +45,7 @@ namespace CheckpointSystem{
 
         private void Update()
         {
-            if (!timerActive) return;
+            if (!_timerActive) return;
             long timestampNow = DateTimeOffset.Now.ToUnixTimeMilliseconds(); // Milliseconds since epoch
             long timeSinceStart = timestampNow - _raceStartTimestamp;
             // Convert to DateTime
@@ -53,19 +55,19 @@ namespace CheckpointSystem{
 
         public void SetRaceControlManager(RaceControlManager raceControlManager)
         {
-            this.raceControlManager = raceControlManager;
+            this._raceControlManager = raceControlManager;
         }
 
         public void SetRaceStartTimestamp(long raceStartTimestamp)
         {
             _raceStartTimestamp = raceStartTimestamp;
-            timerActive = true;
+            _timerActive = true;
             raceTimer.gameObject.SetActive(true);
         }
 
-        public void SetPlayerName(string playerName)
+        public void SetPlayerName(string newPlayerName)
         {
-            this.playerName = playerName;
+            playerName = newPlayerName;
             playerNameText.text = playerName;
         }
 
@@ -74,19 +76,19 @@ namespace CheckpointSystem{
             return playerName;
         }
 
-        public void finish()
+        public void Finish()
         {
             _raceEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             var duration = _raceEndTimestamp - _raceStartTimestamp;
             DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(duration).DateTime;
             splitsDisplay.text = "Finish! Race Time: " + finishTime.ToString("mm:ss.fff");
-            timerActive = false;
+            _timerActive = false;
             raceTimer.gameObject.SetActive(false);
 
-            raceControlManager.PlayerFinishedRace(this);
+            _raceControlManager.PlayerFinishedRace(this);
         }
 
-        public void lapSplit()
+        public void LapSplit()
         {
             long timestampNow = DateTimeOffset.Now.ToUnixTimeMilliseconds(); // Milliseconds since epoch
             long timeSinceStart = timestampNow - _raceStartTimestamp;
@@ -98,7 +100,7 @@ namespace CheckpointSystem{
             Invoke(nameof(ClearSplits), 2);
         }
 
-        public void displayWrongCheckpointWarning()
+        public void DisplayWrongCheckpointWarning()
         {
             splitsDisplay.text = "Wrong Way!";
             splitsDisplay.gameObject.SetActive(true);
@@ -146,7 +148,7 @@ namespace CheckpointSystem{
             playerBody.linearVelocity = Vector3.zero;
             playerBody.angularVelocity = Vector3.zero;
             playerBody.MovePosition(_respawnPoint.position);
-            coinController.RemoveCoins(2);
+            coinCollider.RemoveCoins(2);
         }
 
         private IEnumerator RespawnTimer( Rigidbody playerBody)

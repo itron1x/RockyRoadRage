@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Player_2._0;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,12 @@ namespace Player{
             //Get single channel for camera
             OutputChannels cameraChannel = outputChannels[player.playerIndex];
            
+            //Add index to parent
+            playerParent.GetComponent<PrefabController>().SetPlayerIndex(player.playerIndex);
+            
+            //Set culling mask
+            playerParent.GetComponentInChildren<Camera>().cullingMask &= ~(1 << LayerMask.NameToLayer("Player"+player.playerIndex));
+            
             //Add individual channels to each player
             playerParent.GetComponentInChildren<CinemachineCamera>().OutputChannel = cameraChannel;
             playerParent.GetComponentInChildren<CinemachineBrain>().ChannelMask = cameraChannel;

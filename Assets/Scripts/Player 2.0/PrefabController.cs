@@ -1,25 +1,42 @@
 using System.Collections.Generic;
-using Player;
+using Collectables;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Player_2._0{
-    public class PrefabReferences2 : MonoBehaviour{
+    public class PrefabController : MonoBehaviour{
         private GameObject _activeCharacter;
     
         [SerializeField] private List<GameObject> characters;
         
-        [Header("References")]
+        [Header("Controller")]
         [SerializeField] private PlayerController2 playerController;
+        
+        [Header("Camera")]
         [SerializeField] private LookFollower2 lookFollower;
+        [SerializeField] private Camera mainCamera;
         [SerializeField] private CinemachineCamera cinemachineCamera;
         
+        [Header("Overlays")]
         [SerializeField] private GameObject overlays;
         [SerializeField] private GameObject eyes;
+        
+        [Header("Collectables")]
+        [SerializeField] private CoinController coinController;
 
-        void Start(){
+        private int _playerIndex;
+        
+        void Awake(){
             _activeCharacter = GetCharacterByName("Pebble Pete");
+            
+            overlays.layer = LayerMask.NameToLayer("Player" + _playerIndex);
+           
+            //TODO: add get device
+            foreach (var controller in Gamepad.all){
+                print(controller.deviceId);
+            }
         }
 
         void Update(){
@@ -34,6 +51,18 @@ namespace Player_2._0{
             }
             else if (Keyboard.current.digit4Key.wasPressedThisFrame){
                 SetCharacter("Smooth Sally");
+            }
+
+            //TODO: add get device
+            if (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame){
+                print("Keyboard was pressed with ID: " + Keyboard.current.deviceId);
+            }
+            else{
+                foreach (var controller in Gamepad.all){
+                    if (controller != null && controller.rightTrigger.wasPressedThisFrame){
+                        print("Controller was pressed with ID: " + controller.deviceId);
+                    }
+                }
             }
         }
     
@@ -62,10 +91,19 @@ namespace Player_2._0{
             //Update character to new one.
             _activeCharacter = GetCharacterByName(characterName);
             _activeCharacter.SetActive(true);
-        
-            //Update Rigidbody, Target and camera
-            playerController.SetRigidbody(_activeCharacter.GetComponent<Rigidbody>());
-            playerController.SetGroundDetection(_activeCharacter.GetComponentInChildren<GroundDetection2>());
+            
+            PlayerCharacteristics characteristics = _activeCharacter.GetComponent<PlayerCharacteristics>();
+            
+            //Update PlayerController
+            // playerController.SetRigidbody(_activeCharacter.GetComponent<Rigidbody>());
+            // playerController.SetGroundDetection(_activeCharacter.GetComponentInChildren<GroundDetection2>());
+            playerController.SetRigidbody(characteristics.GetRigidbody());
+            playerController.SetGroundDetection(characteristics.GetGroundDetection());
+            playerController.SetSpeed(characteristics.GetSpeed());
+            playerController.SetAcceleration(characteristics.GetAcceleration());
+            playerController.SetJumpForce(characteristics.GetJumpHeight());
+            playerController.SetMass(characteristics.GetMass());
+            
             cinemachineCamera.Follow = _activeCharacter.transform;
         
             //Update Eyes and Name Target
@@ -79,6 +117,22 @@ namespace Player_2._0{
 
         public GameObject GetEye(){
             return eyes;
+        }
+
+        public CoinController GetCoinController(){
+            return coinController;
+        }
+
+        public int GetPlayerCoins(){
+            return coinController.GetCoins();
+        }
+
+        public void SetPlayerIndex(int index){
+            _playerIndex = index;
+        }
+
+        public int GetPlayerindex(){
+            return _playerIndex;
         }
     }
 }

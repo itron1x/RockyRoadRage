@@ -108,12 +108,14 @@ public class RaceControlManager : MonoBehaviour
         //also add it to the global leaderboard
         RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
         infoSystem?.AddGlobalLeaderboardEntry(infoSystem.ActiveMapIndex, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
+        infoSystem?.AddGlobalCoins(playerRaceTelemetry.getPlayerCoins());
         
-        //when all Players have finished the Race, display Leaderboard
+        //when all Players have finished the Race, display Leaderboard and save Leaderboard and Coins to disk
         if (_raceLeaderboard.Count >= _playerInputs.Count)
         {
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
             SaveSystem.SaveLeaderboard(); //save after Player finished to keep the finish time even if race gets aborted afterwards
+            SaveSystem.Save();
             Invoke(nameof(ShowLeaderboard), postRaceTimeoutSeconds);
         }
     }

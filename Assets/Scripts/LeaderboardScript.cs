@@ -24,11 +24,12 @@ public class LeaderboardScript : MonoBehaviour
     public void RefreshLeaderboard()
     {
         RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
-        List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData()[mapIndex].Leaderboard;
+        // List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData()[mapIndex].Leaderboard;
+        List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData(mapIndex);
         for (int i = 0; i < Math.Min(leaderboardTexts.Count, leaderboardEntries.Count); i++)
         {
-            DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(leaderboardEntries[i].Time).DateTime;
-            leaderboardTexts[i].text = (i+1)+". - "+leaderboardEntries[i].Name+"\t\t"+dateTime.ToString("mm:ss.fff");
+            DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(leaderboardEntries[i].time).DateTime;
+            leaderboardTexts[i].text = (i+1)+". - "+leaderboardEntries[i].name+"\t\t"+dateTime.ToString("mm:ss.fff");
         }
         SaveSystem.SaveLeaderboard();
     }

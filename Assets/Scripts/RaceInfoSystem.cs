@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class RaceInfoSystem : MonoBehaviour
 {
@@ -19,7 +20,10 @@ public class RaceInfoSystem : MonoBehaviour
     private Hashtable _characterInformation;
     
     public LeaderBoardEntry LeaderBoardEntry{ get; set; }
-    private List<MapLeaderboard> _leaderboardPlayers = new List<MapLeaderboard>();
+    
+    List<LeaderBoardEntry> _map0Leaderboard = new List<LeaderBoardEntry>();
+    List<LeaderBoardEntry> _map1Leaderboard = new List<LeaderBoardEntry>();
+    List<LeaderBoardEntry> _map2Leaderboard = new List<LeaderBoardEntry>();
     
     private void Awake()
     {
@@ -37,17 +41,9 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation.Add("Cubic Chris", false);
         _characterInformation.Add("Triangle Tam", false);
         _characterInformation.Add("Smooth Sally", false);
-        
-        for(int i=0; i< 2; i++){//TODO: map count
-            MapLeaderboard leaderboard = new MapLeaderboard();
-            leaderboard.MapName = i.ToString();
-            leaderboard.Leaderboard = new List<LeaderBoardEntry>();
-            _leaderboardPlayers.Add(leaderboard);
-            
-        }
-        
+
         // Load saved data.
-        //SaveSystem.Load();
+        SaveSystem.Load();
     }
 
     public static RaceInfoSystem GetInstance()
@@ -147,46 +143,68 @@ public class RaceInfoSystem : MonoBehaviour
 
     //0 = Map1, 1 = Map2, 2 = Map3
     public bool AddLeaderboardEntry(int map, long time, string playerName){
-        List<LeaderBoardEntry> leaderboardEntries = _leaderboardPlayers[map].Leaderboard;
+        List<LeaderBoardEntry> leaderboardEntries = new List<LeaderBoardEntry>();
+        switch (map){
+            case 0:
+                leaderboardEntries = _map0Leaderboard;
+                break;
+            case 1:
+                leaderboardEntries = _map1Leaderboard;
+                break;
+            case 2:
+                leaderboardEntries = _map2Leaderboard;
+                break;
+        }
         
-        if (leaderboardEntries.Count <= 0 || leaderboardEntries[0].Time <= time){
+        if (leaderboardEntries.Count <= 10 || leaderboardEntries[0].time >= time){
             //Create new LeaderBoardEntry and add to Leaderboard
             LeaderBoardEntry = new LeaderBoardEntry(time, playerName);
             leaderboardEntries.Add(LeaderBoardEntry);
             
             //Sort Leaderboard
-            leaderboardEntries = leaderboardEntries.OrderByDescending(player => player.Time).ToList();
-            if(leaderboardEntries.Count > 10) leaderboardEntries.Remove(leaderboardEntries.Last());
+            leaderboardEntries = leaderboardEntries.OrderByDescending(player => player.time).ToList();
+            if (leaderboardEntries.Count > 10){
+                leaderboardEntries.Remove(leaderboardEntries.Last());
+            }
             return true;
         }
         return false;
     }
 
-    public List<MapLeaderboard> GetLeaderboardData(){
-        return _leaderboardPlayers;
+    public List<LeaderBoardEntry> GetLeaderboardData(int mapIndex){
+        switch (mapIndex){
+            case 0:
+                return _map0Leaderboard;
+            case 1:
+                return _map1Leaderboard;
+            case 2:
+                return _map2Leaderboard;
+        }
+
+        return null;
     }
 
     public void SaveLeaderboardData(ref LeaderboardData data){
-        data.MapLeaderboards = _leaderboardPlayers;
+        data.map0 = _map0Leaderboard;
+        data.map1 = _map1Leaderboard;
+        data.map2 = _map2Leaderboard;
     }
 
     public void LoadLeaderboardData(ref LeaderboardData data){
-        _leaderboardPlayers = data.MapLeaderboards;
+        _map0Leaderboard = data.map0;
+        _map1Leaderboard = data.map1;
+        _map2Leaderboard = data.map2;
     }
 }
 
-public class MapLeaderboard{
-    public string MapName;
-    public List<LeaderBoardEntry> Leaderboard;
-}
-
+[System.Serializable]
 public class LeaderBoardEntry{
-    public string Name;
-    public long Time;
+    public string name;
+    public long time;
 
     public LeaderBoardEntry(long time, string playerName){
-        Name = playerName;
-        Time = time;
+        name = playerName;
+        this.time = time;
     }
 }
 
@@ -201,6 +219,8 @@ public struct PlayerSaveData{
 
 [System.Serializable]
 public struct LeaderboardData{
-    public List<MapLeaderboard> MapLeaderboards;
+    public List<LeaderBoardEntry> map0;
+    public List<LeaderBoardEntry> map1;
+    public List<LeaderBoardEntry> map2;
 }
 

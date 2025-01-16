@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &66029378
 Transform:
   m_ObjectHideFlags: 0
@@ -481,10 +481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e903e2d8ffd406040bac26f42c9087c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameText: {fileID: 42905912}
+  DeviceNumber: {fileID: 42905912}
   nextPlayerButton: {fileID: 894285075}
   backPlayerButton: {fileID: 1967220382}
-  confirmButton: {fileID: 656249755}
+  confirmPlayer: {fileID: 0}
   characterController: {fileID: 570275136}
 --- !u!1001 &73223922
 PrefabInstance:
@@ -4089,9 +4089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3474318cbd4d4ceb996b7e5c9e2186ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefabs:
-  - {fileID: 3493568873387071188, guid: 9dc53b4e52f84cb4c909b67829255e73, type: 3}
-  - {fileID: 3493568873387071188, guid: bea0d616aca08514eabf2747d3700a9a, type: 3}
+  devicePrefabs: []
+  inputActions: {fileID: 0}
 --- !u!1 &588475185
 GameObject:
   m_ObjectHideFlags: 0
@@ -5628,7 +5627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &843670138
 Transform:
   m_ObjectHideFlags: 0

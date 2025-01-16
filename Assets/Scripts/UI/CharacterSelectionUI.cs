@@ -12,7 +12,7 @@ public class CharacterSelectionIU : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button backButton;
     [SerializeField] private Button confirmButton;
-    [SerializeField] private ShopManager shopManager; // Referenz auf den ShopManager
+    [SerializeField] private ShopManager shopManager; // Reference to ShopManager
     [SerializeField] private List<GameObject> characterPrefabs; 
     
     private List<GameObject> availableCharacters;
@@ -36,13 +36,13 @@ public class CharacterSelectionIU : MonoBehaviour
             }
         }
 
-        Debug.Log($"Gekaufte Charaktere geladen: {availableCharacters.Count}");
+        Debug.Log($"IsBought Characters loaded: {availableCharacters.Count}");
         
         playerData = data;
         allCharacters = prefabs;
         onCharacterSelectedCallback = onCharacterSelected;
 
-        playerNameText.text = $"Spieler {data.PlayerIndex + 1}";
+        playerNameText.text = $"Player {data.PlayerIndex + 1}";
         UpdateCharacterPreview();
 
         nextButton.onClick.AddListener(NextCharacter);
@@ -52,13 +52,12 @@ public class CharacterSelectionIU : MonoBehaviour
     
     public void StartCharacterSelection(PlayerData playerData, List<GameObject> availablePrefabs, System.Action<PlayerData, GameObject> onCharacterSelectedCallback)
     {
-        // Starte die Auswahl mit den übergebenen Daten
         InitializeCharacters(playerData, availablePrefabs, onCharacterSelectedCallback);
 
-        // Aktiviert die UI, falls sie deaktiviert war
+        // activate UI ! 
         gameObject.SetActive(true);
 
-        Debug.Log($"Charakterauswahl für Spieler {playerData.PlayerIndex + 1} gestartet.");
+        Debug.Log($"Choose Character for Player {playerData.PlayerIndex + 1} started.");
     }
 
     private void NextCharacter()
@@ -81,12 +80,12 @@ public class CharacterSelectionIU : MonoBehaviour
     private void ConfirmSelection()
     {
         GameObject selectedPrefab = allCharacters[currentPrefabIndex];
-        playerData.SelectedPrefab = selectedPrefab; // Speichert das ausgewählte Prefab in PlayerData
+        playerData.SelectedPrefab = selectedPrefab; // save selected Character in playerData
 
-        // Callback aufrufen, um CC zu informieren
+        // call Callback to inform CC
         onCharacterSelectedCallback?.Invoke(playerData, selectedPrefab);
 
-        Debug.Log($"Charakter {selectedPrefab.name} für Spieler {playerData.PlayerIndex + 1} bestätigt.");
+        Debug.Log($"Character {selectedPrefab.name} for Player {playerData.PlayerIndex + 1} confirmed.");
     }
     
 }

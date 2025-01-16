@@ -7,41 +7,60 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text playerNameText;
+    [SerializeField] private TMP_Text DeviceNumber;
     [SerializeField] private Button nextPlayerButton;
     [SerializeField] private Button backPlayerButton;
-    [SerializeField] private Button confirmButton;
-    [SerializeField] private CC characterController; // Referenz zur CC-Klasse
+    [SerializeField] private Button confirmPlayer;
+    [SerializeField] private CC characterController; // Referenze to CC-Klasse
     private List<InputDevice> devices;
     private int currentDeviceIndex = 0;
+    private List<InputDevice> confirmedDevices = new List<InputDevice>(); 
 
-    private List<InputManager.PlayerData> players;
-    private List<InputDevice> detectedDevices = new List<InputDevice>();
-
+    
     void Start()
     {
-        devices = characterController.GetDetectedDevices(); // Geräte abrufen
+        // initialise Devices from CC 
+        devices = characterController.GetDetectedDevices();
         if (devices == null || devices.Count == 0)
         {
-            Debug.LogError("Keine Geräte erkannt!");
+            Debug.LogError("No Device recognized!");
+            DeviceNumber.text = "No Device recognized!";
             return;
         }
 
         UpdateDeviceDisplay();
+
+        // Update Device
+        InputSystem.onDeviceChange += OnDeviceChange;
     }
 
+    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        devices = characterController.GetDetectedDevices();
+        currentDeviceIndex = Mathf.Clamp(currentDeviceIndex, 0, devices.Count - 1);
+        UpdateDeviceDisplay();
+    }
+
+    void OnDestroy()
+    {
+        // -= deactive Device
+        InputSystem.onDeviceChange -= OnDeviceChange;
+    }
+    
     private void UpdateDeviceDisplay()
     {
         if (devices.Count == 0)
         {
-            playerNameText.text = "Keine Geräte verfügbar";
+            DeviceNumber.text = "No device available!";
             return;
         }
 
         InputDevice currentDevice = devices[currentDeviceIndex];
-        playerNameText.text = $"Gerät: {currentDevice.displayName}";
+        DeviceNumber.text = $"Device: {currentDevice.displayName}";
     }
 
+    
+    // iterate through Device-List --------------------------------
     public void NextDevice()
     {
         currentDeviceIndex = (currentDeviceIndex + 1) % devices.Count;
@@ -57,10 +76,29 @@ public class PlayerUI : MonoBehaviour
     public void ConfirmDevice()
     {
         InputDevice selectedDevice = devices[currentDeviceIndex];
-        characterController.CreatePlayer(selectedDevice); // Spieler mit dem ausgewählten Gerät erstellen
-        Debug.Log($"Gerät {selectedDevice.displayName} wurde als Spieler hinzugefügt.");
-    }
+        if (confirmedDevices.Contains(selectedDevice))
+        {
+            Debug.LogWarning($"Device {selectedDevice.displayName} is already confirmed!");
+            return; 
+        }
 
+        confirmedDevices.Add(selectedDevice);
+        Debug.Log($"Device {selectedDevice.displayName} confirmed for a new player.");
+    }
+    // -------------------------------------------------------------
+
+    public void ConfirmPlayers()
+    {
+        foreach (var device in confirmedDevices)
+        {
+            // create Player based on confirmed Devices
+            characterController.CreatePlayer(device);
+        }
+
+        Debug.Log($"{confirmedDevices.Count} Player created.");
+    }
+    
+    /*
     public void ConfirmSelection()
     {
         List<PlayerData> players = characterController.GetPlayerDataList();
@@ -68,13 +106,14 @@ public class PlayerUI : MonoBehaviour
         {
             PlayerData
                 currentPlayer =
-                    players[currentDeviceIndex]; // Verwende den Index, falls das Gerät mit einem Spieler verbunden ist
+                    players[currentDeviceIndex]; // use Index = Device connected to Player - 
             Debug.Log(
-                $"Spieler {currentPlayer.PlayerIndex + 1} mit Steuerung {currentPlayer.ControlScheme} bestätigt.");
+                $"Player {currentPlayer.PlayerIndex + 1} with Device {currentPlayer.ControlScheme} confirmed.");
         }
         else
         {
-            Debug.LogError("Keine Spieler-Daten verfügbar!");
+            Debug.LogError("No Player Data available!");
         }
     }
+    */
 }

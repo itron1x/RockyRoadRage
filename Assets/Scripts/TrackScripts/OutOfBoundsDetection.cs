@@ -8,7 +8,7 @@ namespace TrackScripts{
         {
             if (other.CompareTag("Player"))
             {
-                RaceTelemetry playerRaceTelemetry = other.transform.parent.GetComponentInChildren<RaceTelemetry>();
+                RaceTelemetry playerRaceTelemetry = other.transform.parent.parent.GetComponentInChildren<RaceTelemetry>();
                 if(playerRaceTelemetry.GetFinishTime() == -1) playerRaceTelemetry.OnPlayerOutOfBounds(other.transform.GetComponent<Rigidbody>());
             }
         }
@@ -17,7 +17,7 @@ namespace TrackScripts{
         {
             if (other.CompareTag("Player"))
             {
-                RaceTelemetry playerRaceTelemetry = other.transform.parent.GetComponentInChildren<RaceTelemetry>();
+                RaceTelemetry playerRaceTelemetry = other.transform.parent.parent.GetComponentInChildren<RaceTelemetry>();
                 playerRaceTelemetry.OnPlayerBackInBounds();
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CheckpointSystem;
+using Player_2._0;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -69,7 +70,7 @@ public class RaceControlManager : MonoBehaviour
         int playerIndex = _playerInputs.IndexOf(playerInput);
         
         LapCheckpointTracker lapCheckpointTracker = GetComponent<LapCheckpointTracker>();
-        lapCheckpointTracker.AddPlayer(newPlayer.transform);
+        lapCheckpointTracker.AddPlayer(newPlayer.GetComponentInChildren<Rigidbody>().transform);
         
         RaceTelemetry playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
         Transform spawnPoint = _spawnPointLocations[playerIndex];
@@ -78,7 +79,8 @@ public class RaceControlManager : MonoBehaviour
         playerRaceTelemetry.SetRespawnPoint(spawnPoint); //sets initial spawn point
         
         _raceControlUI.DisplayUpdateText("Player " + (playerIndex + 1) + " joined! Race will begin shortly...");
-        newPlayer.GetComponent<Rigidbody>().MovePosition(spawnPoint.position); //whenever an object has a Rigidbody, it needs to be moved this way to integrate with the physics engine.
+        newPlayer.GetComponentInChildren<Rigidbody>().MovePosition(spawnPoint.position);
+        
     }
 
     private void ActivateRace()
@@ -96,18 +98,20 @@ public class RaceControlManager : MonoBehaviour
     public void PlayerFinishedRace(RaceTelemetry playerRaceTelemetry)
     {
         var playerIndex = playerRaceTelemetry.GetPlayerIndex();
-        Debug.Log("Player " + playerIndex + " finished!");
+        Debug.Log("Player " + playerIndex + " finished!"  + playerRaceTelemetry.GetFinishTime()+"   "+ playerRaceTelemetry.GetPlayerName());
         
         // Call method after a certain amount of time
         StartCoroutine(PlayerFinishCamera(playerIndex, 2));
         
         _leaderboard.Add(playerIndex);
+        RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
+        infoSystem?.AddLeaderboardEntry(0, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
         
         //when all Players have finished the Race, display Leaderboard
         if (_leaderboard.Count >= _playerInputs.Count)
         {
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
-            Invoke(nameof(showLeaderboard), postRaceTimeoutSeconds);
+            Invoke(nameof(ShowLeaderboard), postRaceTimeoutSeconds);
         }
     }
 
@@ -116,15 +120,15 @@ public class RaceControlManager : MonoBehaviour
         
         GameObject playerGameObject = _playerInputs[playerIndex].gameObject;
         Transform parent = playerGameObject.transform.parent;
-        PrefabReferences prefabReferences = playerGameObject.GetComponentInParent<PrefabReferences>();
-
+        PrefabController prefabController = playerGameObject.GetComponentInParent<PrefabController>();
         // Set camera to finish checkpoint
-        parent.GetComponentInChildren<CinemachineCamera>().Follow = mapOverview;
+        //parent.GetComponentInChildren<CinemachineCamera>().Follow = mapOverview;
         
+        prefabController.GetCinemachineCamera().Follow = mapOverview;
         // Make player invisible
-        prefabReferences.GetCharacter().layer = LayerMask.NameToLayer("Invisible");
-        prefabReferences.GetOverlays().layer = LayerMask.NameToLayer("Invisible");
-        prefabReferences.GetEye().layer = LayerMask.NameToLayer("Invisible");
+        prefabController.GetCharacter().layer = LayerMask.NameToLayer("Invisible");
+        prefabController.GetOverlays().layer = LayerMask.NameToLayer("Invisible");
+        prefabController.GetEye().layer = LayerMask.NameToLayer("Invisible");
     }
 
     private void ResetWaitTime()
@@ -154,21 +158,15 @@ public class RaceControlManager : MonoBehaviour
         yield return StartRaceWithCountdown();
     }
 
-    private void showLeaderboard()
+    private void ShowLeaderboard()
     {
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
-        for (int i = 1; i <= _leaderboard.Count; i++)
-        {
-            var playerRaceTelemetry = _playerInputs[i - 1].gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
-            DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(playerRaceTelemetry.GetFinishTime()).DateTime;
-            leaderboardScript.SetPlayer(i, playerRaceTelemetry.GetPlayerName(), finishTime.ToString("mm:ss.fff"), playerRaceTelemetry.GetCoinText().text);
-        }
-        
+        leaderboardScript.RefreshLeaderboard();
         leaderboardCanvas.gameObject.SetActive(true);
         _raceControlUI.gameObject.SetActive(false);
     }
 
-    public void setRaceSpeedMultiplier(float multiplier)
+    public void SetRaceSpeedMultiplier(float multiplier)
     {
         raceSpeedMultiplier = multiplier;
     }

@@ -226,7 +226,6 @@ GameObject:
   - component: {fileID: 7279876900076919611}
   - component: {fileID: 420446588681503527}
   - component: {fileID: 158124487158364124}
-  - component: {fileID: 4030545708068096470}
   m_Layer: 0
   m_Name: RaceControl
   m_TagString: Untagged
@@ -269,7 +268,7 @@ MonoBehaviour:
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4030545708068096470}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputManager.CharacterController, Assembly-CSharp
         m_MethodName: OnPlayerJoined
         m_Mode: 0
@@ -348,6 +347,7 @@ MonoBehaviour:
   postRaceTimeoutSeconds: 5
   leaderboardCanvas: {fileID: 0}
   raceSpeedMultiplier: 1.5
+  mapOverview: {fileID: 0}
 --- !u!114 &420446588681503527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
   checkpointsParent: {fileID: 0}
   playerBallsTransforms: []
   lapsToFinish: 2
+  checkpointTexts: []
 --- !u!114 &158124487158364124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,21 +378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceControlInfoTextObject: {fileID: 8593284288670820546}
   countdownTextObject: {fileID: 3685343852981715535}
---- !u!114 &4030545708068096470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7902113584312164586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06fd67cba824bcb489df834e28840566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 5336992868585047707, guid: 716c1c513d6fd844b8dfe778fa596a9d, type: 3}
-  - {fileID: 8098089123956869360, guid: 77a27baa3ffc91a4d885f97e26ab7a95, type: 3}
 --- !u!1 &8127037903275451320
 GameObject:
   m_ObjectHideFlags: 0

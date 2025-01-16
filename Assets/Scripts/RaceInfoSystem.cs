@@ -19,7 +19,7 @@ public class RaceInfoSystem : MonoBehaviour
     private Hashtable _characterInformation;
     
     public LeaderBoardEntry LeaderBoardEntry{ get; set; }
-    private List<MapLeaderboard> _leaderboardPlayers;
+    private List<MapLeaderboard> _leaderboardPlayers = new List<MapLeaderboard>();
     
     private void Awake()
     {
@@ -38,8 +38,16 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation.Add("Triangle Tam", false);
         _characterInformation.Add("Smooth Sally", false);
         
+        for(int i=0; i< 2; i++){//TODO: map count
+            MapLeaderboard leaderboard = new MapLeaderboard();
+            leaderboard.MapName = i.ToString();
+            leaderboard.Leaderboard = new List<LeaderBoardEntry>();
+            _leaderboardPlayers.Add(leaderboard);
+            
+        }
+        
         // Load saved data.
-        SaveSystem.Load();
+        //SaveSystem.Load();
     }
 
     public static RaceInfoSystem GetInstance()
@@ -138,16 +146,17 @@ public class RaceInfoSystem : MonoBehaviour
     }
 
     //0 = Map1, 1 = Map2, 2 = Map3
-    public bool AddLeaderboardEntry(int map, int time, string playerName){
+    public bool AddLeaderboardEntry(int map, long time, string playerName){
         List<LeaderBoardEntry> leaderboardEntries = _leaderboardPlayers[map].Leaderboard;
-        if (leaderboardEntries[0].Time <= time){
+        
+        if (leaderboardEntries.Count <= 0 || leaderboardEntries[0].Time <= time){
             //Create new LeaderBoardEntry and add to Leaderboard
             LeaderBoardEntry = new LeaderBoardEntry(time, playerName);
             leaderboardEntries.Add(LeaderBoardEntry);
             
             //Sort Leaderboard
-            leaderboardEntries = leaderboardEntries.OrderBy(player => player.Time).ToList();
-            leaderboardEntries.Remove(leaderboardEntries.Last());
+            leaderboardEntries = leaderboardEntries.OrderByDescending(player => player.Time).ToList();
+            if(leaderboardEntries.Count > 10) leaderboardEntries.Remove(leaderboardEntries.Last());
             return true;
         }
         return false;
@@ -173,9 +182,9 @@ public class MapLeaderboard{
 
 public class LeaderBoardEntry{
     public string Name;
-    public int Time;
+    public long Time;
 
-    public LeaderBoardEntry(int time, string playerName){
+    public LeaderBoardEntry(long time, string playerName){
         Name = playerName;
         Time = time;
     }

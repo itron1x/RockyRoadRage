@@ -134,5 +134,10 @@ namespace Player_2._0{
         public int GetPlayerindex(){
             return _playerIndex;
         }
+
+        public CinemachineCamera GetCinemachineCamera()
+        {
+            return cinemachineCamera;
+        }
     }
 }

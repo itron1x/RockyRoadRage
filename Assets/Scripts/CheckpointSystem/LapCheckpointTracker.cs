@@ -42,7 +42,7 @@ public class LapCheckpointTracker : MonoBehaviour
         
         if (passedCheckpoint == nextCheckpoint - 1) return; // Player went through same checkpoint twice
         
-        RaceTelemetry playerRaceTelemetry = ball.parent.GetComponentInChildren<RaceTelemetry>();
+        RaceTelemetry playerRaceTelemetry = ball.parent.parent.GetComponentInChildren<RaceTelemetry>();
         if (passedCheckpoint == nextCheckpoint)
         {
             _nextCheckpointList[playerIndex] = (nextCheckpoint + 1) % _checkpointCount;

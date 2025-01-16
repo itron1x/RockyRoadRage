@@ -16,7 +16,8 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private Canvas leaderboardCanvas;
     [SerializeField] private float raceSpeedMultiplier = 1.5f;
     [SerializeField] private Transform mapOverview;
-    
+    public int mapIndex = 0;
+
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
     private List<int> _leaderboard = new List<int>();
@@ -160,8 +161,11 @@ public class RaceControlManager : MonoBehaviour
 
     private void ShowLeaderboard()
     {
+        RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
+        List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData(mapIndex);
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
-        leaderboardScript.RefreshLeaderboard();
+        leaderboardScript.SetLeaderboard(leaderboardEntries);
+        idleCamera.gameObject.SetActive(true);
         leaderboardCanvas.gameObject.SetActive(true);
         _raceControlUI.gameObject.SetActive(false);
     }

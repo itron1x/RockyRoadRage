@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.IO;
-using Unity.VisualScripting.FullSerializer;
 
 public class SaveSystem{
     private static SaveData _saveData = new SaveData();
@@ -33,15 +32,25 @@ public class SaveSystem{
     }
 
     public static void Load(){
-        string savedData = File.ReadAllText(FilePath("coins"));
-        _saveData = JsonUtility.FromJson<SaveData>(savedData);
+        try{
+            string savedData = File.ReadAllText(FilePath("coins"));
+            _saveData = JsonUtility.FromJson<SaveData>(savedData);
+
+            _raceInfoSystem.LoadGlobalCoins(ref _saveData.saveData);
+            _raceInfoSystem.LoadCharacterInformation(ref _saveData.saveData);
+        }
+        catch{
+            File.WriteAllText(FilePath("coins"), "");
+        }
         
-        _raceInfoSystem.LoadGlobalCoins(ref _saveData.saveData);
-        _raceInfoSystem.LoadCharacterInformation(ref _saveData.saveData);
-        
-        string savedLeaderboardData = File.ReadAllText(FilePath("leaderboard"));
-        _saveLeaderboardData = JsonUtility.FromJson<SaveLeaderboardData>(savedLeaderboardData);
-        _raceInfoSystem.LoadLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+        try{
+            string savedLeaderboardData = File.ReadAllText(FilePath("leaderboard"));
+            _saveLeaderboardData = JsonUtility.FromJson<SaveLeaderboardData>(savedLeaderboardData);
+            _raceInfoSystem.LoadLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+        }
+        catch{
+            File.WriteAllText(FilePath("leaderboard"), "");
+        }
     }
 
     public static void SaveLeaderboard(){

@@ -162,6 +162,7 @@ public class RaceControlManager : MonoBehaviour
     {
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
         leaderboardScript.RefreshLeaderboard();
+        idleCamera.gameObject.SetActive(true);
         leaderboardCanvas.gameObject.SetActive(true);
         _raceControlUI.gameObject.SetActive(false);
     }

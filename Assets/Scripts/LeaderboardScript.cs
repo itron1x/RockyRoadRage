@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class LeaderboardScript : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class LeaderboardScript : MonoBehaviour
     
     [Header("Leaderboard")]
     [SerializeField] private List<TextMeshProUGUI> leaderboardTexts;
-    public int mapIndex = 0;
     
     public void OnBackToMainMenu()
     {
@@ -21,15 +21,12 @@ public class LeaderboardScript : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene.name);
     }
     
-    public void RefreshLeaderboard()
+    public void SetLeaderboard(List<LeaderBoardEntry> leaderboardEntries)
     {
-        RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
-        // List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData()[mapIndex].Leaderboard;
-        List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData(mapIndex);
         for (int i = 0; i < Math.Min(leaderboardTexts.Count, leaderboardEntries.Count); i++)
         {
             DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(leaderboardEntries[i].time).DateTime;
-            leaderboardTexts[i].text = (i+1)+". - "+leaderboardEntries[i].name+"\t\t"+dateTime.ToString("mm:ss.fff");
+            leaderboardTexts[i].text = (i+1)+".\t "+leaderboardEntries[i].name+"\t\t"+dateTime.ToString("mm:ss.fff");
         }
         SaveSystem.SaveLeaderboard();
     }

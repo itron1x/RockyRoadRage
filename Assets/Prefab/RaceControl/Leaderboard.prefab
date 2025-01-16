@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuScene: {fileID: 102900000, guid: 9a921ca429b77424ea567d7c22e2299f, type: 3}
+  leaderboardHeader: {fileID: 2661452386191160313}
   leaderboardTexts:
   - {fileID: 6933120206843594861}
   - {fileID: 7801113156868611270}

@@ -382,7 +382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -181.4}
+  m_AnchoredPosition: {x: 26.7, y: -220.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414277761
@@ -405,9 +405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Devices
-
-'
+  m_text: Press Enter or MenuButton
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -472,7 +470,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -140.63977, y: 0, z: -139.64429, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1273,6 +1271,7 @@ GameObject:
   - component: {fileID: 1658523905}
   - component: {fileID: 1658523904}
   - component: {fileID: 1658523903}
+  - component: {fileID: 1658523906}
   m_Layer: 5
   m_Name: Test
   m_TagString: Untagged
@@ -1344,9 +1343,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InputManager.CharacterController, Assembly-CSharp
-        m_MethodName: AddDevice
+      - m_Target: {fileID: 1658523906}
+        m_TargetAssemblyTypeName: TestScript, Assembly-CSharp
+        m_MethodName: AddPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1406,6 +1405,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658523901}
   m_CullTransparentMesh: 1
+--- !u!114 &1658523906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658523901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa27d0cc741aac4fb0ea42934f0d6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 414277761}
+  button: {fileID: 1658523903}
 --- !u!1001 &1663546574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1581,23 +1594,11 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 8
   m_AllowJoining: 1
-  m_JoinBehavior: 1
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InputManager.CharacterController, Assembly-CSharp
-        m_MethodName: OnPlayerJoined
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2286547543159089433, guid: 716c1c513d6fd844b8dfe778fa596a9d, type: 3}
+      - m_Target: {fileID: 2286547543159089433, guid: 7e07b994beeb89e4fbbce638248c2163, type: 3}
         m_TargetAssemblyTypeName: Player.CameraHandler, Assembly-CSharp
         m_MethodName: AddPlayer
         m_Mode: 0

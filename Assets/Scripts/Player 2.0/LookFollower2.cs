@@ -35,6 +35,8 @@ namespace Player_2._0{
                     return eyeSprites[2];
                 case "Smooth Sally":
                     return eyeSprites[3];
+                case "Lava Larry":
+                    return eyeSprites[4];
             }
             throw new System.Exception("Unknown character");
         }

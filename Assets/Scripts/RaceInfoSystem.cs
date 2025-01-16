@@ -41,6 +41,7 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation.Add("Cubic Chris", false);
         _characterInformation.Add("Triangle Tam", false);
         _characterInformation.Add("Smooth Sally", false);
+        _characterInformation.Add("Lava Larry", false);
 
         // Load saved data.
         SaveSystem.Load();
@@ -119,6 +120,7 @@ public class RaceInfoSystem : MonoBehaviour
         data.cubicChris = (bool)_characterInformation["Cubic Chris"];
         data.triangleTam = (bool)_characterInformation["Triangle Tam"];
         data.smoothSally = (bool)_characterInformation["Smooth Sally"];
+        data.lavaLarry = (bool)_characterInformation["Lava Larry"];
     }
 
     public void LoadGlobalCoins(ref PlayerSaveData data){
@@ -130,6 +132,7 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation["Cubic Chris"] = data.cubicChris;
         _characterInformation["Triangle Tam"] = data.triangleTam;
         _characterInformation["Smooth Sally"] = data.smoothSally;
+        _characterInformation["Lava Larry"] = data.lavaLarry;
     }
 
     public void BuyCharacter(string characterName, int price){
@@ -215,6 +218,7 @@ public struct PlayerSaveData{
     public bool cubicChris;
     public bool triangleTam;
     public bool smoothSally;
+    public bool lavaLarry;
 }
 
 [System.Serializable]

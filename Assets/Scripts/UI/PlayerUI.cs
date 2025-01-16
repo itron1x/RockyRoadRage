@@ -37,6 +37,8 @@ namespace UI{
             {
                 increaseButton.interactable = false;
             }
+            
+            increaseButton.interactable = true;
         }
 
         public void RemoveNumber()
@@ -51,6 +53,7 @@ namespace UI{
             {
                 decreaseButton.interactable = false;
             }
+            decreaseButton.interactable = true;
         }
 
         public void switchCanvas()

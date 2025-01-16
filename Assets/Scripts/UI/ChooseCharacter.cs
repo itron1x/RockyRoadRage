@@ -7,20 +7,28 @@ namespace UI{
     public class ChooseCharacter : MonoBehaviour
     {
         [SerializeField] private List<GameObject> characters;
-        
         [Header("Text Objects")]
         [SerializeField] private TextMeshProUGUI characterName;
-    
         
         [Header("Buttons")]
         [SerializeField] private Button confirmButton;
         
         private int _activeCharacter;
+        private string character;
 
         // Set initial character
         private void Awake(){
             UpdateCharacter(_activeCharacter);
             
+            
+        }
+
+        public void availableCharacer()
+        {
+            CharacterDetails characterDetails = characters[_activeCharacter].GetComponent<CharacterDetails>();
+            RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
+            raceInfoSystem.IsBought(characterDetails.GetCharacterName());
+
         }
 
         // update active character to next in list

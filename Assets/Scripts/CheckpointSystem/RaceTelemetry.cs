@@ -76,6 +76,11 @@ namespace CheckpointSystem{
             return playerName;
         }
 
+        public int getPlayerCoins()
+        {
+            return coinCollider.GetCoins();
+        }
+        
         public void Finish()
         {
             _raceEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();

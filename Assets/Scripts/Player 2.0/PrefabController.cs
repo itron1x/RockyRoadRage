@@ -52,6 +52,9 @@ namespace Player_2._0{
             else if (Keyboard.current.digit4Key.wasPressedThisFrame){
                 SetCharacter("Smooth Sally");
             }
+            else if (Keyboard.current.digit5Key.wasPressedThisFrame){
+                SetCharacter("Lava Larry");
+            }
 
             //TODO: add get device
             if (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame){
@@ -80,6 +83,8 @@ namespace Player_2._0{
                     return characters[2];
                 case "Smooth Sally":
                     return characters[3];
+                case "Lava Larry":
+                    return characters[4];
             }
             throw new System.Exception("Unknown character");
         }

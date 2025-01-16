@@ -24,7 +24,7 @@ public class SaveSystem{
     public static void Save(){
         _raceInfoSystem.SaveGlobalCoins(ref _saveData.saveData);
         _raceInfoSystem.SaveCharacterInformation(ref _saveData.saveData);
-        _raceInfoSystem.SaveLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+        _raceInfoSystem.SaveGlobalLeaderboardData(ref _saveLeaderboardData.leaderboardData);
         
         //Pretty Print to false make it not human-readable
         File.WriteAllText(FilePath("coins"), JsonUtility.ToJson(_saveData, true));
@@ -46,7 +46,7 @@ public class SaveSystem{
         try{
             string savedLeaderboardData = File.ReadAllText(FilePath("leaderboard"));
             _saveLeaderboardData = JsonUtility.FromJson<SaveLeaderboardData>(savedLeaderboardData);
-            _raceInfoSystem.LoadLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+            _raceInfoSystem.LoadGlobalLeaderboardData(ref _saveLeaderboardData.leaderboardData);
         }
         catch{
             File.WriteAllText(FilePath("leaderboard"), "");
@@ -54,7 +54,7 @@ public class SaveSystem{
     }
 
     public static void SaveLeaderboard(){
-        _raceInfoSystem.SaveLeaderboardData(ref _saveLeaderboardData.leaderboardData);
+        _raceInfoSystem.SaveGlobalLeaderboardData(ref _saveLeaderboardData.leaderboardData);
         
         File.WriteAllText(FilePath("leaderboard"), JsonUtility.ToJson(_saveLeaderboardData, true));
     }

@@ -16,11 +16,10 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private Canvas leaderboardCanvas;
     [SerializeField] private float raceSpeedMultiplier = 1.5f;
     [SerializeField] private Transform mapOverview;
-    public int mapIndex = 0;
-
+    
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
-    private List<int> _leaderboard = new List<int>();
+    private List<LeaderBoardEntry> _raceLeaderboard = new List<LeaderBoardEntry>();
     private RaceControlUI _raceControlUI;
     private long _raceStartTimeMilliseconds;
     
@@ -101,17 +100,22 @@ public class RaceControlManager : MonoBehaviour
         var playerIndex = playerRaceTelemetry.GetPlayerIndex();
         Debug.Log("Player " + playerIndex + " finished!"  + playerRaceTelemetry.GetFinishTime()+"   "+ playerRaceTelemetry.GetPlayerName());
         
-        // Call method after a certain amount of time
+        //Switch the player camera to the finish after 2 seconds
         StartCoroutine(PlayerFinishCamera(playerIndex, 2));
-        
-        _leaderboard.Add(playerIndex);
+        //add the player's time to the race leaderboard
+        LeaderBoardEntry finishedPlayer = new LeaderBoardEntry(playerRaceTelemetry.GetFinishTime(), playerRaceTelemetry.GetPlayerName());
+        _raceLeaderboard.Add(finishedPlayer);
+        //also add it to the global leaderboard
         RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
-        infoSystem?.AddLeaderboardEntry(0, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
+        infoSystem?.AddGlobalLeaderboardEntry(infoSystem.ActiveMapIndex, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
+        infoSystem?.AddGlobalCoins(playerRaceTelemetry.getPlayerCoins());
         
-        //when all Players have finished the Race, display Leaderboard
-        if (_leaderboard.Count >= _playerInputs.Count)
+        //when all Players have finished the Race, display Leaderboard and save Leaderboard and Coins to disk
+        if (_raceLeaderboard.Count >= _playerInputs.Count)
         {
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
+            SaveSystem.SaveLeaderboard(); //save after Player finished to keep the finish time even if race gets aborted afterwards
+            SaveSystem.Save();
             Invoke(nameof(ShowLeaderboard), postRaceTimeoutSeconds);
         }
     }
@@ -161,10 +165,9 @@ public class RaceControlManager : MonoBehaviour
 
     private void ShowLeaderboard()
     {
-        RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
-        List<LeaderBoardEntry> leaderboardEntries = raceInfoSystem.GetLeaderboardData(mapIndex);
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
-        leaderboardScript.SetLeaderboard(leaderboardEntries);
+        leaderboardScript.SetRaceLeaderboard(_raceLeaderboard);
+        leaderboardScript.ShowRaceLeaderboard();
         idleCamera.gameObject.SetActive(true);
         leaderboardCanvas.gameObject.SetActive(true);
         _raceControlUI.gameObject.SetActive(false);

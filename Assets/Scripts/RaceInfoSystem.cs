@@ -15,7 +15,14 @@ public class RaceInfoSystem : MonoBehaviour
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<GameObject> _playerPrefabs = new List<GameObject>();
     private float _raceSpeed;
-    
+    private int _activeMapIndex = 0;
+
+    public int ActiveMapIndex
+    {
+        get => _activeMapIndex;
+        set => _activeMapIndex = value;
+    }
+
     private int _globalCoins;
     private Hashtable _characterInformation;
     
@@ -42,7 +49,8 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation.Add("Triangle Tam", false);
         _characterInformation.Add("Smooth Sally", false);
         _characterInformation.Add("Lava Larry", false);
-
+        
+        _activeMapIndex = 0;
         // Load saved data.
         SaveSystem.Load();
     }
@@ -145,7 +153,7 @@ public class RaceInfoSystem : MonoBehaviour
     }
 
     //0 = Map1, 1 = Map2, 2 = Map3
-    public bool AddLeaderboardEntry(int map, long time, string playerName){
+    public bool AddGlobalLeaderboardEntry(int map, long time, string playerName){
         List<LeaderBoardEntry> leaderboardEntries = new List<LeaderBoardEntry>();
         switch (map){
             case 0:
@@ -174,7 +182,7 @@ public class RaceInfoSystem : MonoBehaviour
         return false;
     }
 
-    public List<LeaderBoardEntry> GetLeaderboardData(int mapIndex){
+    public List<LeaderBoardEntry> GetGlobalLeaderboardData(int mapIndex){
         switch (mapIndex){
             case 0:
                 return _map0Leaderboard;
@@ -187,13 +195,13 @@ public class RaceInfoSystem : MonoBehaviour
         return null;
     }
 
-    public void SaveLeaderboardData(ref LeaderboardData data){
+    public void SaveGlobalLeaderboardData(ref LeaderboardData data){
         data.map0 = _map0Leaderboard;
         data.map1 = _map1Leaderboard;
         data.map2 = _map2Leaderboard;
     }
 
-    public void LoadLeaderboardData(ref LeaderboardData data){
+    public void LoadGlobalLeaderboardData(ref LeaderboardData data){
         _map0Leaderboard = data.map0;
         _map1Leaderboard = data.map1;
         _map2Leaderboard = data.map2;

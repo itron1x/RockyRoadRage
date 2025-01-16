@@ -37,6 +37,7 @@ public class LapCheckpointTracker : MonoBehaviour
         Debug.Log("Detected player ball: " + ball.name);
         
         int playerIndex = playerBallsTransforms.IndexOf(ball);
+        //TODO: check if possible with SetCharacter!
         int passedCheckpoint = checkpoint.GetCheckpointId();
         int nextCheckpoint = _nextCheckpointList[playerIndex];
         

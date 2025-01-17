@@ -4520,6 +4520,141 @@ MonoBehaviour:
   acceleration: 8
   funFact: Pete has dreams of becoming a skipping stone champion.
   bought: 1
+--- !u!1001 &223718886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1399587869}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6910.034
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6910.034
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6910.034
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.300266
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.99236
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1282196
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_Name
+      value: Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223718890}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223718889}
+  m_SourcePrefab: {fileID: 100100000, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+--- !u!4 &223718887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+  m_PrefabInstance: {fileID: 223718886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &223718888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 53ce6cfe7202ef64d85d5684ab0e4ee8, type: 3}
+  m_PrefabInstance: {fileID: 223718886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &223718889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223718888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfbcef5bba900664ebc50d71e674c3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Smooth Sally
+  cost: 10000
+  shape: Lava Larry
+  speed: 7
+  weight: 5
+  acceleration: 8
+  funFact: Larry cools off in a volcano after every race.
+  bought: 0
+--- !u!95 &223718890
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223718888}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8379ab28dd49f9e4bb6dfd37694a0fbc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &225882832
 GameObject:
   m_ObjectHideFlags: 0
@@ -17539,6 +17674,7 @@ MonoBehaviour:
   - {fileID: 724020839}
   - {fileID: 73223924}
   - {fileID: 11243989}
+  - {fileID: 223718888}
   characterName: {fileID: 118662205}
   characterPrice: {fileID: 1203731064}
   characterDescription: {fileID: 1835196323}
@@ -27744,6 +27880,7 @@ Transform:
   - {fileID: 724020838}
   - {fileID: 73223923}
   - {fileID: 1157851701}
+  - {fileID: 223718887}
   m_Father: {fileID: 1260408204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408011448

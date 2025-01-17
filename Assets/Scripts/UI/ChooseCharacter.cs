@@ -14,35 +14,48 @@ namespace UI{
         [SerializeField] private Button confirmButton;
         
         private int _activeCharacter;
-        private string character;
+        private int _isBoughtCharacter;
+        
+        private List<GameObject> boughtCharacters; // new List 
+        
+        
 
         // Set initial character
-        private void Awake(){
-            UpdateCharacter(_activeCharacter);
-            
-            
-        }
-
-        public void availableCharacer()
+        private void Awake()
         {
-            CharacterDetails characterDetails = characters[_activeCharacter].GetComponent<CharacterDetails>();
-            RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
-            raceInfoSystem.IsBought(characterDetails.GetCharacterName());
 
+            boughtCharacters = new List<GameObject>();
+            RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
+
+            foreach (GameObject character in characters)
+            {
+                CharacterDetails checkCharacter = character.GetComponent<CharacterDetails>();
+                bool isBought = raceInfoSystem.IsBought(checkCharacter.GetCharacterName());
+
+                if (isBought)
+                {
+                    boughtCharacters.Add(character);
+                }
+
+                // call after check IsBought
+                UpdateCharacter(0);
+
+            }
         }
+
 
         // update active character to next in list
         public void NextCharacter(){
-            if (_activeCharacter + 1 < characters.Count) _activeCharacter++;
-            else _activeCharacter = 0;
-            UpdateCharacter(_activeCharacter);
+            if (_isBoughtCharacter + 1 < boughtCharacters.Count) _isBoughtCharacter++; // just go throught boughtCharacters
+            else _isBoughtCharacter = 0;
+            UpdateCharacter(_isBoughtCharacter);
         }
 
         // update active character to previous in list
         public void PreviousCharacter(){
-            if (_activeCharacter - 1 < 0) _activeCharacter = characters.Count - 1;
-            else _activeCharacter--;
-            UpdateCharacter(_activeCharacter);
+            if (_isBoughtCharacter - 1 < 0) _isBoughtCharacter = boughtCharacters.Count - 1;
+            else _isBoughtCharacter--;
+            UpdateCharacter(_isBoughtCharacter);
         }
 
         public void Confirm(){
@@ -50,18 +63,19 @@ namespace UI{
         }
 
         // Update UI elements to character
-        private void UpdateCharacter(int activeCharacter){
-            foreach (GameObject character in characters){
+        private void UpdateCharacter(int activeCharacter)
+        {
+            foreach (GameObject character in boughtCharacters)
+            {
                 character.SetActive(false);
             }
-            characters[activeCharacter].gameObject.SetActive(true);
-           
-            CharacterDetails characterDetails = characters[activeCharacter].GetComponent<CharacterDetails>();
-            
+
+            boughtCharacters[activeCharacter].gameObject.SetActive(true);
+
+            CharacterDetails characterDetails = boughtCharacters[activeCharacter].GetComponent<CharacterDetails>();
+
             characterName.text = characterDetails.GetCharacterName();
-            
         }
-        
     }
 }
 

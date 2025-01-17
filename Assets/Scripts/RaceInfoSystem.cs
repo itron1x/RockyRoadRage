@@ -167,16 +167,29 @@ public class RaceInfoSystem : MonoBehaviour
                 break;
         }
         
-        if (leaderboardEntries.Count <= 10 || leaderboardEntries[0].time >= time){
+        if (leaderboardEntries.Count <= 10 || leaderboardEntries.Last().time >= time){
             //Create new LeaderBoardEntry and add to Leaderboard
             LeaderBoardEntry = new LeaderBoardEntry(time, playerName);
             leaderboardEntries.Add(LeaderBoardEntry);
             
             //Sort Leaderboard
-            leaderboardEntries = leaderboardEntries.OrderByDescending(player => player.time).ToList();
+            leaderboardEntries = leaderboardEntries.OrderBy(player => player.time).ToList();
             if (leaderboardEntries.Count > 10){
                 leaderboardEntries.Remove(leaderboardEntries.Last());
             }
+            
+            switch (map){
+                case 0:
+                    _map0Leaderboard = leaderboardEntries;
+                    break;
+                case 1:
+                    _map1Leaderboard = leaderboardEntries;
+                    break;
+                case 2:
+                    _map2Leaderboard = leaderboardEntries;
+                    break;
+            }
+            
             return true;
         }
         return false;

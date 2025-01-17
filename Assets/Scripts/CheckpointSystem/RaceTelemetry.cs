@@ -21,13 +21,8 @@ namespace CheckpointSystem{
         [Header("Other")] 
         [SerializeField] private CoinController coinCollider;
         [SerializeField] private TextMeshProUGUI coinText;
-<<<<<<< Updated upstream
         [SerializeField] private string playerName;
         [SerializeField] private TextMeshProUGUI playerNameText;
-=======
-        [SerializeField] private TextMeshProUGUI checkPointText;
-        [SerializeField] public String playerName;
->>>>>>> Stashed changes
 
         private RaceControlManager _raceControlManager;
         private long _raceStartTimestamp = -1;
@@ -150,15 +145,15 @@ namespace CheckpointSystem{
         }
         
         // update the Checkpoint-Data in the UI (based on CalculateCheckpointDisplay in LabCheckpointTracker)
-        public void UpdateCheckpointText(int currentCheckpoint, int totalCheckpoints)
-        {
-            checkPointText.text = $"Checkpoint: {currentCheckpoint}/{totalCheckpoints}";
-        }
+        // public void UpdateCheckpointText(int currentCheckpoint, int totalCheckpoints)
+        // {
+        //     checkPointText.text = $"Checkpoint: {currentCheckpoint}/{totalCheckpoints}";
+        // }
         
-        public TextMeshProUGUI GetCheckpointText()
-        {
-            return checkPointText;
-        }
+        // public TextMeshProUGUI GetCheckpointText()
+        // {
+        //     return checkPointText;
+        // }
 
         public void SetRespawnPoint(Transform respawnPoint)
         {

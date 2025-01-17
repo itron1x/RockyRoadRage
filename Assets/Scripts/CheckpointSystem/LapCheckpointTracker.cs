@@ -51,13 +51,8 @@ public class LapCheckpointTracker : MonoBehaviour
             Debug.Log("Player " + playerIndex+ " passed Checkpoint " + checkpoint.GetCheckpointId());
             playerRaceTelemetry.SetRespawnPoint(checkpoint.GetRespawnPoint());
             
-<<<<<<< Updated upstream
             // **Update Checkpoint Display**
             // UpdateCheckpointDisplay(playerIndex, _nextCheckpointList[playerIndex]);
-=======
-            // Aktualisiere Checkpoint-Display
-            // CalculateCheckpointDisplay(playerIndex, checkpoint.GetCheckpointId());
->>>>>>> Stashed changes
             
             if (checkpoint.IsLapFinish())
             {
@@ -78,31 +73,12 @@ public class LapCheckpointTracker : MonoBehaviour
         
     }
     
-<<<<<<< Updated upstream
     // **Checkpoint Display**
     // private void UpdateCheckpointDisplay(int playerIndex, int nextCheckpoint)
     // {
     //     int currentCheckpoint = nextCheckpoint == 0 ? _checkpointCount : nextCheckpoint;
     //     checkpointTexts[playerIndex].text = $"Player {playerIndex + 1}: {currentCheckpoint}/{_checkpointCount}";
     // }
-=======
-    /*
-    // Calculate Checkpoint-Data and transfer ist to the RaceTelemetry-Object 
-    private void CalculateCheckpointDisplay(int playerIndex, int passedCheckpoint)
-    {
-        // check if the passed Checkpoint is the last one
-        int currentCheckpoint = passedCheckpoint == 0 ? _checkpointCount : passedCheckpoint;
->>>>>>> Stashed changes
-
-        // get the right RaceTelemetry-Object based in the playerIndex
-        RaceTelemetry playerTelemetry = playerBallsTransforms[playerIndex].GetComponentInParent<RaceTelemetry>();
-        if (playerTelemetry != null)
-        {
-            // update the Checkpoint-Data in the UI (through RaceTelemetry)
-            playerTelemetry.UpdateCheckpointText(currentCheckpoint, _checkpointCount);
-        }
-    }
-    */
     
     public void AddPlayer(Transform playerBall)
     {

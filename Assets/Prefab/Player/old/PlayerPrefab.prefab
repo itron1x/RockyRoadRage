@@ -413,6 +413,7 @@ RectTransform:
   - {fileID: 6654804797056107743}
   - {fileID: 2086168139192123174}
   - {fileID: 4970548549374416223}
+  - {fileID: 1933601505485347286}
   - {fileID: 5930073944358845076}
   - {fileID: 5020880237570884566}
   m_Father: {fileID: 8977592848367416145}
@@ -503,9 +504,15 @@ MonoBehaviour:
   outOfBoundsRespawnTimerSeconds: 3
   coinController: {fileID: 5208917714407895399}
   coinText: {fileID: 8991063834368884545}
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
   playerName: Smooth Sally
   playerNameText: {fileID: 8025134274762564252}
 --- !u!1 &2790392337782137134
+=======
+  checkPointText: {fileID: 3215570266298957749}
+  playerName: 
+--- !u!1 &4650615228087520051
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,6 +520,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
   - component: {fileID: 6395362521301149299}
   - component: {fileID: 5903225050216959082}
   - component: {fileID: 5540316022020500480}
@@ -520,17 +528,29 @@ GameObject:
   - component: {fileID: 977892997268811013}
   m_Layer: 5
   m_Name: PlayerWorldOverlays
+=======
+  - component: {fileID: 1933601505485347286}
+  - component: {fileID: 426350752391332893}
+  - component: {fileID: 3215570266298957749}
+  m_Layer: 5
+  m_Name: CheckPointText
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
 --- !u!224 &6395362521301149299
+=======
+--- !u!224 &1933601505485347286
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
   m_GameObject: {fileID: 2790392337782137134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.09197426}
@@ -548,10 +568,28 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5903225050216959082
 Canvas:
+=======
+  m_GameObject: {fileID: 4650615228087520051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9171587675427738972}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -671, y: -886}
+  m_SizeDelta: {x: 230, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &426350752391332893
+CanvasRenderer:
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
   m_GameObject: {fileID: 2790392337782137134}
   m_Enabled: 1
   serializedVersion: 3
@@ -570,11 +608,17 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &5540316022020500480
+=======
+  m_GameObject: {fileID: 4650615228087520051}
+  m_CullTransparentMesh: 1
+--- !u!114 &3215570266298957749
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
   m_GameObject: {fileID: 2790392337782137134}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -624,6 +668,93 @@ MonoBehaviour:
   Target: {fileID: 4534527147358672676}
   TargetHeight: 2
   Camera: {fileID: 7443049120521553804}
+=======
+  m_GameObject: {fileID: 4650615228087520051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Checkpoint 0/0
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -17.540552, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
 --- !u!1 &4862085252564472760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,7 +1756,11 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
+<<<<<<< Updated upstream:Assets/Prefab/Player/old/PlayerPrefab.prefab
     Value: -10.20976
+=======
+    Value: 32.85498
+>>>>>>> Stashed changes:Assets/Prefab/Player/PlayerPrefab.prefab
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1

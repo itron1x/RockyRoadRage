@@ -49,14 +49,23 @@ public class RaceControlManager : MonoBehaviour
         RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
         if(RaceInfoSystem.GetInstance() == null) return;
         
-        _playerInputManager.playerPrefab = infoSystem.GetPlayerPrefabs()[0];
-        var inputDevice = infoSystem.GetPlayerInputs()[0];
+        // _playerInputManager.playerPrefab = infoSystem.GetPlayerPrefabs()[0];
+        // var inputDevice = infoSystem.GetPlayerInputs()[0];
+        // print(infoSystem.GetPlayerInputs()[0]);
         raceSpeedMultiplier = infoSystem.GetRaceSpeed();
-        _playerInputManager.JoinPlayer(-1, -1, null, inputDevice);
+        // _playerInputManager.JoinPlayer(-1, -1, null, inputDevice);
+
+        //TODO: get input from RaceInfoSystem!
+        List<InputDevice> devices = infoSystem.GetPlayerInputs(); 
+        for (int i = 0; i < devices.Count; i++){
+            _playerInputManager.JoinPlayer(i, controlScheme: null, pairWithDevice: devices[i]);
+        }
+
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        print("Trigger OnPlayerJoined");
         idleCamera.gameObject.SetActive(false);
         
         ResetWaitTime();
@@ -87,12 +96,19 @@ public class RaceControlManager : MonoBehaviour
     {
         Time.timeScale = raceSpeedMultiplier;
         _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        foreach (var playerInput in _playerInputs)
-        {
-            var playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
-            playerRaceTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
+        
+        foreach (PlayerInput playerInput in PlayerInput.all){
+            RaceTelemetry playerTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+            playerTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
             playerInput.ActivateInput();
         }
+        // foreach (var playerInput in _playerInputs)
+        // {
+        //     //TODO: FIX
+        //     var playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+        //     playerRaceTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
+        //     playerInput.ActivateInput();
+        // }
     }
 
     public void PlayerFinishedRace(RaceTelemetry playerRaceTelemetry)

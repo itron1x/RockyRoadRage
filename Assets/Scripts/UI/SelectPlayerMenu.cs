@@ -43,7 +43,7 @@ public class SelectPlayerMenu : MonoBehaviour
             var testDevice = InputSystem.devices.Count > 0 ? InputSystem.devices[0] : null;
             if (testDevice != null)
             {
-                raceInfoSystem.AddPlayer(testDevice, null); // Spieler ohne Prefab hinzufügen
+                raceInfoSystem.AddInput(testDevice); // Spieler ohne Prefab hinzufügen
                 devices = raceInfoSystem.GetPlayerInputs();
                 Debug.Log($"Testgerät hinzugefügt: {testDevice.displayName}");
             }

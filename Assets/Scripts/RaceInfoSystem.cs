@@ -12,8 +12,10 @@ public class RaceInfoSystem : MonoBehaviour
     private static RaceInfoSystem _instance;
 
     private SceneAsset _racingScene;
+    
     private List<InputDevice> _playerInputs = new List<InputDevice>();
-    private List<GameObject> _playerPrefabs = new List<GameObject>();
+    private List<int> _playerCharacter = new List<int>();
+    // private List<GameObject> _playerPrefabs = new List<GameObject>();
     private float _raceSpeed;
     private int _activeMapIndex = 0;
 
@@ -88,10 +90,18 @@ public class RaceInfoSystem : MonoBehaviour
         _racingScene = racingScene;
     }
 
-    public void AddPlayer(InputDevice playerInput, GameObject playerPrefab)
+    public void AddInput(InputDevice playerInput)
     {
         _playerInputs.Add(playerInput);
-        _playerPrefabs.Add(playerPrefab);
+    }
+
+    public void AddCharacter(int characterId){
+        _playerCharacter.Add(characterId);
+    }
+
+    public void ResetPlayers(){
+        _playerInputs.Clear();
+        _playerCharacter.Clear();
     }
 
     public List<InputDevice> GetPlayerInputs()
@@ -99,9 +109,9 @@ public class RaceInfoSystem : MonoBehaviour
         return _playerInputs;
     }
 
-    public List<GameObject> GetPlayerPrefabs()
+    public List<int> GetPlayerCharacter()
     {
-        return _playerPrefabs;
+        return _playerCharacter;
     }
 
     public void StartRace()

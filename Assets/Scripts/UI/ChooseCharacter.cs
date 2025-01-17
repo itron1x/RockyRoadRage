@@ -13,36 +13,33 @@ namespace UI{
         [Header("Buttons")]
         [SerializeField] private Button confirmButton;
         
-        private int _activeCharacter;
         private int _isBoughtCharacter;
-        
         private List<GameObject> boughtCharacters; // new List 
+        private RaceInfoSystem _raceInfoSystem;
         
+        private bool _isSelected;
         
-
         // Set initial character
         private void Awake()
         {
 
             boughtCharacters = new List<GameObject>();
-            RaceInfoSystem raceInfoSystem = RaceInfoSystem.GetInstance();
+            _raceInfoSystem = RaceInfoSystem.GetInstance();
 
             foreach (GameObject character in characters)
             {
                 CharacterDetails checkCharacter = character.GetComponent<CharacterDetails>();
-                bool isBought = raceInfoSystem.IsBought(checkCharacter.GetCharacterName());
+                bool isBought = _raceInfoSystem.IsBought(checkCharacter.GetCharacterName());
 
                 if (isBought)
                 {
                     boughtCharacters.Add(character);
                 }
-
                 // call after check IsBought
                 UpdateCharacter(0);
-
+                _isSelected = false;
             }
         }
-
 
         // update active character to next in list
         public void NextCharacter(){
@@ -59,22 +56,24 @@ namespace UI{
         }
 
         public void Confirm(){
-        
+             _raceInfoSystem.AddCharacter(_isBoughtCharacter);
+             _isSelected = true;
         }
 
         // Update UI elements to character
         private void UpdateCharacter(int activeCharacter)
         {
+            print(_isBoughtCharacter);
             foreach (GameObject character in boughtCharacters)
             {
                 character.SetActive(false);
             }
 
             boughtCharacters[activeCharacter].gameObject.SetActive(true);
+        }
 
-            CharacterDetails characterDetails = boughtCharacters[activeCharacter].GetComponent<CharacterDetails>();
-
-            characterName.text = characterDetails.GetCharacterName();
+        public bool GetIsSelected(){
+            return _isSelected;
         }
     }
 }

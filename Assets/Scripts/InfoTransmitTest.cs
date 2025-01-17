@@ -15,7 +15,7 @@ public class InfoTransmitTest : MonoBehaviour
         var raceInfoSystem = RaceInfoSystem.GetInstance();
         var inputDevice = InputSystem.devices[0];
         
-        raceInfoSystem.AddPlayer(inputDevice, playerPrefab);
+        raceInfoSystem.AddInput(inputDevice);
         raceInfoSystem.SetRacingScene(racingScene);
         raceInfoSystem.SetRaceSpeed(raceSpeed);
         raceInfoSystem.StartRace();

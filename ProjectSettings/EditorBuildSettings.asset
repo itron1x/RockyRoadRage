@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPaul.unity
     guid: 9a921ca429b77424ea567d7c22e2299f
   - enabled: 1
+    path: Assets/Scenes/CarreraBahn.unity
+    guid: ad70f56796629ea40bc36de37ef96460
+  - enabled: 1
     path: Assets/Scenes/SampleRaceScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1

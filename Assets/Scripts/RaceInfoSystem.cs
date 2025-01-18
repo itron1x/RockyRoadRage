@@ -15,8 +15,8 @@ public class RaceInfoSystem : MonoBehaviour
     
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<int> _playerCharacter = new List<int>();
-    // private List<GameObject> _playerPrefabs = new List<GameObject>();
-    private float _raceSpeed;
+    
+    private float _raceSpeed = 1;
     private int _activeMapIndex = 0;
 
     public int ActiveMapIndex
@@ -53,6 +53,7 @@ public class RaceInfoSystem : MonoBehaviour
         _characterInformation.Add("Lava Larry", false);
         
         _activeMapIndex = 0;
+        
         // Load saved data.
         SaveSystem.Load();
     }
@@ -228,6 +229,13 @@ public class RaceInfoSystem : MonoBehaviour
         _map0Leaderboard = data.map0;
         _map1Leaderboard = data.map1;
         _map2Leaderboard = data.map2;
+    }
+
+    public void ResetSystem(){
+        _playerInputs.Clear();
+        _playerCharacter.Clear();
+        _activeMapIndex = 0;
+        _raceSpeed = 1;
     }
 }
 

@@ -1,10 +1,10 @@
-using Player_2._0;
+using Player;
 using UnityEngine;
 
 public class PlayerCharacteristics : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private GroundDetection2 groundDetection;
+    [SerializeField] private GroundDetection groundDetection;
     
     [Header("Movement attributes")] 
     [SerializeField] private int speed;
@@ -16,7 +16,7 @@ public class PlayerCharacteristics : MonoBehaviour
         return rb;
     }
 
-    public GroundDetection2 GetGroundDetection(){
+    public GroundDetection GetGroundDetection(){
         return groundDetection;
     }
 

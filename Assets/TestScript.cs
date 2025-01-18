@@ -1,4 +1,4 @@
-using Player_2._0;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

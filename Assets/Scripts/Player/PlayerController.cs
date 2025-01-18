@@ -1,9 +1,7 @@
 using System;
 using CheckpointSystem;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Player{
     public class PlayerController : MonoBehaviour{
@@ -11,29 +9,28 @@ namespace Player{
         private RaceTelemetry _raceTelemetry;
     
         //Character Settings
-        [FormerlySerializedAs("speed")]
         [Header("Movement attributes")]
         
-        [SerializeField] private int acceleration;
-        [SerializeField] private int speed;
-        [SerializeField] private int jumpForce;
-        [SerializeField] private int mass;
+        private int _acceleration = 20;
+        private int _speed = 20;
+        private int _jumpForce = 10;
+        private float _mass = 1;
         [NonSerialized] public bool Jump;
     
         [Header("References")]
         
-        [SerializeField]
-        private GroundDetection groundDetection;
         [SerializeField] private Transform mainCamera;
+        
+        [Header("Changing References")]
+        [SerializeField] private GroundDetection groundDetection;
     
         //Movement Coordinates
         private float _movementX;
         private float _movementY;
     
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start(){
-            _rb = GetComponent<Rigidbody>();
-            _rb.mass = mass;
+        void Awake(){
+            _rb = GetComponentInParent<PrefabController>().GetCharacter().GetComponent<Rigidbody>();
+            _rb.mass = _mass;
             _raceTelemetry = transform.parent.GetComponentInChildren<RaceTelemetry>();
         }
         
@@ -42,7 +39,7 @@ namespace Player{
             Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
             movement = Quaternion.AngleAxis(mainCamera.rotation.eulerAngles.y, Vector3.up) * movement;
         
-            if(!Jump && !(_rb.linearVelocity.magnitude > speed)) _rb.AddForce(movement * acceleration, ForceMode.Acceleration);
+            if(!Jump && !(_rb.linearVelocity.magnitude > _speed)) _rb.AddForce(movement * _acceleration, ForceMode.Acceleration);
         }
 
         // Change movement for next frame.
@@ -55,8 +52,8 @@ namespace Player{
 
         // Jump with the character
         void OnJump(){
-            Vector3 jumpVector = new Vector3(0.0f, jumpForce, 0.0f);
-            if (groundDetection.IsGrounded){
+            Vector3 jumpVector = new Vector3(0.0f, _jumpForce, 0.0f);
+            if (groundDetection.IsGrounded()){
                 _rb.AddForce(jumpVector,ForceMode.Impulse);
                 Jump = true;
             }
@@ -76,6 +73,34 @@ namespace Player{
             else{
                 Cursor.lockState = CursorLockMode.None;
             }
+        }
+        
+        public void SetRigidbody(Rigidbody rb){
+            _rb = rb;
+        }
+
+        public Rigidbody GetRigidbody(){
+            return _rb;
+        }
+
+        public void SetGroundDetection(GroundDetection newGroundDetection){
+            groundDetection = newGroundDetection;
+        }
+
+        public void SetSpeed(int newSpeed){
+            _speed = newSpeed;
+        }
+
+        public void SetAcceleration(int newAcceleration){
+            _acceleration = newAcceleration;
+        }
+
+        public void SetJumpForce(int newJump){
+            _jumpForce = newJump;
+        }
+
+        public void SetMass(float newMass){
+            _mass = newMass;
         }
     }
 }

@@ -2,20 +2,18 @@ using System.Collections.Generic;
 using Collectables;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
-namespace Player_2._0{
+namespace Player{
     public class PrefabController : MonoBehaviour{
-        private GameObject _activeCharacter;
+        [SerializeField] private GameObject activeCharacter;
     
         [SerializeField] private List<GameObject> characters;
         
         [Header("Controller")]
-        [SerializeField] private PlayerController2 playerController;
+        [SerializeField] private PlayerController playerController;
         
         [Header("Camera")]
-        [SerializeField] private LookFollower2 lookFollower;
+        [SerializeField] private LookFollower lookFollower;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private CinemachineCamera cinemachineCamera;
         
@@ -29,48 +27,43 @@ namespace Player_2._0{
         private int _playerIndex;
         
         void Awake(){
-            _activeCharacter = GetCharacterByName("Pebble Pete");
+            // _activeCharacter = GetCharacterByName("Pebble Pete");
             
             overlays.layer = LayerMask.NameToLayer("Player" + _playerIndex);
-           
-            //TODO: add get device
-            foreach (var controller in Gamepad.all){
-                print(controller.deviceId);
-            }
         }
 
         void Update(){
-            if (Keyboard.current.digit1Key.wasPressedThisFrame){
-                SetCharacter("Pebble Pete");
-            }    
-            else if (Keyboard.current.digit2Key.wasPressedThisFrame){
-                SetCharacter("Triangle Tam");
-            }
-            else if (Keyboard.current.digit3Key.wasPressedThisFrame){
-                SetCharacter("Cubic Chris");
-            }
-            else if (Keyboard.current.digit4Key.wasPressedThisFrame){
-                SetCharacter("Smooth Sally");
-            }
-            else if (Keyboard.current.digit5Key.wasPressedThisFrame){
-                SetCharacter("Lava Larry");
-            }
+            // if (Keyboard.current.digit1Key.wasPressedThisFrame){
+            //     SetCharacter("Pebble Pete");
+            // }    
+            // else if (Keyboard.current.digit2Key.wasPressedThisFrame){
+            //     SetCharacter("Triangle Tam");
+            // }
+            // else if (Keyboard.current.digit3Key.wasPressedThisFrame){
+            //     SetCharacter("Cubic Chris");
+            // }
+            // else if (Keyboard.current.digit4Key.wasPressedThisFrame){
+            //     SetCharacter("Smooth Sally");
+            // }
+            // else if (Keyboard.current.digit5Key.wasPressedThisFrame){
+            //     SetCharacter("Lava Larry");
+            // }
 
-            //TODO: add get device
-            if (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame){
-                print("Keyboard was pressed with ID: " + Keyboard.current.deviceId);
-            }
-            else{
-                foreach (var controller in Gamepad.all){
-                    if (controller != null && controller.rightTrigger.wasPressedThisFrame){
-                        print("Controller was pressed with ID: " + controller.deviceId);
-                    }
-                }
-            }
+            // //TODO: add get device
+            // if (Keyboard.current != null && Keyboard.current.pKey.wasPressedThisFrame){
+            //     print("Keyboard was pressed with ID: " + Keyboard.current.deviceId);
+            // }
+            // else{
+            //     foreach (var controller in Gamepad.all){
+            //         if (controller != null && controller.rightTrigger.wasPressedThisFrame){
+            //             print("Controller was pressed with ID: " + controller.deviceId);
+            //         }
+            //     }
+            // }
         }
     
         public GameObject GetCharacter(){
-            return _activeCharacter;
+            return activeCharacter;
         }
 
         public GameObject GetCharacterByName(string characterName){
@@ -91,17 +84,19 @@ namespace Player_2._0{
 
         public void SetCharacter(string characterName){
             // Disable current character
-            _activeCharacter.SetActive(false);
+            activeCharacter.SetActive(false);
+            
+            Transform position = activeCharacter.transform;
         
             //Update character to new one.
-            _activeCharacter = GetCharacterByName(characterName);
-            _activeCharacter.SetActive(true);
+            activeCharacter = GetCharacterByName(characterName);
+            activeCharacter.SetActive(true);
             
-            PlayerCharacteristics characteristics = _activeCharacter.GetComponent<PlayerCharacteristics>();
+            activeCharacter.GetComponent<Rigidbody>().MovePosition(position.position);
+            
+            PlayerCharacteristics characteristics = activeCharacter.GetComponent<PlayerCharacteristics>();
             
             //Update PlayerController
-            // playerController.SetRigidbody(_activeCharacter.GetComponent<Rigidbody>());
-            // playerController.SetGroundDetection(_activeCharacter.GetComponentInChildren<GroundDetection2>());
             playerController.SetRigidbody(characteristics.GetRigidbody());
             playerController.SetGroundDetection(characteristics.GetGroundDetection());
             playerController.SetSpeed(characteristics.GetSpeed());
@@ -109,10 +104,10 @@ namespace Player_2._0{
             playerController.SetJumpForce(characteristics.GetJumpHeight());
             playerController.SetMass(characteristics.GetMass());
             
-            cinemachineCamera.Follow = _activeCharacter.transform;
+            cinemachineCamera.Follow = activeCharacter.transform;
         
             //Update Eyes and Name Target
-            lookFollower.SetTarget(_activeCharacter.transform);
+            lookFollower.SetTarget(activeCharacter.transform);
             lookFollower.SetEyes(characterName);
         }
 

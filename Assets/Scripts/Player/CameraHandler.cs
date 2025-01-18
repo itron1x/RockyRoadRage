@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Player_2._0;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;

@@ -1,8 +1,4 @@
-using CheckpointSystem;
-using Player_2._0;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Collectables{
     public class CoinCollider : MonoBehaviour{

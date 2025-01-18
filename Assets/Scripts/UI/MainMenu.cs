@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +7,7 @@ namespace UI{
         // Load race scene
         public void StartGame(){
             SceneManager.LoadScene("SampleRaceScene");
+            // SceneManager.LoadScene("Grassy_Roads");
         }
         
         // Quit game

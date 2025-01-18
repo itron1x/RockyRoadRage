@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CheckpointSystem;
-using Player_2._0;
+using Player;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -49,13 +49,8 @@ public class RaceControlManager : MonoBehaviour
         RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
         if(RaceInfoSystem.GetInstance() == null) return;
         
-        // _playerInputManager.playerPrefab = infoSystem.GetPlayerPrefabs()[0];
-        // var inputDevice = infoSystem.GetPlayerInputs()[0];
-        // print(infoSystem.GetPlayerInputs()[0]);
         raceSpeedMultiplier = infoSystem.GetRaceSpeed();
-        // _playerInputManager.JoinPlayer(-1, -1, null, inputDevice);
 
-        //TODO: get input from RaceInfoSystem!
         List<InputDevice> devices = infoSystem.GetPlayerInputs(); 
         for (int i = 0; i < devices.Count; i++){
             _playerInputManager.JoinPlayer(i, controlScheme: null, pairWithDevice: devices[i]);
@@ -75,6 +70,9 @@ public class RaceControlManager : MonoBehaviour
         
         GameObject newPlayer = playerInput.gameObject;
         _playerInputs.Add(playerInput);
+        
+        PrefabController prefabController = playerInput.gameObject.transform.parent.GetComponent<PrefabController>();
+        prefabController.SetCharacter(GetCharacter(RaceInfoSystem.GetInstance().GetPlayerCharacter()[playerInput.playerIndex]));
         
         int playerIndex = _playerInputs.IndexOf(playerInput);
         
@@ -96,19 +94,13 @@ public class RaceControlManager : MonoBehaviour
     {
         Time.timeScale = raceSpeedMultiplier;
         _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        
-        foreach (PlayerInput playerInput in PlayerInput.all){
-            RaceTelemetry playerTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
-            playerTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
+
+        foreach (var playerInput in _playerInputs)
+        {
+            var playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
+            playerRaceTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
             playerInput.ActivateInput();
         }
-        // foreach (var playerInput in _playerInputs)
-        // {
-        //     //TODO: FIX
-        //     var playerRaceTelemetry = playerInput.gameObject.transform.parent.GetComponentInChildren<RaceTelemetry>();
-        //     playerRaceTelemetry.SetRaceStartTimestamp(_raceStartTimeMilliseconds);
-        //     playerInput.ActivateInput();
-        // }
     }
 
     public void PlayerFinishedRace(RaceTelemetry playerRaceTelemetry)
@@ -142,10 +134,10 @@ public class RaceControlManager : MonoBehaviour
         GameObject playerGameObject = _playerInputs[playerIndex].gameObject;
         Transform parent = playerGameObject.transform.parent;
         PrefabController prefabController = playerGameObject.GetComponentInParent<PrefabController>();
-        // Set camera to finish checkpoint
-        //parent.GetComponentInChildren<CinemachineCamera>().Follow = mapOverview;
         
+        // Set camera to finish checkpoint
         prefabController.GetCinemachineCamera().Follow = mapOverview;
+        
         // Make player invisible
         prefabController.GetCharacter().layer = LayerMask.NameToLayer("Invisible");
         prefabController.GetOverlays().layer = LayerMask.NameToLayer("Invisible");
@@ -192,6 +184,22 @@ public class RaceControlManager : MonoBehaviour
     public void SetRaceSpeedMultiplier(float multiplier)
     {
         raceSpeedMultiplier = multiplier;
+    }
+
+    public string GetCharacter(int characterIndex){
+        switch (characterIndex){
+            case 0:
+                return "Pebble Pete";
+            case 1:
+                return "Cubic Chris";
+            case 2:
+                return "Triangle Tam";
+            case 3:
+                return "Smooth Sally";
+            case 4:
+                return "Lava Larry";
+        }
+        throw new NotImplementedException("Character not found.");
     }
     
 }

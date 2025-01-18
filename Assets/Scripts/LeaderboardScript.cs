@@ -22,6 +22,7 @@ public class LeaderboardScript : MonoBehaviour
     public void OnBackToMainMenu()
     {
         Debug.Log("Loading Main Menu");
+        RaceInfoSystem.GetInstance().ResetSystem();
         SceneManager.LoadScene(mainMenuScene.name);
     }
     

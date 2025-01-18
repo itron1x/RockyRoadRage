@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player_2._0{
-    public class CharacterController2 : MonoBehaviour{
+namespace Player{
+    public class CharacterController : MonoBehaviour{
         [SerializeField] 
         private List<GameObject> prefabs;
 

@@ -67,6 +67,7 @@ namespace CheckpointSystem{
 
         public void SetPlayerName(string newPlayerName)
         {
+            playerName = newPlayerName;
             playerNameText.text = newPlayerName;
         }
 

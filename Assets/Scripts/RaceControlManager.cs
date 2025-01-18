@@ -60,17 +60,34 @@ public class RaceControlManager : MonoBehaviour
         
         raceSpeedMultiplier = _raceInfoSystem.GetRaceSpeed();
 
-        List<InputDevice> devices = _raceInfoSystem.GetPlayerInputs(); 
+        List<InputDevice> devices = _raceInfoSystem.GetPlayerInputs();
         for (int i = 0; i < devices.Count; i++){
             _playerInputManager.JoinPlayer(i, controlScheme: null, pairWithDevice: devices[i]);
         }
 
+        switch (_raceInfoSystem.GetPlayerInputs().Count){
+            case 3:
+                idleCamera.gameObject.SetActive(true);
+                idleCamera.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
+                break;
+            case 5:
+                idleCamera.gameObject.SetActive(true);
+                idleCamera.rect = new Rect(0.66f, 0f, 0.34f, 0.5f);
+                break;
+            case 7:
+                idleCamera.gameObject.SetActive(true);
+                idleCamera.rect = new Rect(0.75f, 0f, 0.25f, 0.5f);
+                break;
+            default:
+                idleCamera.gameObject.SetActive(false);
+                break;
+        }
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         print("Trigger OnPlayerJoined");
-        idleCamera.gameObject.SetActive(false);
+        // idleCamera.gameObject.SetActive(false);
         
         ResetWaitTime();
         playerInput.DeactivateInput();
@@ -94,7 +111,7 @@ public class RaceControlManager : MonoBehaviour
         playerRaceTelemetry.SetPlayerIndex(playerIndex);
         playerRaceTelemetry.SetRespawnPoint(spawnPoint); //sets initial spawn point
         
-        _raceControlUI.DisplayUpdateText("Player " + (playerIndex + 1) + " joined! Race will begin shortly...");
+        _raceControlUI.DisplayUpdateText("Race will begin shortly...");
         newPlayer.GetComponentInChildren<Rigidbody>().MovePosition(spawnPoint.position);
         
     }
@@ -134,6 +151,9 @@ public class RaceControlManager : MonoBehaviour
         //when all Players have finished the Race, display Leaderboard and save Leaderboard and Coins to disk
         if (_raceLeaderboard.Count >= _playerInputs.Count)
         {
+            idleCamera.gameObject.SetActive(true);
+            idleCamera.rect = new Rect(0, 0, 1, 1);
+            
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
             SaveSystem.SaveLeaderboard(); //save after Player finished to keep the finish time even if race gets aborted afterwards
             SaveSystem.Save();

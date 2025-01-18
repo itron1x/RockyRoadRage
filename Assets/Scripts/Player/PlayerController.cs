@@ -59,6 +59,13 @@ namespace Player{
             }
         }
 
+        void OnSprint(){
+            Vector3 movement = new Vector3(_movementX, 0.0f, _movementY); 
+            movement = Quaternion.AngleAxis(mainCamera.rotation.eulerAngles.y, Vector3.up) * movement;
+        
+            if(!(_rb.linearVelocity.magnitude > _speed)) _rb.AddForce(movement * _acceleration, ForceMode.Impulse);
+        }
+
         // Manual respawn
         void OnInteract()
         {

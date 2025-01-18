@@ -940,6 +940,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 716888395}
     - target: {fileID: 7279876900076919611, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: pauseMenuCanvas
+      value: 
+      objectReference: {fileID: 1191468939941841941}
+    - target: {fileID: 7279876900076919611, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: leaderboardCanvas
       value: 
       objectReference: {fileID: 100713327}
@@ -1273,6 +1277,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0fcb5564e50af4b381930178f187384, type: 3}
+--- !u!223 &1191468939941841941 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2946102444916627503, guid: c0fcb5564e50af4b381930178f187384, type: 3}
+  m_PrefabInstance: {fileID: 1191468939941841940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

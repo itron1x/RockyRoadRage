@@ -3118,6 +3118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IdleCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 1107233379245386973, guid: a5e22e18d3914fd17a2640f0a50548df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5314473096006650844, guid: a5e22e18d3914fd17a2640f0a50548df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.9
@@ -3277,13 +3281,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: m_PlayerPrefab
       value: 
       objectReference: {fileID: 5336992868585047707, guid: 7e07b994beeb89e4fbbce638248c2163, type: 3}
     - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 547a804b-8391-415e-8022-2e0461d62801
+      objectReference: {fileID: 0}
+    - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 4637671806147048645}
+    - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Join
+      objectReference: {fileID: 0}
     - target: {fileID: 5224761555882925433, guid: 75c08858919442d5eb48351a4fc10a20, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OnPlayerJoined

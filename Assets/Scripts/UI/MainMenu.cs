@@ -6,8 +6,17 @@ namespace UI{
     {
         // Load race scene
         public void StartGame(){
-            SceneManager.LoadScene("SampleRaceScene");
-            // SceneManager.LoadScene("Grassy_Roads");
+            switch (RaceInfoSystem.GetInstance().ActiveMapIndex){
+                case 0:
+                    SceneManager.LoadScene("SampleRaceScene");
+                    break;
+                case 1:
+                    SceneManager.LoadScene("Grassy_Roads");
+                    break;
+                case 2:
+                    SceneManager.LoadScene("SampleRaceScene");
+                    break;
+            }
         }
         
         // Quit game

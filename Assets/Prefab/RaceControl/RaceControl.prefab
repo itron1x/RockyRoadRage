@@ -334,6 +334,7 @@ MonoBehaviour:
   joinTimeoutSeconds: 5
   postRaceTimeoutSeconds: 5
   leaderboardCanvas: {fileID: 0}
+  pauseMenuCanvas: {fileID: 0}
   raceSpeedMultiplier: 1.5
   mapOverview: {fileID: 0}
 --- !u!114 &420446588681503527

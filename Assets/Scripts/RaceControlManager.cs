@@ -101,6 +101,9 @@ public class RaceControlManager : MonoBehaviour
 
     private void ActivateRace()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
         Time.timeScale = raceSpeedMultiplier;
         _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -183,6 +186,9 @@ public class RaceControlManager : MonoBehaviour
 
     private void ShowLeaderboard()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
         leaderboardScript.SetRaceLeaderboard(_raceLeaderboard);
         leaderboardScript.ShowRaceLeaderboard();
@@ -218,8 +224,10 @@ public class RaceControlManager : MonoBehaviour
         else pauseRace();
     }
 
-    public void pauseRace()
-    {
+    public void pauseRace(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
         _isPaused = true;
         _pauseStartTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         Time.timeScale = 0;
@@ -227,6 +235,9 @@ public class RaceControlManager : MonoBehaviour
     }
     public void resumeRace()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
         _pauseEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         _totalPauseTime += _pauseEndTimestamp - _pauseStartTimestamp;
         pauseMenuCanvas.gameObject.SetActive(false);

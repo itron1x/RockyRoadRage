@@ -13,6 +13,7 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private float joinTimeoutSeconds = 5;
     [SerializeField] private float postRaceTimeoutSeconds = 5;
     [SerializeField] private Canvas leaderboardCanvas;
+    [SerializeField] private Canvas pauseMenuCanvas;
     [SerializeField] private float raceSpeedMultiplier = 1.5f;
     [SerializeField] private Transform mapOverview;
     
@@ -25,10 +26,18 @@ public class RaceControlManager : MonoBehaviour
     private IEnumerator _PreRaceCountdown;
     private PlayerInputManager _playerInputManager;
     private RaceInfoSystem _raceInfoSystem;
-    
+
+    private bool _isPaused = false;
+    private long _pauseStartTimestamp;
+    private long _pauseEndTimestamp;
+    private long _totalPauseTime = 0;
+    public long TotalPauseTime => _totalPauseTime;
+    public bool IsPaused => _isPaused;
+
     private void Awake()
     {
         _raceInfoSystem = RaceInfoSystem.GetInstance();
+        _raceInfoSystem.ActiveRaceControlManager = this;
         leaderboardCanvas.gameObject.SetActive(false);
         _playerInputManager = GetComponent<PlayerInputManager>();
         _raceControlUI = GetComponent<RaceControlUI>();
@@ -202,5 +211,21 @@ public class RaceControlManager : MonoBehaviour
         }
         throw new NotImplementedException("Character not found.");
     }
-    
+
+
+    public void pauseRace()
+    {
+        _isPaused = true;
+        _pauseStartTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        Time.timeScale = 0;
+        pauseMenuCanvas.gameObject.SetActive(true);
+    }
+    public void resumeRace()
+    {
+        _pauseEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        _totalPauseTime += _pauseEndTimestamp - _pauseStartTimestamp;
+        pauseMenuCanvas.gameObject.SetActive(false);
+        Time.timeScale = 1 * raceSpeedMultiplier;
+        _isPaused = false;
+    }
 }

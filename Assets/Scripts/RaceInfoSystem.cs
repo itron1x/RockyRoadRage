@@ -28,7 +28,13 @@ public class RaceInfoSystem : MonoBehaviour
 
     private int _globalCoins;
     private Hashtable _characterInformation;
-    
+    private RaceControlManager _activeRaceControlManager;
+
+    public RaceControlManager ActiveRaceControlManager
+    {
+        set => _activeRaceControlManager = value;
+    }
+
     public LeaderBoardEntry LeaderBoardEntry{ get; set; }
     
     List<LeaderBoardEntry> _map0Leaderboard = new List<LeaderBoardEntry>();
@@ -246,6 +252,17 @@ public class RaceInfoSystem : MonoBehaviour
         _playerCharacter.Clear();
         _activeMapIndex = 0;
         _raceSpeed = 1;
+    }
+
+    public static void BackToMainMenu()
+    {
+        GetInstance().ResetSystem();
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void requestPause()
+    {
+        _activeRaceControlManager.pauseRace();
     }
 }
 

@@ -10,8 +10,6 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class LeaderboardScript : MonoBehaviour
 {
-    [Header("Buttons")]
-    [SerializeField] private SceneAsset mainMenuScene;
     
     [Header("Leaderboard")]
     [SerializeField] private TextMeshProUGUI leaderboardHeader;
@@ -22,8 +20,7 @@ public class LeaderboardScript : MonoBehaviour
     public void OnBackToMainMenu()
     {
         Debug.Log("Loading Main Menu");
-        RaceInfoSystem.GetInstance().ResetSystem();
-        SceneManager.LoadScene(mainMenuScene.name);
+        RaceInfoSystem.BackToMainMenu();
     }
     
     public void SetRaceLeaderboard(List<LeaderBoardEntry> leaderboardEntries)

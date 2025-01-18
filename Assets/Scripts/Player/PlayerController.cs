@@ -65,6 +65,12 @@ namespace Player{
             _raceTelemetry.Respawn(_rb);
         }
 
+        //pause the game
+        void OnPause()
+        {
+            RaceInfoSystem.GetInstance()?.requestPause();
+        }
+        
         // Lock cursor mode on game focus
         void OnApplicationFocus(bool focus){
             if (focus){

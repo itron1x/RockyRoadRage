@@ -47,10 +47,10 @@ namespace CheckpointSystem{
         {
             if (!_timerActive) return;
             long timestampNow = DateTimeOffset.Now.ToUnixTimeMilliseconds(); // Milliseconds since epoch
-            long timeSinceStart = timestampNow - _raceStartTimestamp;
+            long timeSinceStart = timestampNow - _raceStartTimestamp - _raceControlManager.TotalPauseTime;
             // Convert to DateTime
             DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
-            raceTimer.text = dateTime.ToString("mm:ss.fff");
+            raceTimer.text = !_raceControlManager.IsPaused ? dateTime.ToString("mm:ss.fff") : ""; //only display time if game is not paused
         }
 
         public void SetRaceControlManager(RaceControlManager raceControlManager)
@@ -83,7 +83,7 @@ namespace CheckpointSystem{
         public void Finish()
         {
             _raceEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            var duration = _raceEndTimestamp - _raceStartTimestamp;
+            var duration = _raceEndTimestamp - _raceStartTimestamp - _raceControlManager.TotalPauseTime;
             DateTime finishTime = DateTimeOffset.FromUnixTimeMilliseconds(duration).DateTime;
             splitsDisplay.text = "Finish! Race Time: " + finishTime.ToString("mm:ss.fff");
             _timerActive = false;
@@ -95,7 +95,7 @@ namespace CheckpointSystem{
         public void LapSplit()
         {
             long timestampNow = DateTimeOffset.Now.ToUnixTimeMilliseconds(); // Milliseconds since epoch
-            long timeSinceStart = timestampNow - _raceStartTimestamp;
+            long timeSinceStart = timestampNow - _raceStartTimestamp - _raceControlManager.TotalPauseTime;
             _lapSplits.Add(timeSinceStart);
             // Convert to DateTime
             DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(timeSinceStart).DateTime;
@@ -120,7 +120,7 @@ namespace CheckpointSystem{
         public long GetFinishTime()
         {
             if (_raceEndTimestamp == -1) return -1;
-            return _raceEndTimestamp - _raceStartTimestamp;
+            return _raceEndTimestamp - _raceStartTimestamp - _raceControlManager.TotalPauseTime;
         }
         
         public List<long> GetLapSplits()

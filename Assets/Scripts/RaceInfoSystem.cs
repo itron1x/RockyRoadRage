@@ -15,6 +15,7 @@ public class RaceInfoSystem : MonoBehaviour
     
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<int> _playerCharacter = new List<int>();
+    private List<string> _playerName = new List<string>();
     
     private float _raceSpeed = 1;
     private int _activeMapIndex = 0;
@@ -100,9 +101,14 @@ public class RaceInfoSystem : MonoBehaviour
         _playerCharacter.Add(characterId);
     }
 
+    public void AddName(string playerName){
+        _playerName.Add(playerName);
+    }
+
     public void ResetPlayers(){
         _playerInputs.Clear();
         _playerCharacter.Clear();
+        _playerName.Clear();
     }
 
     public List<InputDevice> GetPlayerInputs()
@@ -113,6 +119,10 @@ public class RaceInfoSystem : MonoBehaviour
     public List<int> GetPlayerCharacter()
     {
         return _playerCharacter;
+    }
+
+    public List<string> GetPlayerName(){
+        return _playerName;
     }
 
     public void StartRace()

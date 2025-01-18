@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CheckpointSystem;
 using Collectables;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -23,6 +24,9 @@ namespace Player{
         
         [Header("Collectables")]
         [SerializeField] private CoinController coinController;
+        
+        [Header("Race Telemetry")]
+        [SerializeField] private RaceTelemetry raceTelemetry;
 
         private int _playerIndex;
         
@@ -82,7 +86,7 @@ namespace Player{
             throw new System.Exception("Unknown character");
         }
 
-        public void SetCharacter(string characterName){
+        public void SetCharacter(string characterName, string playerName){
             // Disable current character
             activeCharacter.SetActive(false);
             
@@ -109,6 +113,9 @@ namespace Player{
             //Update Eyes and Name Target
             lookFollower.SetTarget(activeCharacter.transform);
             lookFollower.SetEyes(characterName);
+            
+            //Set Playername
+            raceTelemetry.SetPlayerName(playerName);
         }
 
         public GameObject GetOverlays(){

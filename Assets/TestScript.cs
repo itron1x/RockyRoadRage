@@ -19,7 +19,7 @@ public class TestScript : MonoBehaviour
             if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame){
                 PlayerInput player = PlayerInputManager.instance.JoinPlayer(_playerIndex, controlScheme: null , pairWithDevice: Keyboard.current);
                 if (_executed == false){
-                    player.gameObject.GetComponentInParent<PrefabController>().SetCharacter("Triangle Tam");
+                    player.gameObject.GetComponentInParent<PrefabController>().SetCharacter("Triangle Tam", "Triangle Tam");
                     _executed = true;
                 }
                 PlayerAdded();

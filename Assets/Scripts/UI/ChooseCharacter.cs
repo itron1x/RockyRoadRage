@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI{
     public class ChooseCharacter : MonoBehaviour
     {
         [SerializeField] private List<GameObject> characters;
+        [FormerlySerializedAs("characterName")]
         [Header("Text Objects")]
-        [SerializeField] private TextMeshProUGUI characterName;
+        [SerializeField] private TextMeshProUGUI playerName;
         
         [Header("Buttons")]
         [SerializeField] private Button confirmButton;
@@ -57,6 +59,7 @@ namespace UI{
 
         public void Confirm(){
              _raceInfoSystem.AddCharacter(_isBoughtCharacter);
+             _raceInfoSystem.AddName(playerName.text);
              _isSelected = true;
         }
 

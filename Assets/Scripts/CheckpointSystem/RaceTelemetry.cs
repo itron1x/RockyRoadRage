@@ -40,7 +40,7 @@ namespace CheckpointSystem{
             splitsDisplay.gameObject.SetActive(false);
             outOfBoundsDisplay.gameObject.SetActive(false);
             _lapSplits = new List<long>();
-            playerNameText.text = playerName;
+            // playerNameText.text = playerName;
         }
 
         private void Update()
@@ -67,8 +67,7 @@ namespace CheckpointSystem{
 
         public void SetPlayerName(string newPlayerName)
         {
-            playerName = newPlayerName;
-            playerNameText.text = playerName;
+            playerNameText.text = newPlayerName;
         }
 
         public string GetPlayerName()

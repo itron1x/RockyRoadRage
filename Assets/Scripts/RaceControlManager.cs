@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using CheckpointSystem;
 using Player;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,9 +24,11 @@ public class RaceControlManager : MonoBehaviour
     
     private IEnumerator _PreRaceCountdown;
     private PlayerInputManager _playerInputManager;
+    private RaceInfoSystem _raceInfoSystem;
     
     private void Awake()
     {
+        _raceInfoSystem = RaceInfoSystem.GetInstance();
         leaderboardCanvas.gameObject.SetActive(false);
         _playerInputManager = GetComponent<PlayerInputManager>();
         _raceControlUI = GetComponent<RaceControlUI>();
@@ -46,12 +47,11 @@ public class RaceControlManager : MonoBehaviour
 
     private void Start()
     {
-        RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
         if(RaceInfoSystem.GetInstance() == null) return;
         
-        raceSpeedMultiplier = infoSystem.GetRaceSpeed();
+        raceSpeedMultiplier = _raceInfoSystem.GetRaceSpeed();
 
-        List<InputDevice> devices = infoSystem.GetPlayerInputs(); 
+        List<InputDevice> devices = _raceInfoSystem.GetPlayerInputs(); 
         for (int i = 0; i < devices.Count; i++){
             _playerInputManager.JoinPlayer(i, controlScheme: null, pairWithDevice: devices[i]);
         }
@@ -72,7 +72,7 @@ public class RaceControlManager : MonoBehaviour
         _playerInputs.Add(playerInput);
         
         PrefabController prefabController = playerInput.gameObject.transform.parent.GetComponent<PrefabController>();
-        prefabController.SetCharacter(GetCharacter(RaceInfoSystem.GetInstance().GetPlayerCharacter()[playerInput.playerIndex]));
+        prefabController.SetCharacter(GetCharacter(_raceInfoSystem.GetPlayerCharacter()[playerInput.playerIndex]), _raceInfoSystem.GetPlayerName()[playerInput.playerIndex]);
         
         int playerIndex = _playerInputs.IndexOf(playerInput);
         
@@ -110,13 +110,14 @@ public class RaceControlManager : MonoBehaviour
         
         //Switch the player camera to the finish after 2 seconds
         StartCoroutine(PlayerFinishCamera(playerIndex, 2));
+        
         //add the player's time to the race leaderboard
         LeaderBoardEntry finishedPlayer = new LeaderBoardEntry(playerRaceTelemetry.GetFinishTime(), playerRaceTelemetry.GetPlayerName());
         _raceLeaderboard.Add(finishedPlayer);
+        
         //also add it to the global leaderboard
-        RaceInfoSystem infoSystem = RaceInfoSystem.GetInstance();
-        infoSystem?.AddGlobalLeaderboardEntry(infoSystem.ActiveMapIndex, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
-        infoSystem?.AddGlobalCoins(playerRaceTelemetry.getPlayerCoins());
+        _raceInfoSystem?.AddGlobalLeaderboardEntry(_raceInfoSystem.ActiveMapIndex, playerRaceTelemetry.GetFinishTime(),playerRaceTelemetry.GetPlayerName()); //TODO: add dynamic MapIndex
+        _raceInfoSystem?.AddGlobalCoins(playerRaceTelemetry.getPlayerCoins());
         
         //when all Players have finished the Race, display Leaderboard and save Leaderboard and Coins to disk
         if (_raceLeaderboard.Count >= _playerInputs.Count)

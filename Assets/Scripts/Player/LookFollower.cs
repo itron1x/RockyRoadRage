@@ -1,12 +1,13 @@
+using TMPro;
 using UnityEngine;
 
 namespace Player{
     public class LookFollower : MonoBehaviour
     {
     
-        public Transform Target;
-        public float TargetHeight;
-        public Transform Camera;
+        public Transform target;
+        public float targetHeight;
+        public Transform freelookCamera;
     
         [Header("Eye Sprites")]
         [SerializeField] private SpriteRenderer currentEyes;
@@ -14,15 +15,15 @@ namespace Player{
     
         void LateUpdate()
         {
-            transform.position = Target.position + new Vector3(0, TargetHeight, 0);
-            Vector3 direction = transform.position - Camera.position;
+            transform.position = target.position + new Vector3(0, targetHeight, 0);
+            Vector3 direction = transform.position - freelookCamera.position;
             direction = - direction;
             direction.y = 0;
             transform.rotation = Quaternion.LookRotation(direction);
         }
 
-        public void SetTarget(Transform target){
-            Target = target;
+        public void SetTarget(Transform newTarget){
+            target = newTarget;
         }
 
         public Sprite GetCharacterEye(string characterName){

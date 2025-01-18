@@ -1,11 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ChooseCharacterController : MonoBehaviour
 {
     [SerializeField] private Button nextButton;
     [SerializeField] private List<InputHandler> player;
+    
+    private List<int> _deviceIds;
+
+    void Awake(){
+        _deviceIds = new List<int>();
+        _deviceIds.Add(Keyboard.current.deviceId);
+        foreach (Gamepad controller in Gamepad.all){
+            _deviceIds.Add(controller.deviceId);
+        }
+    }
 
     void Start(){
         nextButton.interactable = false;
@@ -32,5 +43,23 @@ public class ChooseCharacterController : MonoBehaviour
         foreach (InputHandler chooseCharacter in player){
             chooseCharacter.ResetInputs();
         } 
+        ResetDeviceList();
+    }
+
+    public void RemoveDevice(int deviceId){
+        _deviceIds.Remove(deviceId);
+    }
+
+    public bool DeviceUsed(int deviceId){
+        return _deviceIds.Contains(deviceId);
+    }
+
+    public void ResetDeviceList(){
+        _deviceIds.Clear();
+        
+        _deviceIds.Add(Keyboard.current.deviceId);
+        foreach (Gamepad controller in Gamepad.all){
+            _deviceIds.Add(controller.deviceId);
+        }
     }
 }

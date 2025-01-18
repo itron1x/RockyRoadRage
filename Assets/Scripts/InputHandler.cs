@@ -16,31 +16,35 @@ public class InputHandler : MonoBehaviour{
     private bool _executed;
     private RaceInfoSystem _raceInfoSystem;
     private int _playerIndex;
+    private ChooseCharacterController _chooseCharacterController;
 
     void Awake(){
         _listen = false;
         button.enabled = true;
         _raceInfoSystem = RaceInfoSystem.GetInstance();
+        _chooseCharacterController = gameObject.GetComponentInParent<ChooseCharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (_listen){
-            if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame){
+            if (Keyboard.current != null && _chooseCharacterController.DeviceUsed(Keyboard.current.deviceId) && Keyboard.current.enterKey.wasPressedThisFrame){
                 if (_executed == false){
                     print("Keyboard");
                     _raceInfoSystem.AddInput(Keyboard.current);
+                    _chooseCharacterController.RemoveDevice(Keyboard.current.deviceId);
                     _executed = true;
                     PlayerAdded();
                 }
             }
             else{
                 foreach (var controller in Gamepad.all){
-                    if (controller != null && controller.startButton.wasPressedThisFrame){
+                    if (controller != null && _chooseCharacterController.DeviceUsed(controller.deviceId) && controller.startButton.wasPressedThisFrame){
                         if (_executed == false){
                             print("Controller");
                             _raceInfoSystem.AddInput(controller);
+                            _chooseCharacterController.RemoveDevice(controller.deviceId);
                             _executed = true;
                             PlayerAdded();
                         }

@@ -78,6 +78,10 @@ namespace UI{
         public bool GetIsSelected(){
             return _isSelected;
         }
+
+        public void SetPlayerName(string newName){
+            playerName.text = newName;
+        }
     }
 }
 

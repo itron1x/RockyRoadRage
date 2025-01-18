@@ -260,9 +260,9 @@ public class RaceInfoSystem : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    public void requestPause()
+    public void RequestPause()
     {
-        _activeRaceControlManager.pauseRace();
+        _activeRaceControlManager.togglePause();
     }
 }
 

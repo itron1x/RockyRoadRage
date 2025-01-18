@@ -68,7 +68,7 @@ namespace Player{
         //pause the game
         void OnPause()
         {
-            RaceInfoSystem.GetInstance()?.requestPause();
+            RaceInfoSystem.GetInstance()?.RequestPause();
         }
         
         // Lock cursor mode on game focus

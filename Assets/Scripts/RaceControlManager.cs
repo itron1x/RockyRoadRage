@@ -212,6 +212,11 @@ public class RaceControlManager : MonoBehaviour
         throw new NotImplementedException("Character not found.");
     }
 
+    public void togglePause()
+    {
+        if(_isPaused) resumeRace();
+        else pauseRace();
+    }
 
     public void pauseRace()
     {

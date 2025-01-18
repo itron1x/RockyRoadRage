@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -52,6 +53,7 @@ namespace UI{
             // Ckeck if enough coins are available
             if (raceInfoSystem.GetGlobalCoins() < characterDetails.GetCost()){
                 error.gameObject.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(error.gameObject);
                 print("Not enough money");
                 return;
             }
@@ -60,6 +62,7 @@ namespace UI{
             raceInfoSystem.BuyCharacter(characterDetails.GetCharacterName(), characterDetails.GetCost());
             buyButton.interactable = false;
             information.gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(information.gameObject);
             
             // Update coins
             globalCoins.text = raceInfoSystem.GetGlobalCoins().ToString();

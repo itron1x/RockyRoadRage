@@ -43,6 +43,7 @@ public class ChooseCharacterController : MonoBehaviour
         foreach (InputHandler chooseCharacter in player){
             chooseCharacter.ResetInputs();
         } 
+        RaceInfoSystem.GetInstance().ResetPlayers();
         ResetDeviceList();
     }
 
@@ -55,11 +56,19 @@ public class ChooseCharacterController : MonoBehaviour
     }
 
     public void ResetDeviceList(){
-        _deviceIds.Clear();
+        _deviceIds?.Clear();
         
-        _deviceIds.Add(Keyboard.current.deviceId);
+        _deviceIds?.Add(Keyboard.current.deviceId);
         foreach (Gamepad controller in Gamepad.all){
-            _deviceIds.Add(controller.deviceId);
+            _deviceIds?.Add(controller.deviceId);
         }
+    }
+
+    public Button GetNextButton(){
+        return nextButton;
+    }
+
+    public Button GetAddInputButton(){
+        return player[0].GetButton();
     }
 }

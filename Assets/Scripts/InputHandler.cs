@@ -58,6 +58,9 @@ public class InputHandler : MonoBehaviour{
     public void AddInput(){
         infoText.enabled = true;
         _listen = true;
+
+        chooseCharacter.UpdateBoughtCharacters();
+        chooseCharacter.UpdateArrows();
     }
     
     private void PlayerAdded(){
@@ -82,12 +85,16 @@ public class InputHandler : MonoBehaviour{
     }
 
     public void ResetInputs(){
-        _raceInfoSystem.ResetPlayers();
         gameObject.SetActive(true);
         selectCharacter.SetActive(false);
+        selectCharacter.GetComponent<ChooseCharacter>().ResetCharacter();
         infoText.enabled = false;
         button.enabled = true;
         button.interactable = true;
         _executed = false;
+    }
+
+    public Button GetButton(){
+        return button;
     }
 }

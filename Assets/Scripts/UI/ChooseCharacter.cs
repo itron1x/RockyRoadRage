@@ -14,9 +14,11 @@ namespace UI{
         
         [Header("Buttons")]
         [SerializeField] private Button confirmButton;
+        [SerializeField] private Button nextButton;
+        [SerializeField] private Button previousButton;
         
         private int _isBoughtCharacter;
-        private List<GameObject> boughtCharacters; // new List 
+        private List<GameObject> boughtCharacters = new List<GameObject>(); // new List 
         private RaceInfoSystem _raceInfoSystem;
         
         private bool _isSelected;
@@ -28,19 +30,9 @@ namespace UI{
             boughtCharacters = new List<GameObject>();
             _raceInfoSystem = RaceInfoSystem.GetInstance();
 
-            foreach (GameObject character in characters)
-            {
-                CharacterDetails checkCharacter = character.GetComponent<CharacterDetails>();
-                bool isBought = _raceInfoSystem.IsBought(checkCharacter.GetCharacterName());
+            UpdateBoughtCharacters();
 
-                if (isBought)
-                {
-                    boughtCharacters.Add(character);
-                }
-                // call after check IsBought
-                UpdateCharacter(0);
-                _isSelected = false;
-            }
+            UpdateArrows();
         }
 
         // update active character to next in list
@@ -61,12 +53,15 @@ namespace UI{
              _raceInfoSystem.AddCharacter(_isBoughtCharacter);
              _raceInfoSystem.AddName(playerName.text);
              _isSelected = true;
+             nextButton.interactable = false;
+             previousButton.interactable = false;
         }
 
         // Update UI elements to character
         private void UpdateCharacter(int activeCharacter)
         {
             print(_isBoughtCharacter);
+            if (boughtCharacters.Count == 1) return;
             foreach (GameObject character in boughtCharacters)
             {
                 character.SetActive(false);
@@ -81,6 +76,35 @@ namespace UI{
 
         public void SetPlayerName(string newName){
             playerName.text = newName;
+        }
+
+        public void ResetCharacter(){
+            confirmButton.interactable = true;
+            nextButton.interactable = true;
+            previousButton.interactable = true;
+        }
+
+        public void UpdateBoughtCharacters(){
+            if(boughtCharacters != null) boughtCharacters.Clear();;
+            
+            foreach (GameObject character in characters){
+                CharacterDetails checkCharacter = character.GetComponent<CharacterDetails>();
+                bool isBought = RaceInfoSystem.GetInstance().IsBought(checkCharacter.GetCharacterName());
+
+                if (isBought){
+                    boughtCharacters.Add(character);
+                }
+                // call after check IsBought
+                UpdateCharacter(0);
+                _isSelected = false;
+            }
+        }
+
+        public void UpdateArrows(){
+            if (boughtCharacters?.Count == 1){
+                nextButton.interactable = false;
+                previousButton.interactable = false;
+            } ;
         }
     }
 }

@@ -37,6 +37,13 @@ public class RaceInfoSystem : MonoBehaviour
     List<LeaderBoardEntry> _map1Leaderboard = new List<LeaderBoardEntry>();
     List<LeaderBoardEntry> _map2Leaderboard = new List<LeaderBoardEntry>();
     
+    private float globalVolume;
+    public float GlobalVolume { get => globalVolume; set => globalVolume = value; }
+    private float musicVolume;
+    public float MusicVolume { get => musicVolume; set => musicVolume = value; }
+    private float fxVolume;
+    public float FxVolume { get => fxVolume; set => fxVolume = value; }
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -59,6 +66,7 @@ public class RaceInfoSystem : MonoBehaviour
         
         // Load saved data.
         SaveSystem.Load();
+        SaveSystem.LoadVolume();
     }
 
     public static RaceInfoSystem GetInstance()
@@ -220,6 +228,18 @@ public class RaceInfoSystem : MonoBehaviour
         _map2Leaderboard = data.map2;
     }
 
+    public void SaveVolumeData(ref VolumeData data){
+        data.globalVolume = globalVolume;
+        data.musicVolume = musicVolume;
+        data.fxVolume = fxVolume;
+    }
+
+    public void LoadVolumeData(ref VolumeData data){
+        globalVolume = data.globalVolume;
+        musicVolume = data.musicVolume;
+        fxVolume = data.fxVolume;
+    }
+
     public void ResetSystem(){
         _playerInputs.Clear();
         _playerCharacter.Clear();
@@ -265,5 +285,12 @@ public struct LeaderboardData{
     public List<LeaderBoardEntry> map0;
     public List<LeaderBoardEntry> map1;
     public List<LeaderBoardEntry> map2;
+}
+
+[System.Serializable]
+public struct VolumeData{
+    public float globalVolume;
+    public float musicVolume;
+    public float fxVolume;
 }
 

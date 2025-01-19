@@ -158,7 +158,6 @@ public class RaceControlManager : MonoBehaviour
             idleCamera.rect = new Rect(0, 0, 1, 1);
             
             _raceControlUI.DisplayUpdateText("All Players have finished! Loading leaderboard...");
-            SaveSystem.SaveLeaderboard(); //save after Player finished to keep the finish time even if race gets aborted afterwards
             SaveSystem.Save();
             Invoke(nameof(ShowLeaderboard), postRaceTimeoutSeconds);
         }

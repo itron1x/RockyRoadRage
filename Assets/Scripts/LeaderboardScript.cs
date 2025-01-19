@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
-using UnityEditor;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class LeaderboardScript : MonoBehaviour
 {

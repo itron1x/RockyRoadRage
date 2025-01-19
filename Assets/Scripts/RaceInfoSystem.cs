@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class RaceInfoSystem : MonoBehaviour
 {
     private static RaceInfoSystem _instance;
-
-    private SceneAsset _racingScene;
     
     private List<InputDevice> _playerInputs = new List<InputDevice>();
     private List<int> _playerCharacter = new List<int>();
@@ -53,7 +49,7 @@ public class RaceInfoSystem : MonoBehaviour
         
         // Add characters to Hashtable
         _characterInformation = new Hashtable();
-        _characterInformation.Add("Pebble Pete", false);
+        _characterInformation.Add("Pebble Pete", true);
         _characterInformation.Add("Cubic Chris", false);
         _characterInformation.Add("Triangle Tam", false);
         _characterInformation.Add("Smooth Sally", false);
@@ -69,19 +65,6 @@ public class RaceInfoSystem : MonoBehaviour
     {
         return _instance;
     }
-    
-    // Temp manual save and load shortcut
-     // public void Update(){
-     //     if (Keyboard.current.enterKey.wasPressedThisFrame){
-     //         print("Saving!");
-     //         SaveSystem.Save();
-     //     }
-     //
-     //     if (Keyboard.current.spaceKey.wasPressedThisFrame){
-     //         print("Loading!");
-     //         SaveSystem.Load();
-     //     }
-     // }
 
      public void SetRaceSpeed(float speed)
      {
@@ -92,11 +75,6 @@ public class RaceInfoSystem : MonoBehaviour
      {
          return _raceSpeed;
      }
-     
-    public void SetRacingScene(SceneAsset racingScene)
-    {
-        _racingScene = racingScene;
-    }
 
     public void AddInput(InputDevice playerInput)
     {
@@ -129,11 +107,6 @@ public class RaceInfoSystem : MonoBehaviour
 
     public List<string> GetPlayerName(){
         return _playerName;
-    }
-
-    public void StartRace()
-    {
-        SceneManager.LoadScene(_racingScene.name);
     }
 
     public int GetGlobalCoins(){

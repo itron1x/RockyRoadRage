@@ -5,21 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MenuPaul.unity
-    guid: 9a921ca429b77424ea567d7c22e2299f
   - enabled: 1
-    path: Assets/Scenes/CarreraBahn.unity
-    guid: ad70f56796629ea40bc36de37ef96460
+    path: Assets/Scenes/Menu.unity
+    guid: 5b5238dfe9c316e41bbfe91fdfa7e612
   - enabled: 1
     path: Assets/Scenes/SampleRaceScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/CarreraBahn.unity
+    guid: ad70f56796629ea40bc36de37ef96460
+  - enabled: 1
     path: Assets/Scenes/Grassy_Roads.unity
     guid: b444e9c3be91b6e618d245218bbf0e7a
-  - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 5b5238dfe9c316e41bbfe91fdfa7e612
   - enabled: 1
     path: Assets/Scenes/map0.unity
     guid: 703e6be0462cb7c80a3979471b2f596d

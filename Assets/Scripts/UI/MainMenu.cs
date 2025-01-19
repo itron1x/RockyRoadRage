@@ -14,7 +14,7 @@ namespace UI{
                     SceneManager.LoadScene("map0");
                     break;
                 case 2:
-                    SceneManager.LoadScene("SampleRaceScene");
+                    SceneManager.LoadScene("map2");
                     break;
             }
             SceneManager.UnloadSceneAsync("MainMenu");

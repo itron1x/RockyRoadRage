@@ -1,4 +1,4 @@
-<img src="Assets/UI/Rocky Road Rage.png" alt="Rocky Road Rage" width=100% height=100% style="display: block; margin: 0 auto"></img>
+<div align="center"><img src="Assets/UI/Rocky Road Rage.png" alt="Rocky Road Rage" width=100% height=100%></img></div>
 
 ## Description
 Rocky Road Rage is a fun, split-screen Multiplayer game about racing rocks
@@ -28,4 +28,4 @@ Rocky Road Rage is a fun, split-screen Multiplayer game about racing rocks
 This game currently is PC only. However it does support controllers.
 
 
-<img src="Assets/UI/Logo.png" alt="Rocky Road Rage" width=10% height=10% style="display: block; margin: 0 auto"><p align="center"><b>Rock Foundation</b></p></img>
+<div align="center"><img src="Assets/UI/Logo.png" alt="Rocky Road Rage" width=10% height=10% style="display: block; margin: 0 auto"><b>Rock Foundation</b></img></div>

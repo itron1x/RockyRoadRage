@@ -78,16 +78,6 @@ namespace Player{
             RaceInfoSystem.GetInstance()?.RequestPause();
         }
         
-        // Lock cursor mode on game focus
-        void OnApplicationFocus(bool focus){
-            if (focus){
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else{
-                Cursor.lockState = CursorLockMode.None;
-            }
-        }
-        
         public void SetRigidbody(Rigidbody rb){
             _rb = rb;
         }

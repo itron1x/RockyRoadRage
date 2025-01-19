@@ -17,6 +17,7 @@ namespace UI{
                     SceneManager.LoadScene("SampleRaceScene");
                     break;
             }
+            SceneManager.UnloadSceneAsync("MainMenu");
         }
         
         // Quit game

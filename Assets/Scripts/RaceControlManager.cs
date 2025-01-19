@@ -52,6 +52,9 @@ public class RaceControlManager : MonoBehaviour
                 
             }
         }
+        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Start()
@@ -118,8 +121,8 @@ public class RaceControlManager : MonoBehaviour
 
     private void ActivateRace()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         
         Time.timeScale = raceSpeedMultiplier;
         _raceStartTimeMilliseconds = DateTimeOffset.Now.ToUnixTimeMilliseconds();

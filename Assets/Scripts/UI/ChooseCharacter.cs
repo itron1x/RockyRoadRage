@@ -11,6 +11,7 @@ namespace UI{
         [FormerlySerializedAs("characterName")]
         [Header("Text Objects")]
         [SerializeField] private TextMeshProUGUI playerName;
+        [SerializeField] private TMP_InputField input;
         
         [Header("Buttons")]
         [SerializeField] private Button confirmButton;
@@ -105,6 +106,10 @@ namespace UI{
                 nextButton.interactable = false;
                 previousButton.interactable = false;
             } ;
+        }
+
+        public void RemoveSpaces(){
+            input.text = input.text.Replace(" ", "");
         }
     }
 }

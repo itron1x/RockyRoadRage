@@ -21,7 +21,7 @@ public class ChooseCharacterController : MonoBehaviour
     void Start(){
         nextButton.interactable = false;
     }
-    void FixedUpdate()
+    void Update()
     {
         if (EnableNext()){
             print("All players have chosen");

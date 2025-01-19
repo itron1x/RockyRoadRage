@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grassy_Roads.unity
     guid: b444e9c3be91b6e618d245218bbf0e7a
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 5b5238dfe9c316e41bbfe91fdfa7e612
+  - enabled: 1
+    path: Assets/Scenes/map0.unity
+    guid: 703e6be0462cb7c80a3979471b2f596d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9205c32efcbb0574eb1151a5679d8216, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

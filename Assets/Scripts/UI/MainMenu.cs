@@ -11,7 +11,7 @@ namespace UI{
                     SceneManager.LoadScene("SampleRaceScene");
                     break;
                 case 1:
-                    SceneManager.LoadScene("Grassy_Roads");
+                    SceneManager.LoadScene("map0");
                     break;
                 case 2:
                     SceneManager.LoadScene("SampleRaceScene");

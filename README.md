@@ -28,4 +28,4 @@ Rocky Road Rage is a fun, split-screen Multiplayer game about racing rocks
 This game currently is PC only. However it does support controllers.
 
 
-<div align="center"><img src="Assets/UI/Logo.png" alt="Rocky Road Rage" width=10% height=10% style="display: block; margin: 0 auto"><b>Rock Foundation</b></img></div>
+<div align="center"><img src="Assets/UI/Logo.png" alt="Rocky Road Rage" width=10% height=10% style="display: block; margin: 0 auto"></br><b>Rock Foundation</b></img></div>

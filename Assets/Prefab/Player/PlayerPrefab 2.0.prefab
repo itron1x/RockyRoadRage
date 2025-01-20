@@ -236,8 +236,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526636588948362499}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0050674956, y: 0.90579987, z: -0.01083763, w: -0.42353696}
-  m_LocalPosition: {x: 7.715431, y: -1.8622448, z: 6.3772483}
+  m_LocalRotation: {x: 0.0022732934, y: -0.12595187, z: 0.0002886248, w: 0.9920337}
+  m_LocalPosition: {x: 2.5416927, y: -2.0559, z: -9.716215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1828,8 +1828,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8233916060073307263}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0050674956, y: 0.90579987, z: -0.01083763, w: -0.42353696}
-  m_LocalPosition: {x: 7.715431, y: -1.8622448, z: 6.3772483}
+  m_LocalRotation: {x: 0.0022732934, y: -0.12595187, z: 0.0002886248, w: 0.9920337}
+  m_LocalPosition: {x: 2.5416927, y: -2.0559, z: -9.716215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1912,7 +1912,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 3
   HorizontalAxis:
-    Value: -129.88036
+    Value: -14.469663
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -1922,7 +1922,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 1.1096321
+    Value: 0
     Center: 17.5
     Range: {x: 0, y: 60}
     Wrap: 0
@@ -2448,8 +2448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5831725514261495792}
   groundDetection: {fileID: 4971592520915213781}
-  speed: 20
-  acceleration: 20
+  speed: 18
+  acceleration: 22
   jumpHeight: 10
   mass: 1
 --- !u!1001 &1384186034348744872
@@ -2812,8 +2812,8 @@ MonoBehaviour:
   groundDetection: {fileID: 6895868763617131833}
   speed: 20
   acceleration: 20
-  jumpHeight: 10
-  mass: 1
+  jumpHeight: 8
+  mass: 0.5
 --- !u!1001 &4593046917114993838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2988,9 +2988,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8651906423464363193}
   groundDetection: {fileID: 2537712267482173942}
-  speed: 20
-  acceleration: 20
-  jumpHeight: 10
+  speed: 22
+  acceleration: 10
+  jumpHeight: 15
   mass: 1
 --- !u!4 &4050845664725891909 stripped
 Transform:
@@ -3159,10 +3159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1634240822440274935}
   groundDetection: {fileID: 7840307161175197225}
-  speed: 20
-  acceleration: 20
-  jumpHeight: 10
-  mass: 1
+  speed: 28
+  acceleration: 15
+  jumpHeight: 8
+  mass: 0.5
 --- !u!4 &9050178437140594368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 33ed21f9380d62a489f22060dd6829b1, type: 3}

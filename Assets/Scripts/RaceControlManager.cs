@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CheckpointSystem;
 using Player;
+using Sound;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

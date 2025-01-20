@@ -1371,6 +1371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IdleCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 4805407835642971020, guid: a5e22e18d3914fd17a2640f0a50548df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 168.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5314473096006650844, guid: a5e22e18d3914fd17a2640f0a50548df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -65
@@ -2393,7 +2397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7584445221540247029, guid: d77c22e3cba87bf3381dbe07e1461ffe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.71
+      value: 6.61
       objectReference: {fileID: 0}
     - target: {fileID: 7584445221540247029, guid: d77c22e3cba87bf3381dbe07e1461ffe, type: 3}
       propertyPath: m_LocalPosition.z

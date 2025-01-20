@@ -9,20 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 5b5238dfe9c316e41bbfe91fdfa7e612
   - enabled: 1
-    path: Assets/Scenes/DevMaps/SampleRaceScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/DevMaps/CarreraBahn.unity
-    guid: ad70f56796629ea40bc36de37ef96460
-  - enabled: 1
-    path: Assets/Scenes/DevMaps/Grassy_Roads.unity
-    guid: b444e9c3be91b6e618d245218bbf0e7a
-  - enabled: 1
-    path: Assets/Scenes/DevMaps/template.unity
-    guid: 703e6be0462cb7c80a3979471b2f596d
-  - enabled: 1
     path: Assets/Scenes/mapTobi.unity
     guid: 03681a87d1a752c41892edb77afc7e44
+  - enabled: 1
+    path: Assets/Scenes/map0.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/map1.unity
+    guid: f1ca21b891c63eb4a845c6777486a70b
   - enabled: 1
     path: Assets/Scenes/map2.unity
     guid: d7389cabdf340314b807edd78e3844ed

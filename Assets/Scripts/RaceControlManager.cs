@@ -134,7 +134,7 @@ public class RaceControlManager : MonoBehaviour
 
     private void ActivateRace()
     {
-        SwitchMusic(raceMusic);
+        PlayMusic();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
@@ -204,6 +204,7 @@ public class RaceControlManager : MonoBehaviour
     private IEnumerator StartRaceWithCountdown()
     {
         StopMusic();
+        StageMusic(raceMusic);
         _raceControlUI.ClearUpdateText();
         for (var i = 3; i >= 1; i--)
         {
@@ -267,7 +268,7 @@ public class RaceControlManager : MonoBehaviour
     public void pauseRace(){
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+        _currentMusic.Pause();
         _isPaused = true;
         _pauseStartTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         Time.timeScale = 0;
@@ -277,7 +278,7 @@ public class RaceControlManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+        _currentMusic.Play();
         _pauseEndTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         _totalPauseTime += _pauseEndTimestamp - _pauseStartTimestamp;
         pauseMenuCanvas.gameObject.SetActive(false);
@@ -296,6 +297,24 @@ public class RaceControlManager : MonoBehaviour
         _currentMusic.clip = audioClip;
         _currentMusic.volume = 1f;
         _currentMusic.loop = true;
+        _currentMusic.Play();
+    }
+
+    private void StageMusic(AudioClip audioClip)
+    {
+        if (_currentMusic != null)
+        {
+            _currentMusic.Stop();
+            Destroy(_currentMusic);
+        }
+        _currentMusic = Instantiate(musicSource,transform.position, Quaternion.identity);
+        _currentMusic.clip = audioClip;
+        _currentMusic.volume = 1f;
+        _currentMusic.loop = true;
+    }
+
+    private void PlayMusic()
+    {
         _currentMusic.Play();
     }
 

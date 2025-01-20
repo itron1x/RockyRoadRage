@@ -337,6 +337,12 @@ MonoBehaviour:
   pauseMenuCanvas: {fileID: 0}
   raceSpeedMultiplier: 1.5
   mapOverview: {fileID: 0}
+  raceMusic: {fileID: 8300000, guid: 8cdad4ad7da49f244b7c423ecc52e3f8, type: 3}
+  postRaceMusic: {fileID: 8300000, guid: e8a25ba4e9bde8743880e7c0a4a91a07, type: 3}
+  preRaceMusic: {fileID: 8300000, guid: e8a25ba4e9bde8743880e7c0a4a91a07, type: 3}
+  beepLow: {fileID: 8300000, guid: 5a80436cfd8f0aa42867737db61d848f, type: 3}
+  beepHigh: {fileID: 8300000, guid: 2d579bebb7cf4af44b72dcf3eb9656ca, type: 3}
+  musicSource: {fileID: 5242428419189846766, guid: 433d5a2a245dff44bbe5bf57c71feea2, type: 3}
 --- !u!114 &420446588681503527
 MonoBehaviour:
   m_ObjectHideFlags: 0

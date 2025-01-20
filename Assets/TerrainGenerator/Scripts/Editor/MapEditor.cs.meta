@@ -1,0 +1,18 @@
+﻿fileFormatVersion: 2
+guid: fb713ff0dbbdb394daf9e00b6502e56e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 140538
+  packageName: Terrain Generator
+  packageVersion: 1.0
+  assetPath: Assets/TerrainGenerator/Scripts/Editor/MapEditor.cs
+  uploadId: 310948

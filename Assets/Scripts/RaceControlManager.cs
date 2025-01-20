@@ -17,6 +17,16 @@ public class RaceControlManager : MonoBehaviour
     [SerializeField] private float raceSpeedMultiplier = 1.5f;
     [SerializeField] private Transform mapOverview;
     
+    [Header("Music")]
+    [SerializeField] private AudioClip raceMusic;
+    [SerializeField] private AudioClip postRaceMusic;
+    [SerializeField] private AudioClip preRaceMusic;
+    [SerializeField] private AudioClip beepLow;
+    [SerializeField] private AudioClip beepHigh;
+    [SerializeField] private AudioSource musicSource;
+    
+    private AudioSource _currentMusic;
+    
     private List<Transform> _spawnPointLocations = new List<Transform>();
     private List<PlayerInput> _playerInputs = new List<PlayerInput>();
     private List<LeaderBoardEntry> _raceLeaderboard = new List<LeaderBoardEntry>();
@@ -85,6 +95,8 @@ public class RaceControlManager : MonoBehaviour
                 idleCamera.gameObject.SetActive(false);
                 break;
         }
+        SwitchMusic(preRaceMusic);
+        
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
@@ -121,6 +133,7 @@ public class RaceControlManager : MonoBehaviour
 
     private void ActivateRace()
     {
+        SwitchMusic(raceMusic);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
@@ -189,14 +202,18 @@ public class RaceControlManager : MonoBehaviour
     // every 2 seconds perform the print()
     private IEnumerator StartRaceWithCountdown()
     {
+        StopMusic();
         _raceControlUI.ClearUpdateText();
         for (var i = 3; i >= 1; i--)
         {
+            SoundManager.Instance.PlaySoundFX(beepLow, 1f, transform);
             _raceControlUI.DisplayCountdownText("" + i);
             yield return new WaitForSeconds(1f);
         }
+        SoundManager.Instance.PlaySoundFX(beepHigh,1f, transform);
         _raceControlUI.DisplayCountdownText("Roll!", 2);
         ActivateRace();
+        
     }
 
     private IEnumerator WaitBeforeCountdown(float waitTime)
@@ -210,7 +227,7 @@ public class RaceControlManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+        SwitchMusic(postRaceMusic);
         LeaderboardScript leaderboardScript = leaderboardCanvas.GetComponent<LeaderboardScript>();
         leaderboardScript.SetRaceLeaderboard(_raceLeaderboard);
         leaderboardScript.ShowRaceLeaderboard();
@@ -265,5 +282,25 @@ public class RaceControlManager : MonoBehaviour
         pauseMenuCanvas.gameObject.SetActive(false);
         Time.timeScale = 1 * raceSpeedMultiplier;
         _isPaused = false;
+    }
+
+    private void SwitchMusic(AudioClip audioClip)
+    {
+        if (_currentMusic != null)
+        {
+            _currentMusic.Stop();
+            Destroy(_currentMusic);
+        }
+        _currentMusic = Instantiate(musicSource,transform.position, Quaternion.identity);
+        _currentMusic.clip = audioClip;
+        _currentMusic.volume = 1f;
+        _currentMusic.loop = true;
+        _currentMusic.Play();
+    }
+
+    private void StopMusic()
+    {
+        _currentMusic?.Stop();
+        Destroy(_currentMusic);
     }
 }

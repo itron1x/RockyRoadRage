@@ -8,7 +8,7 @@ namespace UI{
         public void StartGame(){
             switch (RaceInfoSystem.GetInstance().ActiveMapIndex){
                 case 0:
-                    SceneManager.LoadScene("SampleRaceScene");
+                    SceneManager.LoadScene("mapTobi");
                     break;
                 case 1:
                     SceneManager.LoadScene("map0");

@@ -1,0 +1,18 @@
+﻿fileFormatVersion: 2
+guid: 5a15f81be8b9ba942a29daabb54b17e5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 140538
+  packageName: Terrain Generator
+  packageVersion: 1.0
+  assetPath: Assets/TerrainGenerator/Scripts/Maps/PerlinMap.cs
+  uploadId: 310948

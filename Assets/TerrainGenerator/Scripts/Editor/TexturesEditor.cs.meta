@@ -1,0 +1,18 @@
+﻿fileFormatVersion: 2
+guid: cdd42f0c7ed8fd14db72452ec6ed2402
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 140538
+  packageName: Terrain Generator
+  packageVersion: 1.0
+  assetPath: Assets/TerrainGenerator/Scripts/Editor/TexturesEditor.cs
+  uploadId: 310948

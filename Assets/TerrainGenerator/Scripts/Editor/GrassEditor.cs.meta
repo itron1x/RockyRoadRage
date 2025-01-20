@@ -1,0 +1,18 @@
+﻿fileFormatVersion: 2
+guid: 52223a13a5a88f04198827cda4f36f12
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 140538
+  packageName: Terrain Generator
+  packageVersion: 1.0
+  assetPath: Assets/TerrainGenerator/Scripts/Editor/GrassEditor.cs
+  uploadId: 310948

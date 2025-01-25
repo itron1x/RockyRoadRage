@@ -245,6 +245,7 @@ public class RaceInfoSystem : MonoBehaviour
         _playerCharacter.Clear();
         _activeMapIndex = 0;
         _raceSpeed = 1;
+        Time.timeScale = 1 * GetRaceSpeed();
     }
 
     public static void BackToMainMenu()

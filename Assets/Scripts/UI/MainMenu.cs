@@ -14,10 +14,10 @@ namespace UI{
                     SceneManager.LoadScene("map0");
                     break;
                 case 2:
-                    SceneManager.LoadScene("map1");
+                    SceneManager.LoadScene("map2");
                     break;
                 case 3:
-                    SceneManager.LoadScene("map2");
+                    SceneManager.LoadScene("map1");
                     break;
             }
             SceneManager.UnloadSceneAsync("MainMenu");

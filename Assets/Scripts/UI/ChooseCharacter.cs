@@ -21,6 +21,7 @@ namespace UI{
         private int _isBoughtCharacter;
         private List<GameObject> boughtCharacters = new List<GameObject>(); // new List 
         private RaceInfoSystem _raceInfoSystem;
+        private List<int> _characterIDs = new List<int>();
         
         private bool _isSelected;
         
@@ -51,7 +52,8 @@ namespace UI{
         }
 
         public void Confirm(){
-             _raceInfoSystem.AddCharacter(_isBoughtCharacter);
+             // _raceInfoSystem.AddCharacter(_isBoughtCharacter);
+             _raceInfoSystem.AddCharacter(_characterIDs[_isBoughtCharacter]);
              _raceInfoSystem.AddName(playerName.text);
              _isSelected = true;
              nextButton.interactable = false;
@@ -94,6 +96,7 @@ namespace UI{
 
                 if (isBought){
                     boughtCharacters.Add(character);
+                    _characterIDs.Add(characters.IndexOf(character));
                 }
                 // call after check IsBought
                 UpdateCharacter(0);
